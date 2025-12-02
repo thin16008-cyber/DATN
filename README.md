@@ -1,4 +1,4 @@
-# Oboe - Nền tảng học tiếng Nhật thông minh
+# Oboe - Nền tảng học tiếng Anh thông minh
 
 <div align="center">
 
@@ -15,11 +15,11 @@
 [![First Commit](https://img.shields.io/github/created-at/OboeProjectTeam/OboeProject?style=flat-square&label=First%20Commit)](https://github.com/OboeProjectTeam/OboeProject/commit/eb6e1c31e5ed6122fdc32d1adc20487a3ca40661)
 [![Last Commit](https://img.shields.io/github/last-commit/OboeProjectTeam/OboeProject?style=flat-square)](https://github.com/OboeProjectTeam/OboeProject/commit/c3992644ed95553599aa80b8ca847e05a384074c)
 
-[![Live Demo](https://img.shields.io/badge/🌐_Live_Demo-oboeru.me-blue?style=for-the-badge)](https://oboeru.me)
+
 [![Documentation](https://img.shields.io/badge/📚_Documentation-GitHub-green?style=for-the-badge)](https://docs.google.com/document/d/11EFWQbEjcnAbDQ1XEmVn_tXmRUQYTJ95AEogeqGV4zA/edit?fbclid=IwY2xjawMK-bZleHRuA2FlbQIxMABicmlkETFWTzNjM2dWN0VXNW5TSUxUAR7iDreKfoapXIOQJEJWelf-dgNiN0sdRvnL2gAYALlksOn-5jfeCJprJVAg7A_aem_GNqs4xhYb19-8Zcr8869mA&tab=t.0)
 </div>
 
-Oboe là một nền tảng học tiếng Nhật toàn diện, được thiết kế để giúp người học tiếp cận ngôn ngữ này một cách hiệu quả và cá nhân hóa.
+Oboe là một nền tảng học tiếng Anh toàn diện, được thiết kế để giúp người học tiếp cận ngôn ngữ này một cách hiệu quả và cá nhân hóa.
 
 ## 📄 Tài liệu SRS
 
@@ -284,49 +284,7 @@ docker build -t oboe-backend .
 docker run -p 8080:8080 oboe-backend
 ```
 
-## Team & Roles
 
-### 👥 **Đội ngũ phát triển**
-
-| Thành viên | GitHub | Vai trò | Trách nhiệm |
-|------------|--------|---------|-------------|
-| **Tô Trung Tôn** | [@trungton08072004](https://github.com/trungton08072004) | **Project Manager** | • Project Management & Timeline<br>• Human Resource Management<br>• SRS (Software Requirements Specification)<br>• Use Cases & User Stories<br>• API Documentation<br>• Test Cases & Test Plans<br>• Backend Support |
-| **Hoàng Công Du** | [@hoangdu999](https://github.com/hoangdu999) | **Tech Lead** | • Frontend Development (Vue 3, TailwindCSS)<br>• DevOps & Infrastructure (AWS EC2, CloudFront, WAF)<br>• CI/CD Pipeline (GitHub Actions)<br>• Technical Support & Code Review<br>• Architecture Design |
-| **Nguyễn Hữu Nghĩa** | [@HuuNghia1301](https://github.com/HuuNghia1301) | **Backend Developer** | • Core Backend Development (Spring Boot)<br>• REST API Implementation<br>• Business Logic & Services<br>• Security & Authentication (JWT)<br>• Integration with External APIs<br>• Email Services<br>• Payment Integration (MoMo, PayOS) |
-| **Nguyễn Minh Tuấn** | [@tuanct413](https://github.com/tuanct413) | **Backend Developer** | • Backend Development (Spring Boot)<br>• Database Integration <br>• WebSocket Real-time Features |
-| **Bùi Thành Vương** | [@wuong161104](https://github.com/wuong161104) | **Database & AI Developer** | • Database Design & Architecture<br>• Data Modeling & Migration<br>• Sample Data Creation & Seeding<br>• AI Integration (Gemini API)<br>• Machine Learning Features |
-
-### 🎯 **Phân công chi tiết**
-
-#### **Project Management** - trungton08072004  
-- **Project Planning**: Sprint planning, milestone tracking
-- **Documentation**: Requirements analysis, API specs, test documentation
-- **Quality Assurance**: Test case creation, testing coordination
-- **Team Coordination**: Daily standups, progress tracking
-- **Backend Contribution**: Supporting backend development tasks
-
-#### **Frontend & Infrastructure** - hoangdu999
-- **Frontend Development**: Vue 3, Vuex, Vue Router, SCSS
-- **Component Architecture**: Reusable components, layout system
-- **AWS Infrastructure**: EC2, S3, CloudFront, WAF, Auto Scaling
-- **DevOps**: CI/CD pipeline
-- **Technical Leadership**: Code review, architecture decisions, team support
-
-#### **Core Backend Development** - HuuNghia1301 & tuanct413
-- **API Development**: RESTful services, endpoint implementation
-- **Authentication**: JWT, Firebase integration, security layers
-- **Business Logic**: Core application features, data processing
-- **Third-party Integration**: Payment gateways, external APIs
-- **Real-time Features**: WebSocket implementation, notifications
-
-#### **Database & AI** - wuong161104
-- **Database Design**: MySQL schema, relationships, optimization
-- **Data Management**: Sample data creation, migration scripts
-- **AI Integration**: Gemini API, intelligent features
-- **Data Analysis**: Learning analytics, user behavior insights
-
-### 📊 **Thống kê đóng góp**
-Dựa trên GitHub insights, team đã có gần **700 commits** , hơn **300 workflows** , gần **70 pull requests** với sự đóng góp tích cực từ tất cả thành viên trong việc phát triển nền tảng học tiếng Nhật Oboe.
 
 ## Đóng góp
 
@@ -336,14 +294,6 @@ Dựa trên GitHub insights, team đã có gần **700 commits** , hơn **300 wo
 4. Push to branch (`git push origin feature/TenTinhNang`)
 5. Tạo Pull Request
 
-## Giấy phép
 
-Dự án này được phát triển cho mục đích học tập và nghiên cứu.
 
-## Liên hệ & Liên kết
-
-- **Website**: [https://oboeru.me/](https://oboeru.me/)
-
----
-
-**Oboe** - Nền tảng học tiếng Nhật thông minh với AI
+**Oboe** - Nền tảng học tiếng Anh thông minh với AI
