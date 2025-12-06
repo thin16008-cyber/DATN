@@ -59,7 +59,7 @@ public class PaymentController {
             CustomUserDetails customUser = (CustomUserDetails) authentication.getPrincipal();
             UUID userId = customUser.getUserID();
 
-            var result = payOsService.createPayment(99000, "Thanh toán Oboeru", userId);
+            var result = payOsService.createPayment(99000, "Pay Oboeru", userId);
 
             if (result == null || result.getCheckoutUrl() == null) {
                 return ResponseEntity.status(500).body(Map.of(

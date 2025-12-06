@@ -18,7 +18,7 @@ public class PayOsBeanConfig {
         return new PayOS(
                 payOsConfig.getClientId(),
                 payOsConfig.getApiKey(),
-                payOsConfig.getChecksumKey() // Có thể null nếu không cần
+                payOsConfig.getChecksumKey() 
         );
     }
 }

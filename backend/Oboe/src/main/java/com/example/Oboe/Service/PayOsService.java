@@ -74,8 +74,8 @@ public class PayOsService {
     public WebhookData handleWebhook(String rawJson) throws Exception {
         ObjectMapper mapper = new ObjectMapper();
         vn.payos.type.Webhook webhook = mapper.readValue(rawJson, vn.payos.type.Webhook.class);
-        // WebhookData data = payOS.verifyPaymentWebhookData(webhook);
-       WebhookData data = webhook.getData(); // Bỏ verify chữ ký khi test
+        WebhookData data = payOS.verifyPaymentWebhookData(webhook);
+    //    WebhookData data = webhook.getData(); // Bỏ verify chữ ký khi test
 
         long orderCode = data.getOrderCode();
         String code = data.getCode();
