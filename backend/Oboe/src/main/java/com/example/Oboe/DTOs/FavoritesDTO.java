@@ -1,38 +1,56 @@
 package com.example.Oboe.DTOs;
 
 import java.util.UUID;
-
 import java.time.LocalDate;
+// Đã loại bỏ import Lombok
 
 public class FavoritesDTO {
-    private UUID favoritesId;
+    
+    // Chuẩn hóa tên thuộc tính: FavoritesID -> favoritesId
+    private UUID favoritesId; 
     private String title;
     private String content;
-    private LocalDate favoritesAt;
+    // Chuẩn hóa tên thuộc tính: favoritesAt -> favoritedAt
+    private LocalDate favoritedAt; 
     private UUID userId;
-    private UUID grammaId;
-    private UUID kanjiId;
-
-    private UUID sampleSentenceId;
-    private UUID vocabularyId;
-    //gọi DTo của Kanji để trả ve dữ liệu
+    
+    // Chuẩn hóa tên ID: grammaId -> grammarId
+    private UUID grammarId; 
+    
+    // Đổi tên ID: phraseId -> idiomId (Thay thế PhoneticID đã xóa)
+    private UUID idiomId; 
+    
+    // Chuẩn hóa tên thuộc tính: vocabularyId
+    private UUID vocabularyId; 
+    
+    // Trường để xác định loại nội dung (grammar, vocabulary, idiom)
     private String type;
-    // Constructors
-    public FavoritesDTO() {}
+    
 
-    public FavoritesDTO(UUID favoritesId, String title, String content, LocalDate favoritesAt,
-                        UUID userId, UUID grammaId, UUID kanjiId, UUID sampleSentenceId, UUID vocabularyId) {
+    // --- 1. Constructors ---
+    
+    // Constructor không tham số (thay thế @NoArgsConstructor)
+    public FavoritesDTO() {}
+    
+    // Constructor đầy đủ tham số (thay thế @AllArgsConstructor)
+    // Lưu ý: Thêm 'type' vào constructor nếu bạn muốn khởi tạo nó ngay lập tức
+    // Nếu 'type' chỉ được set sau đó, nó có thể bị loại khỏi constructor này
+    public FavoritesDTO(UUID favoritesId, String title, String content, LocalDate favoritedAt, UUID userId, 
+                        UUID grammarId, UUID idiomId, UUID vocabularyId, String type) {
         this.favoritesId = favoritesId;
         this.title = title;
         this.content = content;
-        this.favoritesAt = favoritesAt;
+        this.favoritedAt = favoritedAt;
         this.userId = userId;
-        this.grammaId = grammaId;
-        this.kanjiId = kanjiId;
-        this.sampleSentenceId = sampleSentenceId;
+        this.grammarId = grammarId;
+        this.idiomId = idiomId;
         this.vocabularyId = vocabularyId;
+        this.type = type;
     }
-    // Getters and Setters
+
+
+    // --- 2. Getters và Setters ---
+
     public UUID getFavoritesId() {
         return favoritesId;
     }
@@ -57,12 +75,12 @@ public class FavoritesDTO {
         this.content = content;
     }
 
-    public LocalDate getFavoritesAt() {
-        return favoritesAt;
+    public LocalDate getFavoritedAt() {
+        return favoritedAt;
     }
 
-    public void setFavoritesAt(LocalDate favoritesAt) {
-        this.favoritesAt = favoritesAt;
+    public void setFavoritedAt(LocalDate favoritedAt) {
+        this.favoritedAt = favoritedAt;
     }
 
     public UUID getUserId() {
@@ -73,22 +91,21 @@ public class FavoritesDTO {
         this.userId = userId;
     }
 
-    public UUID getGrammaId() {
-        return grammaId;
+    public UUID getGrammarId() {
+        return grammarId;
     }
 
-    public void setGrammaId(UUID grammaId) {
-        this.grammaId = grammaId;
+    public void setGrammarId(UUID grammarId) {
+        this.grammarId = grammarId;
     }
 
-    public UUID getKanjiId() {
-        return kanjiId;
+    public UUID getIdiomId() {
+        return idiomId;
     }
 
-    public void setKanjiId(UUID kanjiId) {
-        this.kanjiId = kanjiId;
+    public void setIdiomId(UUID idiomId) {
+        this.idiomId = idiomId;
     }
-
 
     public UUID getVocabularyId() {
         return vocabularyId;
@@ -97,21 +114,12 @@ public class FavoritesDTO {
     public void setVocabularyId(UUID vocabularyId) {
         this.vocabularyId = vocabularyId;
     }
-   public String getType() {
+
+    public String getType() {
         return type;
-   }
-   public void setType(String type) {
+    }
+
+    public void setType(String type) {
         this.type = type;
-   }
-
-    public UUID getSampleSentenceId() {
-        return sampleSentenceId;
     }
-
-    public void setSampleSentenceId(UUID sampleSentenceId) {
-        this.sampleSentenceId = sampleSentenceId;
-    }
-
-
 }
-

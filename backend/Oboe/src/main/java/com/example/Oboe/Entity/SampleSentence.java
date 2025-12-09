@@ -1,68 +1,138 @@
 package com.example.Oboe.Entity;
 
-
-import jakarta.persistence.*;
-
 import java.util.UUID;
 
+import jakarta.persistence.*;
+// Đã loại bỏ import Lombok
+
 @Entity
-@Table(name = "sample_sentence")
+@Table(name = "sample_sentences")
 public class SampleSentence {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name = "sample_sentence_id", updatable = false, nullable = false)
-    private UUID sample_sentence_id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "sentence_id")
+    private UUID sentenceId;
 
-    @Column(name = "japanese_text", nullable = false, columnDefinition = "TEXT")
-    private String japaneseText; // Câu tiếng Nhật
+    @Column(name = "english_sentence", columnDefinition = "TEXT", nullable = false)
+    private String englishSentence;
 
-    @Column(name = "vietnamese_meaning", columnDefinition = "TEXT")
-    private String vietnameseMeaning; // Nghĩa tiếng Việt
+    @Column(name = "vietnamese_translation", columnDefinition = "TEXT", nullable = false)
+    private String vietnameseTranslation;
 
+    @Column(name = "difficulty")
+    private String difficulty;
 
-    @Column(name = "vietnamese_pronunciation")
-    private String vietnamesePronunciation;
+    @Column(name = "audio_url")
+    private String audioUrl;
 
-    public String getVietnamesePronunciation() {
-        return vietnamesePronunciation;
-    }
+    // Mối quan hệ N-1 (Nhiều câu ví dụ - 1 Từ vựng)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "related_vocab_id")
+    private Vocabulary vocabulary; 
 
-    public void setVietnamesePronunciation(String vietnamesePronunciation) {
-        this.vietnamesePronunciation = vietnamesePronunciation;
-    }
+    // Mối quan hệ N-1 (Nhiều câu ví dụ - 1 Thành ngữ)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "related_idiom_id")
+    private Idiom idiom; 
 
+    // Mối quan hệ N-1 (Nhiều câu ví dụ - 1 Ngữ pháp)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "related_grammar_id")
+    private Grammar grammar; 
 
-    // Constructors
+    // --- 1. Constructors ---
+    
+    // Constructor không tham số
     public SampleSentence() {}
 
-    public SampleSentence(String japaneseText, String vietnameseMeaning) {
-        this.japaneseText = japaneseText;
-        this.vietnameseMeaning = vietnameseMeaning;
-
+    // Constructor đầy đủ tham số (Không bao gồm ID và các Entity)
+    public SampleSentence(String englishSentence, String vietnameseTranslation, 
+                          String difficulty, String audioUrl) {
+        this.englishSentence = englishSentence;
+        this.vietnameseTranslation = vietnameseTranslation;
+        this.difficulty = difficulty;
+        this.audioUrl = audioUrl;
     }
 
-    public UUID getSample_sentence_id() {
-        return sample_sentence_id;
+    // Constructor đầy đủ tham số (Bao gồm tất cả các trường)
+    public SampleSentence(UUID sentenceId, String englishSentence, String vietnameseTranslation, 
+                          String difficulty, String audioUrl, Vocabulary vocabulary, 
+                          Idiom idiom, Grammar grammar) {
+        this.sentenceId = sentenceId;
+        this.englishSentence = englishSentence;
+        this.vietnameseTranslation = vietnameseTranslation;
+        this.difficulty = difficulty;
+        this.audioUrl = audioUrl;
+        this.vocabulary = vocabulary;
+        this.idiom = idiom;
+        this.grammar = grammar;
     }
 
-    public void setSample_sentence_id(UUID sample_sentence_id) {
-        this.sample_sentence_id = sample_sentence_id;
+
+    // --- 2. Getters và Setters ---
+
+    public UUID getSentenceId() {
+        return sentenceId;
     }
 
-    public String getJapaneseText() {
-        return japaneseText;
+    public void setSentenceId(UUID sentenceId) {
+        this.sentenceId = sentenceId;
     }
 
-    public void setJapaneseText(String japaneseText) {
-        this.japaneseText = japaneseText;
+    public String getEnglishSentence() {
+        return englishSentence;
     }
 
-    public String getVietnameseMeaning() {
-        return vietnameseMeaning;
+    public void setEnglishSentence(String englishSentence) {
+        this.englishSentence = englishSentence;
     }
 
-    public void setVietnameseMeaning(String vietnameseMeaning) {
-        this.vietnameseMeaning = vietnameseMeaning;
+    public String getVietnameseTranslation() {
+        return vietnameseTranslation;
     }
 
+    public void setVietnameseTranslation(String vietnameseTranslation) {
+        this.vietnameseTranslation = vietnameseTranslation;
+    }
+
+    public String getDifficulty() {
+        return difficulty;
+    }
+
+    public void setDifficulty(String difficulty) {
+        this.difficulty = difficulty;
+    }
+
+    public String getAudioUrl() {
+        return audioUrl;
+    }
+
+    public void setAudioUrl(String audioUrl) {
+        this.audioUrl = audioUrl;
+    }
+
+    public Vocabulary getVocabulary() {
+        return vocabulary;
+    }
+
+    public void setVocabulary(Vocabulary vocabulary) {
+        this.vocabulary = vocabulary;
+    }
+
+    public Idiom getIdiom() {
+        return idiom;
+    }
+
+    public void setIdiom(Idiom idiom) {
+        this.idiom = idiom;
+    }
+
+    public Grammar getGrammar() {
+        return grammar;
+    }
+
+    public void setGrammar(Grammar grammar) {
+        this.grammar = grammar;
+    }
 }

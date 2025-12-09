@@ -23,18 +23,21 @@ public class GrammarController {
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size
     ) {
+        // Gọi Service
         return ResponseEntity.ok(grammarService.getAllGrammar(page, size));
     }
 
     // Lấy grammar theo ID
     @GetMapping("/{id}")
     public ResponseEntity<GrammarDTO> getGrammarById(@PathVariable UUID id) {
+        // Gọi Service
         return ResponseEntity.ok(grammarService.getGrammarById(id));
     }
 
     // Tạo mới grammar (ROLE_ADMIN)
     @PostMapping
     public ResponseEntity<GrammarDTO> createGrammar(@RequestBody GrammarDTO dto) {
+        // Gọi Service
         GrammarDTO created = grammarService.createGrammar(dto);
         return ResponseEntity.ok(created);
     }
@@ -45,6 +48,7 @@ public class GrammarController {
             @PathVariable UUID id,
             @RequestBody GrammarDTO dto
     ) {
+        // Gọi Service
         GrammarDTO updated = grammarService.updateGrammar(id, dto);
         return ResponseEntity.ok(updated);
     }
@@ -52,6 +56,7 @@ public class GrammarController {
     // Xoá grammar (ROLE_ADMIN)
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteGrammar(@PathVariable UUID id) {
+        // Gọi Service
         grammarService.deleteGrammar(id);
         return ResponseEntity.noContent().build();
     }
@@ -59,6 +64,7 @@ public class GrammarController {
     // Tìm kiếm grammar theo từ khoá
     @GetMapping("/search")
     public ResponseEntity<List<GrammarDTO>> searchGrammar(@RequestParam String keyword) {
+        // Gọi Service
         return ResponseEntity.ok(grammarService.searchGrammar(keyword));
     }
 }

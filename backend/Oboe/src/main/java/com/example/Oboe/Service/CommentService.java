@@ -32,28 +32,33 @@ public class CommentService {
     private final CommentRepository commentRepository;
     private final UserService userService;
     private final NotificationsRepository notificationsRepository;
-    private final KanjiRepository kanjiRepository;
+    
+    // 1. LOẠI BỎ: PhoneticsRepository
+    // private final PhoneticsRepository phoneticsRepository; 
+    
     private final GrammarRepository grammarRepository;
-    private final SampleSentenceRepository sampleSentenceRepository ;
+    
+    // 2. Cập nhật: PhraseIdiomRepository -> IdiomRepository
+    private final IdiomRepository idiomRepository ; 
+    
     private final VocabularyRepository vocabularyRepository ;
 
 
     public CommentService(CommentRepository commentRepository, UserService userService, BlogRepository blogRepository, NotificationsRepository notificationsRepository,
-                          KanjiRepository kanjiRepository,
+                          // LOẠI BỎ PhoneticsRepository
+                          // PhoneticsRepository phoneticsRepository,
                           GrammarRepository grammarRepository,
-                          VocabularyRepository vocabularyRepository
-                          ,
-                          SampleSentenceRepository sampleSentenceRepository) {
+                          VocabularyRepository vocabularyRepository,
+                          // Cập nhật IdiomRepository
+                          IdiomRepository idiomRepository) { 
         this.commentRepository = commentRepository;
         this.userService = userService;
         this.blogRepository = blogRepository;
         this.notificationsRepository = notificationsRepository;
-        this.kanjiRepository = kanjiRepository;
+        // LOẠI BỎ: this.phoneticsRepository = phoneticsRepository;
         this.grammarRepository = grammarRepository;
-        this.sampleSentenceRepository = sampleSentenceRepository;
+        this.idiomRepository = idiomRepository; // Cập nhật
         this.vocabularyRepository = vocabularyRepository;
-
-
     }
 
 
@@ -64,13 +69,13 @@ public class CommentService {
                 .map(this::toDTO)
                 .collect(Collectors.toList());
 
-        //  Tạo cây và lọc ra các comment cha (gốc)
+        //  Tạo cây và lọc ra các comment cha (gốc)
         List<CommentDTOs> commentTree = buildCommentTree(allDtos);
 
-        //  commentTree là danh sách gốc (cha), vì buildCommentTree đã lọc
+        //  commentTree là danh sách gốc (cha), vì buildCommentTree đã lọc
         List<CommentDTOs> rootComments = commentTree;
 
-        //  Phân trang theo comment cha
+        //  Phân trang theo comment cha
         List<CommentDTOs> paginated = paginateComments(rootComments, page, size);
 
         Map<String, Object> response = new HashMap<>();
@@ -101,6 +106,10 @@ public class CommentService {
                 // Nếu có parent → gắn vào danh sách phản hồi (replies) của comment cha
                 CommentDTOs parentDto = dtoMap.get(parentId);
                 if (parentDto != null) {
+                    // Đảm bảo replies được khởi tạo
+                    if (parentDto.getReplies() == null) {
+                        parentDto.setReplies(new ArrayList<>());
+                    }
                     parentDto.getReplies().add(dto);
                 }
             }
@@ -109,7 +118,7 @@ public class CommentService {
         return rootComments;
     }
 
-     // phân trang về danh sách con của root comments theo phân trang
+      // phân trang về danh sách con của root comments theo phân trang
     private List<CommentDTOs> paginateComments(List<CommentDTOs> rootComments, int page, int size) {
         int fromIndex = page * size;
         int toIndex = Math.min(fromIndex + size, rootComments.size());
@@ -121,34 +130,36 @@ public class CommentService {
         return rootComments.subList(fromIndex, toIndex);
     }
 
-    //  Tạo comment mới (comment cha)
+    //  Tạo comment mới (comment cha)
     public CommentDTOs createComment(UUID teamId, UUID userId, CommentDTOs dto) {
-        //  Lấy người gửi
+        //  Lấy người gửi
         User sender = userService.findById(userId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Người dùng không hợp lệ"));
 
         User receiver = null;
         boolean isBlog = false;
 
-        //  Xác định loại nội dung
+        //  Xác định loại nội dung
         Optional<Blog> blogOpt = blogRepository.findById(teamId);
         if (blogOpt.isPresent()) {
             isBlog = true;
             receiver = blogOpt.get().getUser();
         } else if (
-                !kanjiRepository.existsById(teamId) &&
-                        !grammarRepository.existsById(teamId) &&
-                     !sampleSentenceRepository.existsById(teamId)&&
-                        !vocabularyRepository.existsById(teamId)
+             // 3. LOẠI BỎ: phoneticsRepository.existsById(teamId)
+             !grammarRepository.existsById(teamId) &&
+             // 4. Cập nhật: phraseIdiomRepository -> idiomRepository
+             !idiomRepository.existsById(teamId) && 
+             !vocabularyRepository.existsById(teamId)
         ) {
+            // Lỗi chỉ được ném ra nếu teamId không khớp với Blog, Grammar, Idiom, hoặc Vocabulary
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Không tìm thấy nội dung phù hợp để bình luận");
         }
 
-        //  Lấy giờ Việt Nam
+        //  Lấy giờ Việt Nam
         ZoneId vietnamZone = ZoneId.of("Asia/Ho_Chi_Minh");
         LocalDateTime vietnamTime = LocalDateTime.now(vietnamZone);
 
-        //  Tạo Comment
+        //  Tạo Comment
         Comment comment = new Comment();
         comment.setTitle(dto.getTitle());
         comment.setContent(dto.getContent());
@@ -158,8 +169,7 @@ public class CommentService {
         Comment saved = commentRepository.save(comment);
         CommentDTOs commentDTO = toDTO(saved);
 
-        //  Nếu là comment blog → tạo thông báo và gửi WebSocket
-        // Nếu là comment blog → tạo thông báo và gửi WebSocket
+        //  Nếu là comment blog → tạo thông báo và gửi WebSocket
         if (isBlog && receiver != null && !receiver.getUser_id().equals(sender.getUser_id())) {
             // Tạo thông báo
             Notifications notification = new Notifications();
@@ -167,8 +177,8 @@ public class CommentService {
             notification.setText_notification("Bạn vừa nhận được một bình luận mới từ " + sender.getUserName());
             notification.setRead(false);
             notification.setUpdate_at(vietnamTime);
-            notification.setTargetId(saved.getreferenceId());          // ID của comment
-            notification.setTargetType("BLog");            // Kiểu: "Comment"
+            notification.setTargetId(saved.getCommentId()); // ID của comment
+            notification.setTargetType("BLog");
 
             Notifications savedNoti = notificationsRepository.save(notification);
 
@@ -180,8 +190,8 @@ public class CommentService {
                     ObjectMapper mapper = new ObjectMapper();
                     mapper.registerModule(new JavaTimeModule());
                     mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
-                    mapper.enable(SerializationFeature.INDENT_OUTPUT);
-
+                    // Bỏ mapper.enable(SerializationFeature.INDENT_OUTPUT); nếu không cần
+                    
                     String commentJson = mapper.writeValueAsString(commentDTO);
                     String notificationJson = mapper.writeValueAsString(savedNoti);
 
@@ -190,7 +200,8 @@ public class CommentService {
                     receiverSession.sendMessage(new TextMessage(notificationJson));
 
                 } catch (IOException e) {
-                    e.printStackTrace(); // In ra thông tin lỗi
+                    // Log lỗi
+                    System.err.println("Lỗi gửi WebSocket khi tạo comment: " + e.getMessage());
                 }
             }
         }
@@ -220,7 +231,7 @@ public class CommentService {
         reply.setCreatedAt(vietnamTime);
         reply.setUser(sender);
         reply.setParentComment(parent);
-        reply.setreferenceId(parent.getreferenceId()); // giữ nguyên blogId hoặc teamId giống comment cha
+        reply.setreferenceId(parent.getreferenceId()); // giữ nguyên referenceId giống comment cha
 
         // Lưu comment con vào database
         Comment savedReply = commentRepository.save(reply);
@@ -236,7 +247,7 @@ public class CommentService {
             notification.setRead(false);
             notification.setUpdate_at(vietnamTime);
             notification.setTargetId(parent.getreferenceId());
-            notification.setTargetType("BLog");
+            notification.setTargetType("BLog"); // Cần chuẩn hóa tên nếu cần
 
             Notifications savedNoti = notificationsRepository.save(notification);
 
@@ -247,7 +258,6 @@ public class CommentService {
                     ObjectMapper mapper = new ObjectMapper();
                     mapper.registerModule(new JavaTimeModule());
                     mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
-                    mapper.enable(SerializationFeature.INDENT_OUTPUT);
 
                     // JSON của bình luận phản hồi
                     String replyJson = mapper.writeValueAsString(toDTO(savedReply));
@@ -257,13 +267,14 @@ public class CommentService {
                     receiverSession.sendMessage(new TextMessage(replyJson));
                     receiverSession.sendMessage(new TextMessage(notificationJson));
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    System.err.println("Lỗi gửi WebSocket khi phản hồi comment: " + e.getMessage());
                 }
             }
         }
 
         return toDTO(savedReply);
     }
+    
     public CommentDTOs getcommentbyID(UUID commentId) {
         Comment comment = getCommentEntityById(commentId);
         if (comment == null) {
@@ -271,25 +282,29 @@ public class CommentService {
         }
         return toDTO(comment);
     }
-    //  Cập nhật comment (chỉ người tạo mới được sửa)
+    
+    //  Cập nhật comment (chỉ người tạo mới được sửa)
     public CommentDTOs updateComment(UUID commentId, UUID userId, CommentDTOs dto) {
         Comment comment = getCommentEntityById(commentId);
-        if (comment == null) return null;
+        if (comment == null) throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Không tìm thấy bình luận");
 
-        Optional<User> userOpt = userService.findById(userId);
-        if (userOpt.isEmpty()) return null;
+        User user = userService.findById(userId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Người dùng không hợp lệ"));
 
         // Chỉ cho phép sửa nếu là người tạo
-        if (!comment.getUser().getUser_id().equals(userOpt.get().getUser_id())) return null;
+        if (!comment.getUser().getUser_id().equals(user.getUser_id())) {
+             throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Bạn không có quyền sửa bình luận này");
+        }
 
         comment.setTitle(dto.getTitle());
         comment.setContent(dto.getContent());
-        comment.setCreatedAt(LocalDateTime.now());
+        // Cập nhật thời gian chỉnh sửa
+        comment.setCreatedAt(LocalDateTime.now(ZoneId.of("Asia/Ho_Chi_Minh"))); 
 
         return toDTO(commentRepository.save(comment));
     }
 
-    //  Xóa comment nếu đúng người tạo
+    //  Xóa comment nếu đúng người tạo
     public boolean deleteComment(UUID commentId, UUID userId) {
         Comment comment = getCommentEntityById(commentId);
         if (comment == null) return false;
@@ -312,13 +327,13 @@ public class CommentService {
                 .map(this::toShortDTO).toList();
     }
 
-    //lấy  Lấy tất cả comment của một user
+    //lấy  Lấy tất cả comment của một user
     public Page<CommentDTOs> getCommentByUserIds(UUID userId, int page, int size) {
         Optional<User> userOpt = userService.findById(userId);
         if (userOpt.isEmpty()) {
             return Page.empty(); // Trả về Page rỗng thay vì List.of()
         }
-        Pageable pageable = PageRequest.of(page, size); //  Tạo pageable
+        Pageable pageable = PageRequest.of(page, size); //  Tạo pageable
         Page<Comment> commentPage = commentRepository.findCommentByUserIds(userId, pageable); //
 
         List<CommentDTOs> dtoList = commentPage.stream()
@@ -328,17 +343,17 @@ public class CommentService {
     }
 
 
-    //  Lấy số lượng comment theo teamId (blogId)
+    //  Lấy số lượng comment theo teamId (blogId)
     public Long getCommentCountByTeamId(UUID teamId) {
         return commentRepository.countByReferenceId(teamId);
     }
 
-    //  Hàm dùng chung để lấy comment theo ID
+    //  Hàm dùng chung để lấy comment theo ID
     public Comment getCommentEntityById(UUID commentId) {
         return commentRepository.findById(commentId).orElse(null);
     }
 
-    //  Chuyển từ entity -> DTO
+    //  Chuyển từ entity -> DTO
     private CommentDTOs toDTO(Comment comment) {
         CommentDTOs dto = new CommentDTOs();
         dto.setCommentId(comment.getCommentId());
@@ -359,6 +374,7 @@ public class CommentService {
         dto.setReplies(new ArrayList<>()); // Khởi tạo danh sách phản hồi
         return dto;
     }
+    
     private CommentDTOs toShortDTO(Comment comment) {
         CommentDTOs dto = new CommentDTOs();
         dto.setCommentId(comment.getCommentId());

@@ -3,10 +3,10 @@ import TheHome from "@/views/home/TheHome.vue";
 import TheIntro from "@/views/intro/TheIntro.vue";
 import TheLogin from "@/views/auth/login/TheLogin.vue";
 import TheRegister from "@/views/auth/register/TheRegister.vue";
-import WordDetail from '@/views/search-japanese/word-detail/WordDetail.vue' 
-import KanjiDetail from '@/views/search-japanese/kanji-detail/KanjiDetail.vue'
-import GrammarDetail from '@/views/search-japanese/grammar-detail/GrammarDetail.vue'
-import SentenceDetail from '@/views/search-japanese/sentence-detail/SentenceDetail.vue'
+import WordDetail from '@/views/search-english/word-detail/WordDetail.vue' 
+import IdiomDetail from '@/views/search-english/idiom-detail/IdiomDetail.vue'
+import GrammarDetail from '@/views/search-english/grammar-detail/GrammarDetail.vue'
+import SentenceDetail from '@/views/search-english/sentence-detail/SentenceDetail.vue'
 import FlashcardLearn from '@/views/flashcard/flashcard-learn/FlashcardLearn.vue'
 import CreateFlashcard from '@/views/create-learn/create-flashcard/CreateFlashcard.vue'
 import CreateQuiz from '@/views/create-learn/create-quiz/CreateQuiz.vue'
@@ -150,9 +150,9 @@ const routes = [
     component: WordDetail
   },
   {
-    path: '/kanji/:id',
-    name: 'KanjiDetail',
-    component: KanjiDetail
+    path: '/idiom/:id',
+    name: 'IdiomDetail',
+    component: IdiomDetail
   },
   {
     path: '/grammar/:id',

@@ -1,9 +1,9 @@
 import axios from '@/api/axios';
 import { handleApiError } from '@/api/apiUtils';
 
-const PREFIX = '/api/kanji';
+const PREFIX = '/api/idioms';
 
-const kanjiApi = {
+const idiomsApi = {
   // Lấy danh sách có phân trang
   async getAll({ page = 0, size = 10 } = {}) {
     try {
@@ -26,7 +26,7 @@ const kanjiApi = {
     }
   },
 
-  // Tạo Kanji (admin)
+  // Tạo Idiom (admin)
   async create(dto) {
     try {
       const res = await axios.post(PREFIX, dto);
@@ -36,7 +36,7 @@ const kanjiApi = {
     }
   },
 
-  // Cập nhật Kanji (admin)
+  // Cập nhật Idiom (admin)
   async update(id, dto) {
     try {
       const res = await axios.put(`${PREFIX}/${id}`, dto);
@@ -46,7 +46,7 @@ const kanjiApi = {
     }
   },
 
-  // Xoá Kanji (admin)
+  // Xoá Idiom (admin)
   async delete(id) {
     try {
       const res = await axios.delete(`${PREFIX}/${id}`);
@@ -69,9 +69,9 @@ const kanjiApi = {
   },
 
   // Lấy từ liên quan
-  async getRelated(kanjiId) {
+  async getRelated(idiomId) {
     try {
-      const res = await axios.get(`${PREFIX}/${kanjiId}/related`);
+      const res = await axios.get(`${PREFIX}/${idiomId}/related`);
       return res.data;
     } catch (error) {
       throw new Error(handleApiError(error));
@@ -79,4 +79,4 @@ const kanjiApi = {
   }
 };
 
-export default kanjiApi;
+export default idiomsApi;

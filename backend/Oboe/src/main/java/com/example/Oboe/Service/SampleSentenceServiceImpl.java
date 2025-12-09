@@ -3,7 +3,7 @@ package com.example.Oboe.Service;
 import com.example.Oboe.DTOs.SampleSentenceDTO;
 import com.example.Oboe.Entity.SampleSentence;
 import com.example.Oboe.Repository.SampleSentenceRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.transaction.Transactional; // Thêm @Transactional để đảm bảo tính toàn vẹn
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -11,59 +11,111 @@ import org.springframework.stereotype.Service;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+import java.util.stream.Collectors; // Thêm import cho Collectors
 
 @Service
+@Transactional // Đảm bảo các thao tác với DB chạy trong transaction
 public class SampleSentenceServiceImpl implements SampleSentenceService {
 
-    @Autowired
-    private SampleSentenceRepository repository;
+    // Sử dụng Constructor Injection thay vì @Autowired trên trường
+    private final SampleSentenceRepository repository;
 
-    private SampleSentenceDTO convertToDTO(SampleSentence entity) {
-        return new SampleSentenceDTO(
-                entity.getSample_sentence_id(),
-                entity.getJapaneseText(),
-                entity.getVietnameseMeaning()
-        );
+    public SampleSentenceServiceImpl(SampleSentenceRepository repository) {
+        this.repository = repository;
     }
 
+    // --- Hàm chuyển đổi DTO <-> Entity ---
+
+    // Đã cập nhật để ánh xạ các trường mới và tên trường mới
+    private SampleSentenceDTO convertToDTO(SampleSentence entity) {
+        SampleSentenceDTO dto = new SampleSentenceDTO();
+        
+        // Cần sử dụng các Getter mới: getSentenceId, getEnglishSentence, getVietnameseTranslation
+        dto.setSentenceId(entity.getSentenceId());
+        dto.setEnglishSentence(entity.getEnglishSentence());
+        dto.setVietnameseTranslation(entity.getVietnameseTranslation());
+        
+        // Thêm các trường mới
+        dto.setDifficulty(entity.getDifficulty());
+        dto.setAudioUrl(entity.getAudioUrl());
+        
+        // Thêm các ID khóa ngoại
+        // Giả định Entity SampleSentence có các mối quan hệ và Getter tương ứng
+        if (entity.getVocabulary() != null) dto.setRelatedVocabId(entity.getVocabulary().getVocabularyId());
+        if (entity.getIdiom() != null) dto.setRelatedIdiomId(entity.getIdiom().getIdiomId());
+        if (entity.getGrammar() != null) dto.setRelatedGrammarId(entity.getGrammar().getGrammarId());
+        
+        return dto;
+    }
+
+    // Đã cập nhật để ánh xạ các trường mới và tên trường mới
     private SampleSentence convertToEntity(SampleSentenceDTO dto) {
         SampleSentence entity = new SampleSentence();
-        entity.setSample_sentence_id(dto.getId());
-        entity.setJapaneseText(dto.getJapaneseText());
-        entity.setVietnameseMeaning(dto.getVietnameseMeaning());
+        
+        // KHÔNG set ID cho thao tác CREATE. ID (UUID) sẽ được Hibernate tự động sinh.
+        
+        // Cần sử dụng các Getter mới: getEnglishSentence, getVietnameseTranslation
+        entity.setEnglishSentence(dto.getEnglishSentence());
+        entity.setVietnameseTranslation(dto.getVietnameseTranslation());
+        
+        // Thêm các trường mới
+        entity.setDifficulty(dto.getDifficulty());
+        entity.setAudioUrl(dto.getAudioUrl());
+        
+        // KHÔNG xử lý khóa ngoại (Vocabulary, Idiom, Grammar) ở đây vì cần phải tìm Entity cha trước.
+        // Logic xử lý khóa ngoại nên được thực hiện trong Service nếu cần.
+
         return entity;
     }
 
+    // --- CRUD Implementation ---
+
     @Override
     public SampleSentenceDTO create(SampleSentenceDTO dto) {
-        SampleSentence entity = convertToEntity(dto);
+        // Tái sử dụng logic toEntity, nhưng không set ID
+        SampleSentence entity = convertToEntity(dto); 
         return convertToDTO(repository.save(entity));
     }
 
     @Override
     public SampleSentenceDTO update(UUID id, SampleSentenceDTO dto) {
         SampleSentence entity = repository.findById(id)
-                .orElseThrow(() -> new RuntimeException("SampleSentence not found"));
-        entity.setJapaneseText(dto.getJapaneseText());
-        entity.setVietnameseMeaning(dto.getVietnameseMeaning());
+                .orElseThrow(() -> new RuntimeException("SampleSentence not found with ID: " + id));
+        
+        // Cập nhật các trường
+        if (dto.getEnglishSentence() != null) entity.setEnglishSentence(dto.getEnglishSentence());
+        if (dto.getVietnameseTranslation() != null) entity.setVietnameseTranslation(dto.getVietnameseTranslation());
+        if (dto.getDifficulty() != null) entity.setDifficulty(dto.getDifficulty());
+        if (dto.getAudioUrl() != null) entity.setAudioUrl(dto.getAudioUrl());
+        
+        // Lưu ý: Cần logic phức tạp hơn nếu muốn cập nhật các khóa ngoại (related IDs)
+        
         return convertToDTO(repository.save(entity));
     }
 
     @Override
     public void delete(UUID id) {
+        // Nên kiểm tra sự tồn tại trước khi xóa
+        if (!repository.existsById(id)) {
+            throw new RuntimeException("SampleSentence not found with ID: " + id);
+        }
         repository.deleteById(id);
     }
 
     @Override
     public SampleSentenceDTO getById(UUID id) {
         SampleSentence entity = repository.findById(id)
-                .orElseThrow(() -> new RuntimeException("SampleSentence not found"));
+                .orElseThrow(() -> new RuntimeException("SampleSentence not found with ID: " + id));
         return convertToDTO(entity);
     }
 
     @Override
     public Map<String, Object> getAll(Pageable pageable) {
         Page<SampleSentence> pageResult = repository.findAll(pageable);
+        
+        // Sử dụng stream().map(this::convertToDTO).collect(Collectors.toList())
+        // thay vì pageResult.map(this::convertToDTO) để tránh lỗi nếu sử dụng Spring Data JPA cũ
+        // Nhưng nếu sử dụng Spring Boot 3.x, pageResult.map() là hợp lệ. Tôi sẽ giữ pageResult.map().
         Page<SampleSentenceDTO> dtoPage = pageResult.map(this::convertToDTO);
 
         Map<String, Object> response = new HashMap<>();
@@ -75,6 +127,4 @@ public class SampleSentenceServiceImpl implements SampleSentenceService {
 
         return response;
     }
-
-
 }

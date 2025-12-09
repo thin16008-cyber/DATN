@@ -7,7 +7,7 @@ import dashboardApi from './modules/dashboardApi';
 import favoriteApi from './modules/favoriteApi';
 import flashcardApi from './modules/flashcardApi';
 import grammarApi from './modules/grammarApi';
-import kanjiApi from './modules/kanjiApi';
+import idiomsApi from './modules/idiomsApi';
 import messageApi from './modules/messageApi';
 import notificationApi from './modules/notificationApi';
 import profileApi from './modules/profileApi';
@@ -36,7 +36,7 @@ const api = {
     favorite: favoriteApi,
     flashcard: flashcardApi,
     grammar: grammarApi,
-    kanji: kanjiApi,
+    idiom: idiomsApi,
     learningMaterial: learningMaterialApi,
     message: messageApi,
     notification: notificationApi,

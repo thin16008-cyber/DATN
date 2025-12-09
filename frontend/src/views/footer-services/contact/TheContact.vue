@@ -11,7 +11,7 @@
         <div class="info-card">
           <i class="fas fa-phone-alt"></i>
           <h3>{{ t('contact.phone') }}</h3>
-          <p>0775751954</p>
+          <p>0282312998 </p>
           <p class="time">{{ t('contact.phoneTime') }}</p>
         </div>
 

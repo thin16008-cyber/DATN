@@ -1,11 +1,8 @@
 package com.example.Oboe.Service;
 
 import com.example.Oboe.DTOs.GrammarDTO;
-import com.example.Oboe.DTOs.ReadingDTO;
 import com.example.Oboe.Entity.Grammar;
-import com.example.Oboe.Entity.Reading;
 import com.example.Oboe.Repository.GrammarRepository;
-import com.example.Oboe.Repository.ReadingRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -23,12 +20,13 @@ import java.util.stream.Collectors;
 public class GrammarService {
 
     private final GrammarRepository grammarRepository;
-    private final ReadingRepository readingRepository;
-
-    public GrammarService(GrammarRepository grammarRepository,ReadingRepository readingRepository) {
+    
+    // Cập nhật Constructor (chỉ còn GrammarRepository)
+    public GrammarService(GrammarRepository grammarRepository) {
         this.grammarRepository = grammarRepository;
-        this.readingRepository = readingRepository;
     }
+
+    // --- Phương thức CRUD ---
 
     // Get all grammar with pagination
     public Map<String, Object> getAllGrammar(int page, int size) {
@@ -51,30 +49,39 @@ public class GrammarService {
         return response;
     }
 
-    //  Create new grammar (ROLE_ADMIN)
+    // Create new grammar (ROLE_ADMIN)
     public GrammarDTO createGrammar(GrammarDTO dto) {
         checkAdminAccess();
 
         Grammar grammar = new Grammar();
         grammar.setStructure(dto.getStructure());
         grammar.setExplanation(dto.getExplanation());
-        grammar.setExample(dto.getExample());
-        grammar.setGrammarType(dto.getGrammarType());
-        grammar.setVietnamesePronunciation(dto.getVietnamesePronunciation());
+        
+        // Cập nhật: Ánh xạ trường mới detailContent
+        if (dto.getDetailContent() != null) {
+            grammar.setDetailContent(dto.getDetailContent());
+        }
+        
+        // Cập nhật: Ánh xạ trường mới topicTag (thay thế grammarType cũ)
+        if (dto.getTopicTag() != null) {
+            grammar.setTopicTag(dto.getTopicTag());
+        }
+        
+        // LOẠI BỎ: grammar.setExample(dto.getExample()); vì trường 'example' đã bị xóa khỏi Entity Grammar
 
         Grammar saved = grammarRepository.save(grammar);
 
         return grammarToDTO(saved);
     }
 
-    //  Get grammar by ID
+    // Get grammar by ID
     public GrammarDTO getGrammarById(UUID id) {
         Grammar grammar = grammarRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Không tìm thấy Grammar với ID: " + id));
         return grammarToDTO(grammar);
     }
 
-    //  Update grammar (ROLE_ADMIN)
+    // Update grammar (ROLE_ADMIN)
     public GrammarDTO updateGrammar(UUID id, GrammarDTO dto) {
         checkAdminAccess();
 
@@ -83,15 +90,19 @@ public class GrammarService {
 
         if (dto.getStructure() != null) grammar.setStructure(dto.getStructure());
         if (dto.getExplanation() != null) grammar.setExplanation(dto.getExplanation());
-        if (dto.getExample() != null) grammar.setExample(dto.getExample());
-        if (dto.getGrammarType() != null) grammar.setGrammarType(dto.getGrammarType());
-        if (dto.getVietnamesePronunciation() != null) grammar.setVietnamesePronunciation(dto.getVietnamesePronunciation());
+        // LOẠI BỎ: if (dto.getExample() != null) grammar.setExample(dto.getExample());
+        
+        // Cập nhật: Ánh xạ trường mới detailContent
+        if (dto.getDetailContent() != null) grammar.setDetailContent(dto.getDetailContent());
+        
+        // Cập nhật: Ánh xạ trường mới topicTag
+        if (dto.getTopicTag() != null) grammar.setTopicTag(dto.getTopicTag());
 
         Grammar updated = grammarRepository.save(grammar);
         return grammarToDTO(updated);
     }
 
-    //  Delete grammar (ROLE_ADMIN)
+    // Delete grammar (ROLE_ADMIN)
     public void deleteGrammar(UUID id) {
         checkAdminAccess();
 
@@ -101,40 +112,41 @@ public class GrammarService {
         grammarRepository.delete(grammar);
     }
 
-    //  Search grammar
+    // Search grammar
     public List<GrammarDTO> searchGrammar(String keyword) {
-        List<Grammar> grammars = grammarRepository.searchGrammar(keyword); // cần @Query bên repo
+        // Giả định GrammarRepository có phương thức searchGrammar() hoạt động
+        List<Grammar> grammars = grammarRepository.searchGrammar(keyword); 
         return grammars.stream()
                 .map(this::grammarToDTO)
                 .collect(Collectors.toList());
     }
 
-    //  Convert Grammar → DTO
+    // --- Hàm chuyển đổi ---
+
+    // Convert Grammar → DTO
     private GrammarDTO grammarToDTO(Grammar grammar) {
         GrammarDTO dto = new GrammarDTO();
-        dto.setGrammarId(grammar.getGrammaID().toString());
+        
+        dto.setGrammarId(grammar.getGrammarId()); 
+        
         dto.setStructure(grammar.getStructure());
         dto.setExplanation(grammar.getExplanation());
-        dto.setExample(grammar.getExample());
-        dto.setGrammarType(grammar.getGrammarType());
-        dto.setVietnamesePronunciation(grammar.getVietnamesePronunciation());
-        List<ReadingDTO> readingDTOs = readingRepository.findByOwnerTypeAndOwnerId("grammar", grammar.getGrammaID())
-                .stream().map(this::readingToDTO).collect(Collectors.toList());
-        dto.setReadings(readingDTOs);
+        
+        // LOẠI BỎ: dto.setExample(grammar.getExample());
+        
+        // Cập nhật: Ánh xạ trường mới detailContent
+        dto.setDetailContent(grammar.getDetailContent());
+        
+        // Cập nhật: Ánh xạ trường mới topicTag (thay thế tenseAspect/grammarType cũ)
+        dto.setTopicTag(grammar.getTopicTag()); 
+        
+        // Nếu DTO vẫn giữ trường tenseAspect, cần ánh xạ:
+        // dto.setTenseAspect(grammar.getGrammarType()); 
+        
         return dto;
     }
 
-    private ReadingDTO readingToDTO(Reading r) {
-        return new ReadingDTO(
-                r.getReadingID(),
-                r.getReadingText(),
-                r.getReadingType(),
-                r.getOwnerType(),
-                r.getOwnerId()
-        );
-    }
-
-    //  Check role
+    // Check role
     private void checkAdminAccess() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth == null || !auth.isAuthenticated() ||

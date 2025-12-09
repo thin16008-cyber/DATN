@@ -11,8 +11,9 @@ import java.util.*;
 @Service
 public class SearchService {
 
-    @Autowired
-    private KanjiRepository kanjiRepository;
+    // 1. LOẠI BỎ: PhoneticsRepository (vì Entity đã bị xóa)
+    // @Autowired
+    // private PhoneticsRepository phoneticsRepository; 
 
     @Autowired
     private VocabularyRepository vocabularyRepository;
@@ -20,9 +21,12 @@ public class SearchService {
     @Autowired
     private GrammarRepository grammarRepository;
 
+    // 2. Cập nhật Autowired: Dùng IdiomRepository (vì PhraseIdiom đã đổi tên)
     @Autowired
-    private SampleSentenceRepository sampleSentenceRepository;
+    private IdiomRepository idiomRepository;
 
+    // Giữ lại các Autowired khác (Quizzes, FlashCard, User) nếu vẫn được sử dụng ở các phương thức khác
+    // Lưu ý: Các Repository này cần được kiểm tra để đảm bảo Entity của chúng vẫn tồn tại.
     @Autowired
     private UserRepository userRepository;
 
@@ -32,14 +36,17 @@ public class SearchService {
     @Autowired
     private FlashCardRepository flashCardRepository;
 
+
     // Gợi ý tất cả các loại học liệu (cho /suggest)
     public List<Map<String, String>> suggestAllTypes(String keyword) {
         List<Map<String, String>> suggestions = new ArrayList<>();
 
         suggestions.addAll(searchByType(keyword, "vocabulary"));
-        suggestions.addAll(searchByType(keyword, "kanji"));
+        // 3. LOẠI BỎ: phonetic (vì Entity đã bị xóa)
+        // suggestions.addAll(searchByType(keyword, "phonetic")); 
         suggestions.addAll(searchByType(keyword, "grammar"));
-        suggestions.addAll(searchByType(keyword, "sentence"));
+        // 3. Cập nhật tên type: phrase -> idiom
+        suggestions.addAll(searchByType(keyword, "idiom")); 
 
         return suggestions;
     }
@@ -54,45 +61,40 @@ public class SearchService {
                     Map<String, String> item = new HashMap<>();
                     item.put("type", "vocabulary");
                     item.put("word", v.getWords());
-                    item.put("reading", v.getVietnamesePronunciation());
-                    item.put("meaning", v.getMeanning());
-                    item.put("id", v.getVocalbId().toString());
+                    // 4a. Cập nhật trường reading: Dùng phoneticIpa
+                    item.put("reading", v.getPhoneticIpa()); 
+                    item.put("meaning", v.getVietnameseMeaning()); 
+                    item.put("id", v.getVocabularyId().toString()); 
                     suggestions.add(item);
                 }
                 break;
 
-            case "kanji":
-                for (Kanji k : kanjiRepository.searchKanji(keyword)) {
-                    Map<String, String> item = new HashMap<>();
-                    item.put("type", "kanji");
-                    item.put("word", k.getCharacter_name());
-                    item.put("reading", k.getVietnamesePronunciation());
-                    item.put("meaning", k.getMeaning());
-                    item.put("id", k.getKanjiId().toString());
-                    suggestions.add(item);
-                }
-                break;
+            // 4b. LOẠI BỎ: case "phonetic" (Entity đã bị xóa)
+            // case "phonetic": ... break;
 
             case "grammar":
                 for (Grammar g : grammarRepository.searchGrammar(keyword)) {
                     Map<String, String> item = new HashMap<>();
                     item.put("type", "grammar");
                     item.put("word", g.getStructure());
-                    item.put("reading", g.getVietnamesePronunciation());
+                    // Giữ lại getVietnamesePronunciation nếu Grammar Entity còn trường này
                     item.put("meaning", g.getExplanation());
-                    item.put("id", g.getGrammaID().toString());
+                    item.put("id", g.getGrammarId().toString()); 
                     suggestions.add(item);
                 }
                 break;
 
-            case "sentence":
-                for (SampleSentence s : sampleSentenceRepository.searchByVietnameseMeaning(keyword)) {
+            // 4c. Cập nhật case phrase -> idiom (dùng tên Entity mới)
+            case "idiom":
+                // Sử dụng IdiomRepository và phương thức search mới
+                for (Idiom s : idiomRepository.searchPhrasesAndIdioms(keyword)) { 
                     Map<String, String> item = new HashMap<>();
-                    item.put("type", "sentence");
-                    item.put("word", s.getJapaneseText());
-                    item.put("reading", s.getVietnamesePronunciation());
+                    item.put("type", "idiom");
+                    item.put("word", s.getEnglishPhrase()); 
+                    // Loại bỏ "reading" nếu Entity Idiom không có trường phát âm nào
+                    // (Giả định Entity Idiom không có vietnamesePronunciation)
                     item.put("meaning", s.getVietnameseMeaning());
-                    item.put("id", s.getSample_sentence_id().toString());
+                    item.put("id", s.getIdiomId().toString()); 
                     suggestions.add(item);
                 }
                 break;

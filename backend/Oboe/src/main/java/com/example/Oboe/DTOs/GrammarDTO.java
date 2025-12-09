@@ -1,44 +1,53 @@
 package com.example.Oboe.DTOs;
 
-import java.util.List;
+import java.util.UUID;
+// KHÔNG cần import Lombok
 
 public class GrammarDTO {
-    private String grammarId;
-    private String example;
+    
+    private UUID grammarId; 
+    
+    // Giữ nguyên tên 'structure' để đồng bộ với Service đang gọi setStructure()
+    private String structure; 
+    
     private String explanation;
-    private String structure;
-    private String grammarType;
-    private String VietnamesePronunciation;
-    private List<ReadingDTO> readings;
+    private String example;
+    
+    // Trường mới thay thế grammarType
+    private String tenseAspect; 
+    
+    private String detailContent;
+    private String topicTag;
 
 
+    // --- 1. Constructors ---
+    
+    // Constructor không tham số (NoArgsConstructor)
+    public GrammarDTO() {}
+    
+    // Constructor đầy đủ tham số (AllArgsConstructor)
+    public GrammarDTO(UUID grammarId, String structure, String explanation, String example, String tenseAspect) {
+        this.grammarId = grammarId;
+        this.structure = structure;
+        this.explanation = explanation;
+        this.example = example;
+        this.tenseAspect = tenseAspect;
+    }
 
 
-    // Getter & Setter
-    public String getGrammarId() {
+    // --- 2. Getters và Setters ---
+    
+    // Getter/Setter cho grammarId
+    public UUID getGrammarId() {
         return grammarId;
     }
 
-    public void setGrammarId(String grammarId) {
+    public void setGrammarId(UUID grammarId) {
         this.grammarId = grammarId;
     }
 
-    public String getExample() {
-        return example;
-    }
-
-    public void setExample(String example) {
-        this.example = example;
-    }
-
-    public String getExplanation() {
-        return explanation;
-    }
-
-    public void setExplanation(String explanation) {
-        this.explanation = explanation;
-    }
-
+    // Getter/Setter cho structure
+    // Đảm bảo method này tồn tại để khắc phục lỗi "cannot find symbol: method getStructure()"
     public String getStructure() {
         return structure;
     }
@@ -47,26 +56,48 @@ public class GrammarDTO {
         this.structure = structure;
     }
 
-    public String getGrammarType() {
-        return grammarType;
+    // Getter/Setter cho explanation
+    public String getExplanation() {
+        return explanation;
     }
 
-    public void setGrammarType(String grammarType) {
-        this.grammarType = grammarType;
+    public void setExplanation(String explanation) {
+        this.explanation = explanation;
     }
 
-    public String getVietnamesePronunciation() {
-        return VietnamesePronunciation;
+    // Getter/Setter cho example
+    public String getExample() {
+        return example;
     }
 
-    public void setVietnamesePronunciation(String vietnamesePronunciation) {
-        VietnamesePronunciation = vietnamesePronunciation;
+    public void setExample(String example) {
+        this.example = example;
     }
-    public List<ReadingDTO> getReadings() {
-        return readings;
+    
+    // Getter/Setter cho tenseAspect
+    public String getTenseAspect() {
+        return tenseAspect;
     }
 
-    public void setReadings(List<ReadingDTO> readings) {
-        this.readings = readings;
+    public void setTenseAspect(String tenseAspect) {
+        this.tenseAspect = tenseAspect;
+    }
+    // Getter
+    public String getDetailContent() {
+        return detailContent;
+    }
+
+    // Setter
+    public void setDetailContent(String detailContent) {
+        this.detailContent = detailContent;
+    }
+    // Getter
+    public String getTopicTag() {
+        return topicTag;
+    }
+
+    // Setter
+    public void setTopicTag(String detailContent) {
+        this.topicTag = topicTag;
     }
 }

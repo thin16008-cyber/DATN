@@ -1,18 +1,62 @@
 package com.example.Oboe.Entity;
 
 import jakarta.persistence.*;
+// Đã loại bỏ import Lombok
 
 import java.util.UUID;
 
 @Entity
-@Table(name = "Gramma")
+@Table(name = "grammar") // Đã đổi tên bảng từ 'Gramma' thành 'grammar' trong DB
 public class Grammar {
-    public UUID getGrammaID() {
-        return grammaID;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name = "grammar_id", updatable = false, nullable = false)
+    private UUID grammarId; // Khóa chính UUID
+
+    @Column(name = "structure", columnDefinition = "TEXT")
+    private String structure; // Cấu trúc ngữ pháp
+
+    @Column(name = "explanation", columnDefinition = "TEXT")
+    private String explanation; // Giải thích ngữ pháp
+
+    @Column(name = "grammar_type")
+    private String grammarType; // Loại ngữ pháp (e.g., Conditionals, Tenses)
+    
+    // THÊM MỚI: Nội dung chi tiết/mở rộng
+    @Column(name = "detail_content", columnDefinition = "TEXT")
+    private String detailContent;
+
+    // THÊM MỚI: Tag chủ đề để dễ phân loại
+    @Column(name = "topic_tag")
+    private String topicTag;
+
+
+    // --- 1. Constructors ---
+    
+    // Constructor không tham số
+    public Grammar() {}
+
+    // Constructor đầy đủ tham số
+    public Grammar(UUID grammarId, String structure, String explanation, String grammarType, 
+                   String detailContent, String topicTag) {
+        this.grammarId = grammarId;
+        this.structure = structure;
+        this.explanation = explanation;
+        this.grammarType = grammarType;
+        this.detailContent = detailContent;
+        this.topicTag = topicTag;
     }
 
-    public void setGrammaID(UUID grammaID) {
-        this.grammaID = grammaID;
+
+    // --- 2. Getters và Setters ---
+
+    public UUID getGrammarId() {
+        return grammarId;
+    }
+
+    public void setGrammarId(UUID grammarId) {
+        this.grammarId = grammarId;
     }
 
     public String getStructure() {
@@ -31,14 +75,6 @@ public class Grammar {
         this.explanation = explanation;
     }
 
-    public String getExample() {
-        return example;
-    }
-
-    public void setExample(String example) {
-        this.example = example;
-    }
-
     public String getGrammarType() {
         return grammarType;
     }
@@ -47,23 +83,19 @@ public class Grammar {
         this.grammarType = grammarType;
     }
 
-    public String getVietnamesePronunciation() {
-        return vietnamesePronunciation;
+    public String getDetailContent() {
+        return detailContent;
     }
 
-    public void setVietnamesePronunciation(String vietnamesePronunciation) {
-        this.vietnamesePronunciation = vietnamesePronunciation;
+    public void setDetailContent(String detailContent) {
+        this.detailContent = detailContent;
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name = "grammaID", updatable = false, nullable = false)
-    private UUID grammaID;
-    private String structure;
-    private String explanation;
-    private String example;
-    private String grammarType;
-    @Column(name = "vietnamese_pronunciation")
-    private String vietnamesePronunciation;
+    public String getTopicTag() {
+        return topicTag;
+    }
 
+    public void setTopicTag(String topicTag) {
+        this.topicTag = topicTag;
+    }
 }

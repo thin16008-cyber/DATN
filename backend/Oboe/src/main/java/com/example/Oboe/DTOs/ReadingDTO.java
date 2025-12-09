@@ -3,30 +3,37 @@ package com.example.Oboe.DTOs;
 import java.util.UUID;
 
 public class ReadingDTO {
-    private UUID readingID;
-    private String readingText;
-    private String readingType;
-    private String ownerType;
+    private UUID readingId; 
+    
+    private String readingText; // Nội dung cách đọc (VD: /pɪg/)
+    
+    // 2. Đổi tên: readingType (VD: On'yomi, Kun'yomi) -> variationType (VD: US/UK pronunciation)
+    private String variationType; 
+    
+    private String ownerType; // Loại Entity sở hữu (VD: PHONETIC, VOCABULARY, GRAMMAR)
     private UUID ownerId;
 
     // Constructors
     public ReadingDTO() {}
 
-    public ReadingDTO(UUID readingID, String readingText, String readingType, String ownerType, UUID ownerId) {
-        this.readingID = readingID;
+    // 3. Cập nhật Constructor
+    public ReadingDTO(UUID readingId, String readingText, String variationType, String ownerType, UUID ownerId) {
+        this.readingId = readingId;
         this.readingText = readingText;
-        this.readingType = readingType;
+        this.variationType = variationType;
         this.ownerType = ownerType;
         this.ownerId = ownerId;
     }
 
-    // Getters and Setters
-    public UUID getReadingID() {
-        return readingID;
+    // --- Getters and Setters Đã Chuẩn hóa ---
+    
+    // Getter/Setter cho readingId
+    public UUID getReadingId() {
+        return readingId;
     }
 
-    public void setReadingID(UUID readingID) {
-        this.readingID = readingID;
+    public void setReadingId(UUID readingId) {
+        this.readingId = readingId;
     }
 
     public String getReadingText() {
@@ -37,12 +44,13 @@ public class ReadingDTO {
         this.readingText = readingText;
     }
 
-    public String getReadingType() {
-        return readingType;
+    // Getter/Setter cho variationType
+    public String getVariationType() {
+        return variationType;
     }
 
-    public void setReadingType(String readingType) {
-        this.readingType = readingType;
+    public void setVariationType(String variationType) {
+        this.variationType = variationType;
     }
 
     public String getOwnerType() {

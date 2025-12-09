@@ -1,38 +1,66 @@
 package com.example.Oboe.DTOs;
 
-import java.util.List;
 import java.util.UUID;
+// Đã loại bỏ import Lombok
 
 public class VocabularyDTOs {
 
-    private UUID vocalbId;
+    private UUID vocabularyId; 
+    
     private String words;
-    private String meanning;
+    
+    // 1. Chuẩn hóa tên thuộc tính
+    private String vietnameseMeaning; 
+    
     private String wordType;
-    private String scriptType;
-    private UUID kanjiId;
-    private String vietnamese_pronunciation;
+    
+    // --- Các thuộc tính mới cho hệ thống Tiếng Anh ---
+    
+    // 2. THÊM MỚI: Ký hiệu phiên âm quốc tế
+    private String phoneticIpa; 
+    
+    // 3. THÊM MỚI: Đường dẫn file phát âm
+    private String audioUrl;
+    
+    // 4. THÊM MỚI: Cấp độ (A1, B2,...)
+    private String level;
+    
+    // 5. THÊM MỚI: Từ đồng nghĩa
+    private String synonyms; 
+    
+    // 6. THÊM MỚI: Từ trái nghĩa
+    private String antonyms; 
 
-    public String getVietnamese_pronunciation() {
-        return vietnamese_pronunciation;
+
+    // --- 1. Constructors ---
+    
+    // Constructor không tham số (thay thế @NoArgsConstructor)
+    public VocabularyDTOs() {}
+
+    // Constructor đầy đủ tham số (thay thế @AllArgsConstructor)
+    public VocabularyDTOs(UUID vocabularyId, String words, String vietnameseMeaning, 
+                          String wordType, String phoneticIpa, String audioUrl, 
+                          String level, String synonyms, String antonyms) {
+        this.vocabularyId = vocabularyId;
+        this.words = words;
+        this.vietnameseMeaning = vietnameseMeaning;
+        this.wordType = wordType;
+        this.phoneticIpa = phoneticIpa;
+        this.audioUrl = audioUrl;
+        this.level = level;
+        this.synonyms = synonyms;
+        this.antonyms = antonyms;
     }
 
-    public void setVietnamese_pronunciation(String vietnamese_pronunciation) {
-        this.vietnamese_pronunciation = vietnamese_pronunciation;
+
+    // --- 2. Getters và Setters ---
+
+    public UUID getVocabularyId() {
+        return vocabularyId;
     }
 
-
-
-
-    private List<ReadingDTO> readings;
-
-    // Getters & Setters
-    public UUID getVocalbId() {
-        return vocalbId;
-    }
-
-    public void setVocalbId(UUID vocalbId) {
-        this.vocalbId = vocalbId;
+    public void setVocabularyId(UUID vocabularyId) {
+        this.vocabularyId = vocabularyId;
     }
 
     public String getWords() {
@@ -43,12 +71,12 @@ public class VocabularyDTOs {
         this.words = words;
     }
 
-    public String getMeanning() {
-        return meanning;
+    public String getVietnameseMeaning() {
+        return vietnameseMeaning;
     }
 
-    public void setMeanning(String meanning) {
-        this.meanning = meanning;
+    public void setVietnameseMeaning(String vietnameseMeaning) {
+        this.vietnameseMeaning = vietnameseMeaning;
     }
 
     public String getWordType() {
@@ -59,27 +87,43 @@ public class VocabularyDTOs {
         this.wordType = wordType;
     }
 
-    public String getScriptType() {
-        return scriptType;
+    public String getPhoneticIpa() {
+        return phoneticIpa;
     }
 
-    public void setScriptType(String scriptType) {
-        this.scriptType = scriptType;
+    public void setPhoneticIpa(String phoneticIpa) {
+        this.phoneticIpa = phoneticIpa;
     }
 
-    public UUID getKanjiId() {
-        return kanjiId;
+    public String getAudioUrl() {
+        return audioUrl;
     }
 
-    public void setKanjiId(UUID kanjiId) {
-        this.kanjiId = kanjiId;
+    public void setAudioUrl(String audioUrl) {
+        this.audioUrl = audioUrl;
     }
 
-    public List<ReadingDTO> getReadings() {
-        return readings;
+    public String getLevel() {
+        return level;
     }
 
-    public void setReadings(List<ReadingDTO> readings) {
-        this.readings = readings;
+    public void setLevel(String level) {
+        this.level = level;
+    }
+
+    public String getSynonyms() {
+        return synonyms;
+    }
+
+    public void setSynonyms(String synonyms) {
+        this.synonyms = synonyms;
+    }
+
+    public String getAntonyms() {
+        return antonyms;
+    }
+
+    public void setAntonyms(String antonyms) {
+        this.antonyms = antonyms;
     }
 }

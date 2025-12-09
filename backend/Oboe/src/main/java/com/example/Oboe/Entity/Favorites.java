@@ -1,76 +1,82 @@
 package com.example.Oboe.Entity;
 
 import jakarta.persistence.*;
-
 import java.time.LocalDate;
 import java.util.UUID;
 
 @Entity
-@Table(name = "Favorites")
+@Table(name = "favorites") // Chuẩn hóa tên bảng thành chữ thường
 public class Favorites {
+
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name = "FavoritesID", updatable = false, nullable = false)
-    private UUID FavoritesID;
+    // Chuẩn hóa tên cột Khóa chính: favorites_id
+    @Column(name = "favorites_id", updatable = false, nullable = false) 
+    private UUID favoritesId; // Chuẩn hóa tên thuộc tính Java (camelCase)
+
     private String title;
     private String content;
-    private LocalDate favories_at = LocalDate.now();
 
+    // Chuẩn hóa tên cột DB: favorited_at
+    @Column(name = "favorited_at") 
+    private LocalDate favoritedAt = LocalDate.now(); 
 
+    // --- Mối quan hệ Khóa ngoại ---
 
-    @ManyToOne
+    // 1. User
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
 
-    @ManyToOne
-    @JoinColumn(name ="grammaID")
-    private Grammar gramma;
+    // 2. Grammar
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name ="grammar_id") 
+    private Grammar grammar;
 
-    @ManyToOne
-    @JoinColumn(name ="kanjiId")
-    private Kanji kanji;
-
-    @ManyToOne
-    @JoinColumn(name ="CardId")
+    // 3. Vocabulary
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name ="vocabulary_id") 
+    private Vocabulary vocabulary;
+    
+    // 4. Idiom
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "idiom_id") 
+    private Idiom idiom; 
+    
+    // 5. FlashCards
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name ="card_id") 
     private FlashCards flashCards;
 
-    @ManyToOne
-    @JoinColumn(name ="Vocalb_id")
-    private Vocabulary vocabulary;
 
-    @ManyToOne
-    @JoinColumn(name = "sample_sentence_id")
-    private SampleSentence sentence;
+    // --- 1. Constructors ---
+    
+    // Constructor không tham số (thay thế @NoArgsConstructor)
+    public Favorites() {}
 
-    public SampleSentence getSentence() {
-        return sentence;
-    }
-
-    public void setSentence(SampleSentence sentence) {
-        this.sentence = sentence;
-    }
-
-
-
-    //Contructor
-    public Favorites() {
-
-    }
-
-    public FlashCards getFlashCards() {
-        return flashCards;
-    }
-
-    public void setFlashCards(FlashCards flashCards) {
+    // Constructor đầy đủ tham số (thay thế @AllArgsConstructor)
+    public Favorites(UUID favoritesId, String title, String content, LocalDate favoritedAt, 
+                     User user, Grammar grammar, Vocabulary vocabulary, Idiom idiom, FlashCards flashCards) {
+        this.favoritesId = favoritesId;
+        this.title = title;
+        this.content = content;
+        this.favoritedAt = favoritedAt;
+        this.user = user;
+        this.grammar = grammar;
+        this.vocabulary = vocabulary;
+        this.idiom = idiom;
         this.flashCards = flashCards;
     }
 
-    public UUID getFavoritesID() {
-        return FavoritesID;
+
+    // --- 2. Getters và Setters ---
+
+    public UUID getFavoritesId() {
+        return favoritesId;
     }
 
-    public void setFavoritesID(UUID favoritesID) {
-        FavoritesID = favoritesID;
+    public void setFavoritesId(UUID favoritesId) {
+        this.favoritesId = favoritesId;
     }
 
     public String getTitle() {
@@ -89,12 +95,12 @@ public class Favorites {
         this.content = content;
     }
 
-    public LocalDate getFavories_at() {
-        return favories_at;
+    public LocalDate getFavoritedAt() {
+        return favoritedAt;
     }
 
-    public void setFavories_at(LocalDate favories_at) {
-        this.favories_at = favories_at;
+    public void setFavoritedAt(LocalDate favoritedAt) {
+        this.favoritedAt = favoritedAt;
     }
 
     public User getUser() {
@@ -105,20 +111,12 @@ public class Favorites {
         this.user = user;
     }
 
-    public Grammar getGramma() {
-        return gramma;
+    public Grammar getGrammar() {
+        return grammar;
     }
 
-    public void setGramma(Grammar gramma) {
-        this.gramma = gramma;
-    }
-
-    public Kanji getKanji() {
-        return kanji;
-    }
-
-    public void setKanji(Kanji kanji) {
-        this.kanji = kanji;
+    public void setGrammar(Grammar grammar) {
+        this.grammar = grammar;
     }
 
     public Vocabulary getVocabulary() {
@@ -129,7 +127,19 @@ public class Favorites {
         this.vocabulary = vocabulary;
     }
 
+    public Idiom getIdiom() {
+        return idiom;
+    }
 
+    public void setIdiom(Idiom idiom) {
+        this.idiom = idiom;
+    }
 
+    public FlashCards getFlashCards() {
+        return flashCards;
+    }
 
+    public void setFlashCards(FlashCards flashCards) {
+        this.flashCards = flashCards;
+    }
 }

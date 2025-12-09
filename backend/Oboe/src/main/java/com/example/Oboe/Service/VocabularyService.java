@@ -1,12 +1,8 @@
 package com.example.Oboe.Service;
 
 import com.example.Oboe.DTOs.VocabularyDTOs;
-import com.example.Oboe.DTOs.ReadingDTO;
 import com.example.Oboe.Entity.Vocabulary;
-import com.example.Oboe.Entity.Reading;
-import com.example.Oboe.Repository.KanjiRepository;
 import com.example.Oboe.Repository.VocabularyRepository;
-import com.example.Oboe.Repository.ReadingRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.data.domain.*;
 import org.springframework.security.core.*;
@@ -22,13 +18,10 @@ import java.util.stream.Collectors;
 public class VocabularyService {
 
     private final VocabularyRepository vocabularyRepository;
-    private final ReadingRepository readingRepository;
-    private final KanjiRepository kanjiRepository;
-
-    public VocabularyService(VocabularyRepository vocabularyRepository, ReadingRepository readingRepository ,KanjiRepository kanjiRepository) {
+    
+    // Constructor đã chuẩn hóa
+    public VocabularyService(VocabularyRepository vocabularyRepository) {
         this.vocabularyRepository = vocabularyRepository;
-        this.readingRepository = readingRepository;
-        this.kanjiRepository = kanjiRepository;
     }
 
     // Get all vocabularies with pagination
@@ -36,8 +29,9 @@ public class VocabularyService {
         Pageable pageable = PageRequest.of(page, size);
         Page<Vocabulary> vocabPage = vocabularyRepository.findAll(pageable);
 
+        // Sử dụng DTO đã chuẩn hóa
         List<VocabularyDTOs> vocabDTOs = vocabPage.getContent().stream()
-                .map(this::vocabToDTO) .collect(Collectors.toList());
+                .map(this::vocabToDTO).collect(Collectors.toList());
 
         Map<String, Object> response = new HashMap<>();
         response.put("vocabularies", vocabDTOs);
@@ -54,28 +48,9 @@ public class VocabularyService {
     public VocabularyDTOs createVocabulary(VocabularyDTOs dto) {
         checkAdminAccess();
 
-        Vocabulary vocab = new Vocabulary();
-        vocab.setWords(dto.getWords());
-        vocab.setMeanning(dto.getMeanning());
-        vocab.setWordType(dto.getWordType());
-        vocab.setScriptType(dto.getScriptType());
-        vocab.setVietnamesePronunciation(dto.getVietnamese_pronunciation());
-
+        Vocabulary vocab = convertToEntity(dto); // Sử dụng hàm chuyển đổi chung
+        
         Vocabulary saved = vocabularyRepository.save(vocab);
-        if (dto.getKanjiId() != null) {
-            kanjiRepository.findById(dto.getKanjiId())
-                    .ifPresent(vocab::setKanji);
-        }
-
-        if (dto.getReadings() != null && !dto.getReadings().isEmpty()) {
-            List<Reading> readings = dto.getReadings().stream().map(r -> {
-                r.setOwnerType("vocabulary");
-                r.setOwnerId(saved.getVocalbId());
-                return readingToEntity(r);
-            }).collect(Collectors.toList());
-            readingRepository.saveAll(readings);
-        }
-
         return vocabToDTO(saved);
     }
 
@@ -93,27 +68,19 @@ public class VocabularyService {
         Vocabulary vocab = vocabularyRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Từ vựng không tồn tại"));
 
+        // Cập nhật các thuộc tính từ DTO sang Entity (chỉ khi DTO cung cấp dữ liệu)
         if (dto.getWords() != null) vocab.setWords(dto.getWords());
-        if (dto.getMeanning() != null) vocab.setMeanning(dto.getMeanning());
+        if (dto.getVietnameseMeaning() != null) vocab.setVietnameseMeaning(dto.getVietnameseMeaning()); 
         if (dto.getWordType() != null) vocab.setWordType(dto.getWordType());
-        if (dto.getScriptType() != null) vocab.setScriptType(dto.getScriptType());
-        if(dto.getVietnamese_pronunciation() != null ) vocab.setVietnamesePronunciation(dto.getVietnamese_pronunciation());
+        
+        // Cập nhật các trường mới
+        if (dto.getPhoneticIpa() != null) vocab.setPhoneticIpa(dto.getPhoneticIpa()); 
+        if (dto.getAudioUrl() != null) vocab.setAudioUrl(dto.getAudioUrl());
+        if (dto.getLevel() != null) vocab.setLevel(dto.getLevel());
+        if (dto.getSynonyms() != null) vocab.setSynonyms(dto.getSynonyms());
+        if (dto.getAntonyms() != null) vocab.setAntonyms(dto.getAntonyms());
 
         Vocabulary updated = vocabularyRepository.save(vocab);
-
-        // Xoá và thêm lại readings
-        List<Reading> oldReadings = readingRepository.findByOwnerTypeAndOwnerId("vocabulary", id);
-        readingRepository.deleteAll(oldReadings);
-
-        if (dto.getReadings() != null && !dto.getReadings().isEmpty()) {
-            List<Reading> newReadings = dto.getReadings().stream().map(r -> {
-                r.setOwnerType("vocabulary");
-                r.setOwnerId(id);
-                return readingToEntity(r);
-            }).collect(Collectors.toList());
-            readingRepository.saveAll(newReadings);
-        }
-
         return vocabToDTO(updated);
     }
 
@@ -123,61 +90,50 @@ public class VocabularyService {
 
         Vocabulary vocab = vocabularyRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Từ vựng không tồn tại"));
-
-        List<Reading> readings = readingRepository.findByOwnerTypeAndOwnerId("vocabulary", id);
-        readingRepository.deleteAll(readings);
-
+        
         vocabularyRepository.delete(vocab);
     }
 
     // Search
     public List<VocabularyDTOs> searchVocabulary(String keyword) {
-        List<Vocabulary> results = vocabularyRepository.searchVocabulary(keyword); // @Query cần định nghĩa
+        List<Vocabulary> results = vocabularyRepository.searchVocabulary(keyword); 
         return results.stream().map(this::vocabToDTO).collect(Collectors.toList());
     }
 
-    // 🔄 Entity → DTO
+    // 🔄 Entity → DTO (Đảm bảo ánh xạ các trường mới)
     private VocabularyDTOs vocabToDTO(Vocabulary vocab) {
+        // Sử dụng constructor đầy đủ nếu có, hoặc setter nếu DTO dùng Lombok @Data
         VocabularyDTOs dto = new VocabularyDTOs();
-        dto.setVocalbId(vocab.getVocalbId());
+        
+        dto.setVocabularyId(vocab.getVocabularyId()); 
         dto.setWords(vocab.getWords());
-        dto.setMeanning(vocab.getMeanning());
+        dto.setVietnameseMeaning(vocab.getVietnameseMeaning()); 
         dto.setWordType(vocab.getWordType());
-        dto.setScriptType(vocab.getScriptType());
-
-        // ✅ Sửa ở đây để tránh lỗi nếu kanji là null
-        dto.setKanjiId(vocab.getKanji() != null ? vocab.getKanji().getKanjiId() : null);
-
-        dto.setVietnamese_pronunciation(vocab.getVietnamesePronunciation());
-
-        List<ReadingDTO> readingDTOs = readingRepository
-                .findByOwnerTypeAndOwnerId("vocabulary", vocab.getVocalbId())
-                .stream().map(this::readingToDTO)
-                .collect(Collectors.toList());
-        dto.setReadings(readingDTOs);
-
+        
+        dto.setPhoneticIpa(vocab.getPhoneticIpa()); 
+        dto.setAudioUrl(vocab.getAudioUrl());
+        dto.setLevel(vocab.getLevel());
+        dto.setSynonyms(vocab.getSynonyms());
+        dto.setAntonyms(vocab.getAntonyms());
+        
         return dto;
     }
-
-
-    private ReadingDTO readingToDTO(Reading r) {
-        return new ReadingDTO(
-                r.getReadingID(),
-                r.getReadingText(),
-                r.getReadingType(),
-                r.getOwnerType(),
-                r.getOwnerId()
-        );
-    }
-
-    private Reading readingToEntity(ReadingDTO dto) {
-        Reading r = new Reading();
-        r.setReadingID(dto.getReadingID());
-        r.setReadingText(dto.getReadingText());
-        r.setReadingType(dto.getReadingType());
-        r.setOwnerType(dto.getOwnerType());
-        r.setOwnerId(dto.getOwnerId());
-        return r;
+    
+    // 🔄 DTO → Entity
+    private Vocabulary convertToEntity(VocabularyDTOs dto) {
+        Vocabulary vocab = new Vocabulary();
+        
+        vocab.setWords(dto.getWords());
+        vocab.setVietnameseMeaning(dto.getVietnameseMeaning());
+        vocab.setWordType(dto.getWordType());
+        
+        vocab.setPhoneticIpa(dto.getPhoneticIpa());
+        vocab.setAudioUrl(dto.getAudioUrl());
+        vocab.setLevel(dto.getLevel());
+        vocab.setSynonyms(dto.getSynonyms());
+        vocab.setAntonyms(dto.getAntonyms());
+        
+        return vocab;
     }
 
     private void checkAdminAccess() {

@@ -3,9 +3,13 @@
     type="word"
     :item="wordData"
     :itemId="wordId"
+    
     mainField="words"
-    readingField="vietnamese_pronunciation"
-    meaningField="meanning"
+    
+    readingField="phoneticIpa"
+    
+    meaningField="vietnameseMeaning"
+    
     :notFoundMessage="t('wordDetail.notFound')"
   />
 </template>
@@ -73,5 +77,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@use '@/views/search-japanese/word-detail/WordDetail.scss';
+@use '@/views/search-english/word-detail/WordDetail.scss';
 </style>

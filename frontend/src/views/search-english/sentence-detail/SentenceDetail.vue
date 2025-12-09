@@ -3,11 +3,16 @@
     type="sentence"
     :item="sentenceData"
     :itemId="sentenceId"
-    mainField="japaneseText"
-    readingField=""
-    meaningField="vietnameseMeaning"
+    
+    mainField="englishSentence"
+    
+    readingField="difficulty"
+    
+    meaningField="vietnameseTranslation"
+    
     :notFoundMessage="t('sentenceDetail.notFound')"
-  />
+
+    />
 </template>
 
 <script>
@@ -72,5 +77,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@use '@/views/search-japanese/sentence-detail/SentenceDetail.scss';
+@use '@/views/search-english/sentence-detail/SentenceDetail.scss';
 </style>

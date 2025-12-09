@@ -3,11 +3,16 @@
     type="grammar"
     :item="grammarData"
     :itemId="grammarId"
+    
     mainField="structure"
-    readingField="vietnamesePronunciation"
+    
+    readingField="vietnameseTranslation" 
+    
     meaningField="explanation"
+    
     :notFoundMessage="t('grammarDetail.notFound')"
-  />
+    
+    />
 </template>
 
 <script>
@@ -72,5 +77,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@use '@/views/search-japanese/grammar-detail/GrammarDetail.scss';
+@use '@/views/search-english/grammar-detail/GrammarDetail.scss';
 </style>
