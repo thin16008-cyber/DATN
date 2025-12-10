@@ -36,14 +36,8 @@ public class SampleSentenceServiceImpl implements SampleSentenceService {
         dto.setVietnameseTranslation(entity.getVietnameseTranslation());
         
         // Thêm các trường mới
-        dto.setDifficulty(entity.getDifficulty());
-        dto.setAudioUrl(entity.getAudioUrl());
+        dto.setUsageFrequency(entity.getUsageFrequency());
         
-        // Thêm các ID khóa ngoại
-        // Giả định Entity SampleSentence có các mối quan hệ và Getter tương ứng
-        if (entity.getVocabulary() != null) dto.setRelatedVocabId(entity.getVocabulary().getVocabularyId());
-        if (entity.getIdiom() != null) dto.setRelatedIdiomId(entity.getIdiom().getIdiomId());
-        if (entity.getGrammar() != null) dto.setRelatedGrammarId(entity.getGrammar().getGrammarId());
         
         return dto;
     }
@@ -59,8 +53,7 @@ public class SampleSentenceServiceImpl implements SampleSentenceService {
         entity.setVietnameseTranslation(dto.getVietnameseTranslation());
         
         // Thêm các trường mới
-        entity.setDifficulty(dto.getDifficulty());
-        entity.setAudioUrl(dto.getAudioUrl());
+        entity.setUsageFrequency(dto.getUsageFrequency());
         
         // KHÔNG xử lý khóa ngoại (Vocabulary, Idiom, Grammar) ở đây vì cần phải tìm Entity cha trước.
         // Logic xử lý khóa ngoại nên được thực hiện trong Service nếu cần.
@@ -85,8 +78,7 @@ public class SampleSentenceServiceImpl implements SampleSentenceService {
         // Cập nhật các trường
         if (dto.getEnglishSentence() != null) entity.setEnglishSentence(dto.getEnglishSentence());
         if (dto.getVietnameseTranslation() != null) entity.setVietnameseTranslation(dto.getVietnameseTranslation());
-        if (dto.getDifficulty() != null) entity.setDifficulty(dto.getDifficulty());
-        if (dto.getAudioUrl() != null) entity.setAudioUrl(dto.getAudioUrl());
+        if (dto.getUsageFrequency() != null) entity.setUsageFrequency(dto.getUsageFrequency());
         
         // Lưu ý: Cần logic phức tạp hơn nếu muốn cập nhật các khóa ngoại (related IDs)
         

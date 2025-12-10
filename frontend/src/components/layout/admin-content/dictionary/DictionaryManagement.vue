@@ -1390,7 +1390,6 @@ const loadAllVocabulary = async () => {
           phoneticIpa: '',         // item.phoneticIpa (trước là pronunciation)
           vietnameseMeaning: '',   // item.vietnameseMeaning (trước là meaning)
           wordType: '',            // item.wordType (trước là type)
-          audioUrl: '',            // Trường mới
           level: '',               // Trường mới
           synonyms: '',            // Trường mới
           antonyms: '',            // Trường mới
@@ -1494,15 +1493,17 @@ const loadAllVocabulary = async () => {
         
         if (activeTab.value === 'idioms') {
           // Prepare idioms data for API
-          // Đổi tên biến và thuộc tính
+          
           const idiomData = {
-            phraseText: item.phrase, // Thay 'characterName' bằng 'phraseText'
-            meaning: item.meaning,
-            category: item.category, // Thay 'strokes' bằng 'category'
-            // Loại bỏ 'vietnamesePronunciation'
+            phraseText: item.englishPhrase, 
+            meaning: item.vietnameseMeaning,
+            category: item.category, 
+            audioUrl: item.audioUrl || null,
+            origin: item.origin || null,
+            
           }
           
-          // Đổi 'kanjiApi' thành 'idiomsApi'
+
           if (modalMode.value === 'create') {
             await idiomsApi.create(idiomData)
           } else {
@@ -1536,8 +1537,8 @@ const loadAllVocabulary = async () => {
         } else if (activeTab.value === 'sentences') {
           // Prepare sentence data for API
           const sentenceData = {
-            englishText: item.english, // Thay 'japaneseText' bằng 'englishText'
-            vietnameseMeaning: item.vietnamese
+            englishSentence: item.englishSentence, 
+            vietnameseTranslation: item.vietnameseTranslation
           }
           
           if (modalMode.value === 'create') {

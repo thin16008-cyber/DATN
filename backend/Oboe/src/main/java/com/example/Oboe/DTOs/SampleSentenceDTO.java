@@ -12,13 +12,8 @@ public class SampleSentenceDTO {
     private String vietnameseTranslation; // Đã đổi tên thuộc tính trong DTO (từ vietnameseMeaning)
 
     // Các trường mới
-    private String difficulty;
-    private String audioUrl;
+    private String usageFrequency;
     
-    // Các ID liên kết
-    private UUID relatedVocabId;
-    private UUID relatedIdiomId;
-    private UUID relatedGrammarId;
 
     // --- Constructors ---
     
@@ -27,16 +22,11 @@ public class SampleSentenceDTO {
 
     // Constructor đầy đủ tham số
     public SampleSentenceDTO(UUID sentenceId, String englishSentence, String vietnameseTranslation, 
-                             String difficulty, String audioUrl, UUID relatedVocabId, 
-                             UUID relatedIdiomId, UUID relatedGrammarId) {
+                             String usageFrequency) {
         this.sentenceId = sentenceId;
         this.englishSentence = englishSentence;
         this.vietnameseTranslation = vietnameseTranslation;
-        this.difficulty = difficulty;
-        this.audioUrl = audioUrl;
-        this.relatedVocabId = relatedVocabId;
-        this.relatedIdiomId = relatedIdiomId;
-        this.relatedGrammarId = relatedGrammarId;
+        this.usageFrequency = usageFrequency;
     }
 
     // --- Getters & Setters ---
@@ -65,43 +55,12 @@ public class SampleSentenceDTO {
         this.vietnameseTranslation = vietnameseTranslation;
     }
 
-    public String getDifficulty() {
-        return difficulty;
+    public String getUsageFrequency() {
+        return usageFrequency;
     }
 
-    public void setDifficulty(String difficulty) {
-        this.difficulty = difficulty;
+    public void setUsageFrequency(String usageFrequency) {
+        this.usageFrequency = usageFrequency;
     }
 
-    public String getAudioUrl() {
-        return audioUrl;
-    }
-
-    public void setAudioUrl(String audioUrl) {
-        this.audioUrl = audioUrl;
-    }
-
-    public UUID getRelatedVocabId() {
-        return relatedVocabId;
-    }
-
-    public void setRelatedVocabId(UUID relatedVocabId) {
-        this.relatedVocabId = relatedVocabId;
-    }
-
-    public UUID getRelatedIdiomId() {
-        return relatedIdiomId;
-    }
-
-    public void setRelatedIdiomId(UUID relatedIdiomId) {
-        this.relatedIdiomId = relatedIdiomId;
-    }
-
-    public UUID getRelatedGrammarId() {
-        return relatedGrammarId;
-    }
-
-    public void setRelatedGrammarId(UUID relatedGrammarId) {
-        this.relatedGrammarId = relatedGrammarId;
-    }
 }

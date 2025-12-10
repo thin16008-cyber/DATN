@@ -25,12 +25,5 @@ public interface SampleSentenceRepository extends JpaRepository<SampleSentence, 
     
     // Thêm các phương thức tìm kiếm theo khóa ngoại (tùy chọn)
     
-    // Tìm kiếm theo ID Từ vựng liên quan
-    List<SampleSentence> findByVocabulary_VocabularyId(UUID vocabularyId);
 
-    // Tìm kiếm theo ID Thành ngữ liên quan
-    List<SampleSentence> findByIdiom_IdiomId(UUID idiomId);
-
-    // Tìm kiếm theo ID Ngữ pháp liên quan
-    List<SampleSentence> findByGrammar_GrammarId(UUID grammarId);
 }
