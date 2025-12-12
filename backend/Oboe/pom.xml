@@ -118,6 +118,11 @@
 			<scope>test</scope>
 		</dependency>
 
+		<dependency>
+			<groupId>com.google.firebase</groupId>
+			<artifactId>firebase-admin</artifactId>
+			<version>9.2.0</version>
+		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -141,34 +146,29 @@
 		<dependency>
 			<groupId>org.hibernate.orm</groupId>
 			<artifactId>hibernate-community-dialects</artifactId>
+			<!-- <version>6.2.2.Final</version> -->
 		</dependency>
-		<dependency>
-			<groupId>jakarta.mail</groupId>
-			<artifactId>jakarta.mail-api</artifactId>
-		</dependency>
-
-			<dependency>
-				<groupId>com.google.cloud</groupId>
-				<artifactId>google-cloud-vertexai</artifactId>
-				<version>0.1.0</version>
-			</dependency>
-
 		<dependency>
 			<groupId>io.github.cdimascio</groupId>
 			<artifactId>dotenv-java</artifactId>
 			<version>3.0.0</version>
 			<scope>runtime</scope>
 		</dependency>
+		<!-- <dependency>
+			<groupId>jakarta.mail</groupId>
+			<artifactId>jakarta.mail-api</artifactId>
+			<version>2.0.0</version>
+		</dependency> -->
 <!--		<dependency>-->
 <!--			<groupId>com.microsoft.sqlserver</groupId>-->
 <!--			<artifactId>mssql-jdbc</artifactId>-->
 <!--			<scope>runtime</scope>-->
 <!--		</dependency>-->
-		<dependency>
+		<!-- <dependency>
 			<groupId>com.sun.mail</groupId>
 			<artifactId>jakarta.mail</artifactId>
 			<version>2.0.0</version>
-		</dependency>
+		</dependency> -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.datatype</groupId>
 			<artifactId>jackson-datatype-jsr310</artifactId>
@@ -199,8 +199,6 @@
 		<dependency>
 			<groupId>vn.payos</groupId>
 			<artifactId>payos-java</artifactId>
-			<!-- <version>2.0.1</version> -->
-
 			<version>1.0.3</version>
 		</dependency>
 		<dependency>
@@ -248,6 +246,7 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
+			<!-- <version>1.18.30</version> Hoặc phiên bản mới nhất -->
 			<scope>provided</scope>
 		</dependency>
 
@@ -273,7 +272,8 @@
 
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
+           		<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>3.2.3</version>
 				<executions>
 					<execution>
 						<goals>
