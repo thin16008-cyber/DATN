@@ -717,6 +717,7 @@
 
           <!-- SimpleSentence -->
           <div v-else-if="activeTab === 'sentences'" class="form-group">
+  
             <div class="form-row">
               <div class="form-field full-width">
                 <label for="englishSentence">Câu tiếng Anh *</label>
@@ -744,6 +745,19 @@
             </div>
 
             <div class="form-row">
+              <div class="form-field full-width">
+                <label for="topic">Chủ đề (Topic) *</label>
+                <input 
+                  id="topic"
+                  v-model="editingItem.topic" 
+                  type="text" 
+                  placeholder="VD: Food & Drink, Travel, Technology"
+                  required
+                />
+              </div>
+            </div>
+
+            <div class="form-row">
               <div class="form-field">
                 <label for="audioUrl">Đường dẫn Audio (URL)</label>
                 <input 
@@ -764,40 +778,7 @@
               </div>
             </div>
 
-            <div class="form-row">
-              <div class="form-field">
-                <label for="relatedVocabId">ID từ vựng liên quan (UUID)</label>
-                <input 
-                  id="relatedVocabId"
-                  v-model="editingItem.relatedVocabId" 
-                  type="text" 
-                  placeholder="Dán ID từ vựng liên quan"
-                />
-              </div>
-              <div class="form-field">
-                <label for="relatedIdiomId">ID thành ngữ liên quan (UUID)</label>
-                <input 
-                  id="relatedIdiomId"
-                  v-model="editingItem.relatedIdiomId" 
-                  type="text" 
-                  placeholder="Dán ID thành ngữ liên quan"
-                />
-              </div>
             </div>
-
-            <div class="form-row">
-              <div class="form-field">
-                <label for="relatedGrammarId">ID ngữ pháp liên quan (UUID)</label>
-                <input 
-                  id="relatedGrammarId"
-                  v-model="editingItem.relatedGrammarId" 
-                  type="text" 
-                  placeholder="Dán ID ngữ pháp liên quan"
-                />
-              </div>
-              </div>
-
-          </div>
           
           <!-- Other tab forms can be added here -->
           <div v-else class="placeholder-text">
@@ -1067,12 +1048,8 @@ const loadAllVocabulary = async () => {
         // Đổi allKanjiData thành allIdiomsData
         allIdiomsData.value = response.idioms.map(item => ({
           id: item.idiomId,
-          // Đổi 'character' (ký tự Hán tự) thành 'phrase' (cụm từ/thành ngữ)
           phrase: item.phraseText, 
           meaning: item.meaning,
-          // Loại bỏ 'strokes' và 'vietnamesePronunciation'
-          // strokes: item.strokes,
-          // vietnamesePronunciation: item.vietnamesePronunciation,
           createdAt: new Date().toLocaleDateString('vi-VN')
         }))
       } catch (err) {
@@ -1084,10 +1061,12 @@ const loadAllVocabulary = async () => {
       try {
         const response = await sampleSentenceApi.getAll({ page: 0, size: 1000 })
         allSentencesData.value = response.content.map(item => ({
-          id: item.id,
+          id: item.sentenceId,
           // Đổi 'japanese' thành 'english'
-          english: item.englishText,
-          vietnamese: item.vietnameseMeaning,
+          englishSentence: item.englishSentence,
+          vietnameseTranslation: item.vietnameseTranslation,
+          usageFrequency: item.usageFrequency,
+          topic: item.topic,
           createdAt: new Date().toLocaleDateString('vi-VN')
         }))
       } catch (err) {
@@ -1538,7 +1517,10 @@ const loadAllVocabulary = async () => {
           // Prepare sentence data for API
           const sentenceData = {
             englishSentence: item.englishSentence, 
-            vietnameseTranslation: item.vietnameseTranslation
+            vietnameseTranslation: item.vietnameseTranslation,
+            audioUrl: item.audioUrl || null,
+            usageFrequency: item.usageFrequency || null,
+            topic: item.topic || null,
           }
           
           if (modalMode.value === 'create') {
