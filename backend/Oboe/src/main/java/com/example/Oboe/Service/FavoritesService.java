@@ -102,7 +102,7 @@ public class FavoritesService {
                     .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Vocabulary not found"));
             
             favorites.setVocabulary(vocabulary);
-            favorites.setTitle(vocabulary.getWords());
+            favorites.setTitle(vocabulary.getWord());
             favorites.setContent(vocabulary.getVietnameseMeaning()); 
             
         } else if (dto.getIdiomId() != null) { 

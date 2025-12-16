@@ -68,36 +68,37 @@
         </div>
         
         <div class="items-grid">
-          <div 
+        <div 
             v-for="item in filteredVocabulary" 
-            :key="item.id"
+            :key="item.vocabularyId"
             class="item-card vocabulary-card"
-          >
+        >
             <div class="card-header">
-              <div class="word-info">
-                <h3 class="word">{{ item.word }}</h3>
-                <div class="reading-info" v-if="item.reading">
-                  <strong>Phiên âm:</strong> <span class="reading">{{ item.reading }}</span>
+                <div class="word-info">
+                    <h3 class="word">{{ item.word }}</h3>  
+                    <span class="level-badge" :class="item.level ? item.level.toLowerCase() : ''">{{ item.level }}</span>
+                    <div class="reading-info" v-if="item.phoneticIpa">
+                        <strong>Phiên âm:</strong> <span class="reading">{{ item.phoneticIpa }}</span>
+                    </div>
                 </div>
-                <span class="level-badge" :class="item.level ? item.level.toLowerCase() : ''">{{ item.level }}</span>
-              </div>
-              <div class="actions">
-                <button @click="editItem(item)" class="btn-edit" title="Chỉnh sửa">
-                  <i class="fas fa-edit"></i>
-                </button>
-                <button @click="deleteItem(item.id)" class="btn-delete" title="Xóa">
-                  <i class="fas fa-trash"></i>
-                </button>
-              </div>
+                <div class="actions">
+                      <button @click="editItem(item.vocabularyId)" class="btn-edit" title="Chỉnh sửa">
+                        <i class="fas fa-edit"></i>
+                      </button>
+                      <button @click="deleteItem(item.vocabularyId)" class="btn-delete" title="Xóa">
+                        <i class="fas fa-trash"></i>
+                      </button>
+                </div>
             </div>
             <div class="card-content">
-              <p class="meaning">{{ item.meaning }}</p>
-              <div class="meta-info">
-                <span class="type">{{ item.type }}</span>
-                <span class="script-type">{{ item.scriptType }}</span>
-              </div>
+                <p class="meaning">{{ item.meaning }}</p>
+                <div class="meta-info">
+                    <span class="type">{{ item.type }}</span>
+                    <span class="script-type">{{ item.scriptType }}</span> 
+                </div>
             </div>
-          </div>
+        </div>
+
           
           <!-- Search Pagination -->
           <div v-if="searchQuery && searchQuery.trim() && getSearchTotalPages() > 1" class="pagination">
@@ -186,7 +187,7 @@
                   <span class="grammar-type-badge" :class="item.grammarType">{{ getGrammarTypeName(item.grammarType) }}</span>
                 </div>
                 <div class="actions">
-                  <button @click="editItem(item)" class="btn-edit" title="Chỉnh sửa">
+                  <button @click="editItem(item.id)" class="btn-edit" title="Chỉnh sửa">
                     <i class="fas fa-edit"></i>
                   </button>
                   <button @click="deleteItem(item.id)" class="btn-delete" title="Xóa">
@@ -197,10 +198,10 @@
               <div class="card-content">
                 <p class="explanation">{{ item.explanation }}</p>
                 <div class="pronunciation">
-                  <strong>Phát âm:</strong> {{ item.vietnamesePronunciation }}
+                  <strong>{{ item.topicTag}}</strong> 
                 </div>
                 <div class="example">
-                  <strong>Ví dụ:</strong> {{ item.example }}
+                  <strong>{{ item.detailContent }}</strong> 
                 </div>
               </div>
             </div>
@@ -268,31 +269,31 @@
         <div v-else-if="error" class="error-state">
           <i class="fas fa-exclamation-triangle error-icon"></i>
           <p>{{ error }}</p>
-          <button @click="loadKanji()" class="retry-btn">Thử lại</button>
+          <button @click="loadIdioms()" class="retry-btn">Thử lại</button>
         </div>
         
         <!-- idioms data -->
         <div v-else>
           <!-- Search Results Info -->
           <div v-if="searchQuery && searchQuery.trim()" class="search-results-info">
-            <p>Tìm thấy <strong>{{ filteredKanjiTotal }}</strong> hán tự cho từ khóa "<strong>{{ searchQuery }}</strong>"</p>
+            <p>Tìm thấy <strong>{{ filteredIdiomsTotal }}</strong> hán tự cho từ khóa "<strong>{{ searchQuery }}</strong>"</p>
             <p v-if="getSearchTotalPages() > 1" class="pagination-info">
-              Hiển thị {{ searchCurrentPage * searchPageSize + 1 }} - {{ Math.min((searchCurrentPage + 1) * searchPageSize, filteredKanjiTotal) }} trong tổng số {{ filteredKanjiTotal }} kết quả
+              Hiển thị {{ searchCurrentPage * searchPageSize + 1 }} - {{ Math.min((searchCurrentPage + 1) * searchPageSize, filteredIdiomsTotal) }} trong tổng số {{ filteredIdiomsTotal }} kết quả
             </p>
           </div>
           
           <div class="items-grid">
             <div 
-              v-for="item in filteredKanji" 
+              v-for="item in filteredIdioms" 
               :key="item.id"
               class="item-card idioms-card"
             >
               <div class="card-header">
                 <div class="idioms-info">
-                  <h3 class="character">{{ item.character }}</h3>
+                  <h3 class="character">{{ item.phrase }}</h3>
                 </div>
                 <div class="actions">
-                  <button @click="editItem(item)" class="btn-edit" title="Chỉnh sửa">
+                  <button @click="editItem(item.id)" class="btn-edit" title="Chỉnh sửa">
                     <i class="fas fa-edit"></i>
                   </button>
                   <button @click="deleteItem(item.id)" class="btn-delete" title="Xóa">
@@ -302,10 +303,10 @@
               </div>
               <div class="card-content">
                 <div class="pronunciation">
-                  <strong>Phát âm:</strong> {{ item.vietnamesePronunciation }}
+                   <p>{{ item.origin }}</p>
                 </div>
                 <p class="meaning">{{ item.meaning }}</p>
-                <div class="strokes">{{ item.strokes }} nét</div>
+                <div class="strokes">{{ item.category }} </div>
               </div>
             </div>
           </div>
@@ -322,7 +323,7 @@
             
             <span class="pagination-info">
               Trang {{ searchCurrentPage + 1 }} / {{ getSearchTotalPages() }}
-              ({{ filteredKanjiTotal }} kết quả)
+              ({{ filteredIdiomsTotal }} kết quả)
             </span>
             
             <button 
@@ -337,7 +338,7 @@
           <!-- Regular Pagination -->
           <div v-if="totalPages > 1 && (!searchQuery || !searchQuery.trim())" class="pagination">
             <button 
-              @click="loadKanji(currentPage - 1)" 
+              @click="loadIdioms(currentPage - 1)" 
               :disabled="currentPage === 0"
               class="pagination-btn"
             >
@@ -350,7 +351,7 @@
             </span>
             
             <button 
-              @click="loadKanji(currentPage + 1)" 
+              @click="loadIdioms(currentPage + 1)" 
               :disabled="isLastPage"
               class="pagination-btn"
             >
@@ -393,10 +394,10 @@
             >
               <div class="card-header">
                 <div class="sentence-info">
-                  <h3 class="japanese-text">{{ item.japanese }}</h3>
+                  <h3 class="japanese-text">{{ item.englishSentence }}</h3>
                 </div>
                 <div class="actions">
-                  <button @click="editItem(item)" class="btn-edit" title="Chỉnh sửa">
+                  <button @click="editItem(item.id)" class="btn-edit" title="Chỉnh sửa">
                     <i class="fas fa-edit"></i>
                   </button>
                   <button @click="deleteItem(item.id)" class="btn-delete" title="Xóa">
@@ -483,10 +484,10 @@
           <div v-if="activeTab === 'vocabulary'" class="form-group">
             <div class="form-row">
               <div class="form-field">
-                <label for="words">Từ vựng *</label>
+                <label for="word">Từ vựng *</label>
                 <input 
-                  id="words"
-                  v-model="editingItem.words" 
+                  id="word"
+                  v-model="editingItem.word" 
                   type="text" 
                   placeholder="Nhập từ vựng"
                   required
@@ -585,7 +586,7 @@
                 <label for="englishPhrase">Thành ngữ/Cụm từ (Tiếng Anh) *</label>
                 <input 
                   id="englishPhrase"
-                  v-model="editingItem.englishPhrase" 
+                  v-model="editingItem.phrase" 
                   type="text" 
                   placeholder="Nhập thành ngữ hoặc cụm từ Tiếng Anh"
                   required
@@ -619,7 +620,7 @@
                 <label for="vietnameseMeaning">Nghĩa tiếng Việt *</label>
                 <textarea 
                   id="vietnameseMeaning"
-                  v-model="editingItem.vietnameseMeaning" 
+                  v-model="editingItem.meaning" 
                   placeholder="Nhập nghĩa tiếng Việt của thành ngữ/cụm từ"
                   rows="3"
                   required
@@ -758,20 +759,12 @@
             </div>
 
             <div class="form-row">
-              <div class="form-field">
-                <label for="audioUrl">Đường dẫn Audio (URL)</label>
-                <input 
-                  id="audioUrl"
-                  v-model="editingItem.audioUrl" 
-                  type="url" 
-                  placeholder="Dán URL file audio"
-                />
-              </div>
+              
               <div class="form-field">
                 <label for="difficulty">Mức độ khó (CEFR/Khác)</label>
                 <input 
                   id="difficulty"
-                  v-model="editingItem.difficulty" 
+                  v-model="editingItem.usageFrequency" 
                   type="text" 
                   placeholder="VD: A1, B2, C1"
                 />
@@ -832,6 +825,8 @@ const tabs = ref([
 ])
 
 // Data từ API
+
+// Data từ API
 const vocabularyData = ref([])
 const grammarData = ref([])
 const idiomsData = ref([])
@@ -863,176 +858,164 @@ const isLastPage = ref(false)
 const searchCurrentPage = ref(0)
 const searchPageSize = ref(10)
 
-// API Functions
-const loadVocabulary = async (page = 0) => {
-   try {
-    loading.value = true
-    error.value = ''
-    const response = await vocabularyApi.getAll({ page, size: pageSize.value })
-    vocabularyData.value = response.vocabularies.map(item => {
-      return {
-        id: item.vocabularyId,
-        word: item.words,
-        // Đổi 'reading' (cách đọc Nhật/Việt) thành 'pronunciation'
-        pronunciation: item.pronunciation || '', 
-        meaning: item.meanning || item.meaning || item.vietnameseMeaning || '', 
-        type: item.wordType,
-        // Xóa/Đổi tên 'scriptType' vì không cần thiết cho Tiếng Anh
-        // scriptType: item.scriptType, 
-        // Xóa 'kanjiId'
-        relatedEntryId: item.relatedEntryId || null, // Có thể thay bằng Related ID
-        createdAt: new Date().toLocaleDateString('vi-VN')
-      }
-    })
-    
-    currentPage.value = response.currentPage
-    totalPages.value = response.totalPages
-    totalElements.value = response.totalElements
-    isLastPage.value = response.isLastPage
-    
-  } catch (err) {
-    error.value = 'Không thể tải dữ liệu từ vựng'
-    console.error('Lỗi khi tải từ vựng:', err) // Giữ tiếng Việt cho console error
-  } finally {
-    loading.value = false
-  }
-}
 
-    const loadIdioms = async (page = 0) => {
-      try {
-        loading.value = true
-        error.value = ''
-        
-        const response = await idiomsApi.getAll({ page, size: pageSize.value })
-        
-        // Giả định API trả về dữ liệu danh sách nằm trong 'content' (chuẩn Spring Page)
-        idiomsData.value = response.content.map(item => ({
-          // ID là UUID
-          id: item.idiomId, 
-          
-          // Ánh xạ english_phrase sang phrase (tên hiển thị)
-          phrase: item.englishPhrase, 
-          
-          // Ánh xạ vietnamese_meaning sang meaning
-          meaning: item.vietnameseMeaning, 
-          
-          // Giữ nguyên category
-          category: item.category, 
+// LOAD VOCABULARY 
+    const loadVocabulary = async (page = 0) => {
+      try {
+        loading.value = true
+        error.value = ''
+        const response = await vocabularyApi.getAll({ page, size: pageSize.value })
+        vocabularyData.value = response.vocabularies.map(item => {
+          return {
+              vocabularyId: item.vocabularyId,
+              word: item.word,
+              phoneticIpa: item.phoneticIpa || '',
+              meaning: item.vietnameseMeaning || '',
+              wordType: item.wordType,
+              level: item.level || null,
+              audioUrl: item.audioUrl || null,
+              synonyms: item.synonyms || [],
+              antonyms: item.antonyms || [],
+            }
+        })
+        
+        currentPage.value = response.currentPage
+        totalPages.value = response.totalPages
+        totalElements.value = response.totalElements
+        isLastPage.value = response.isLastPage
+        
+      } catch (err) {
+        error.value = 'Không thể tải dữ liệu từ vựng'
+        console.error('Lỗi khi tải từ vựng:', err) // Giữ tiếng Việt cho console error
+      } finally {
+        loading.value = false
+      }
+    }
 
-            // Có thể thêm các trường khác nếu cần hiển thị nhanh
-            // audioUrl: item.audioUrl,
-            // origin: item.origin,
-            
-          createdAt: new Date().toLocaleDateString('vi-VN')
-        }))
-        
-        // Cập nhật thông tin phân trang dựa trên chuẩn Spring Page
-        currentPage.value = response.currentPage // Hoặc response.number
-        totalPages.value = response.totalPages
-        totalElements.value = response.totalItems // Hoặc response.totalElements
-        isLastPage.value = response.isLastPage // Hoặc response.last
-        
-      } catch (err) {
-        error.value = 'Không thể tải dữ liệu Thành ngữ/Cụm từ'
-        console.error('Lỗi khi tải Thành ngữ/Cụm từ:', err)
-      } finally {
-        loading.value = false
-      }
-    }
 
-    const loadGrammar = async (page = 0) => {
-      try {
-        loading.value = true
-        error.value = ''
-        const response = await grammarApi.getAll({ page, size: pageSize.value })
-        
-        grammarData.value = response.grammars.map(item => ({
-          id: item.grammarId,
-          structure: item.structure,
-          explanation: item.explanation,
-          example: item.example,
-          grammarType: item.grammarType,
-          // Xóa 'vietnamesePronunciation' và 'readings' (không cần thiết cho ngữ pháp Tiếng Anh)
-          // vietnamesePronunciation: item.vietnamesePronunciation,
-          // readings: item.readings || [],
-          level: item.level, // Có thể thêm trường level cho ngữ pháp
-          createdAt: new Date().toISOString()
-        }))
-        
-        currentPage.value = response.currentPage
-        totalPages.value = response.totalPages
-        totalElements.value = response.totalElements
-        isLastPage.value = response.isLastPage
-        
-      } catch (err) {
-        error.value = 'Không thể tải dữ liệu ngữ pháp'
-        console.error('Lỗi khi tải ngữ pháp:', err)
-      } finally {
-        loading.value = false
-      }
-    }
 
-    const loadSentences = async (page = 0) => {
-      try {
-        loading.value = true
-        error.value = ''
-        const response = await sampleSentenceApi.getAll({ page, size: pageSize.value })
-        
-        sentencesData.value = response.content.map(item => ({
-          id: item.id,
-          // Đổi 'japanese' thành 'english'
-          english: item.englishText,
-          vietnamese: item.vietnameseMeaning,
-          createdAt: new Date().toLocaleDateString('vi-VN')
-        }))
-        
-        currentPage.value = response.currentPage
-        totalPages.value = response.totalPages
-        totalElements.value = response.totalItems
-        isLastPage.value = response.isLastPage
-        
-      } catch (err) {
-        error.value = 'Không thể tải dữ liệu mẫu câu'
-        console.error('Lỗi khi tải mẫu câu:', err)
-      } finally {
-        loading.value = false
-      }
-    }
+    
+
+
+
+        const loadIdioms = async (page = 0) => {
+          try {
+            loading.value = true
+            error.value = ''
+
+            const response = await idiomsApi.getAll({page, size: pageSize.value})
+
+            idiomsData.value = response.content.map(item => ({
+              id: item.idiomId, 
+              phrase: item.englishPhrase,
+              meaning: item.vietnameseMeaning,
+              origin: item.origin || '',
+              category: item.category || '',
+              audioUrl: item.audioUrl || null
+            }))
+
+            currentPage.value = response.currentPage
+            totalPages.value = response.totalPages
+            totalElements.value = response.totalElements
+            isLastPage.value = response.isLastPage
+
+          } catch (err) {
+            error.value = 'Không thể tải dữ liệu Thành ngữ/Cụm từ'
+            console.error('Lỗi khi tải Thành ngữ/Cụm từ:', err)
+          } finally {
+            loading.value = false
+          }
+    }
+
+
+        const loadGrammar = async (page = 0) => {
+          try {
+            loading.value = true
+            error.value = ''
+
+            const response = await grammarApi.getAll({page,size: pageSize.value})
+
+            grammarData.value = response.grammars.map(item => ({
+              id: item.grammarId,
+              structure: item.structure,
+              explanation: item.explanation,
+              detailContent: item.detailContent,
+              grammarType: item.grammarType,
+              topicTag: item.topicTag ?? '',
+              createdAt: item.createdAt
+            }))
+
+            currentPage.value = response.currentPage
+            totalPages.value = response.totalPages
+            totalElements.value = response.totalElements
+            isLastPage.value = response.isLastPage
+
+          } catch (err) {
+            error.value = 'Không thể tải dữ liệu ngữ pháp'
+            console.error('Lỗi khi tải ngữ pháp:', err)
+          } finally {
+            loading.value = false
+          }
+    }
+
+
+        const loadSentences = async (page = 0) => {
+          try {
+            loading.value = true
+            error.value = ''
+
+            const response = await sampleSentenceApi.getAll({page,size: pageSize.value})
+
+            sentencesData.value = response.content.map(item => ({
+              id: item.id,
+              english: item.englishText || item.englishSentence,
+              vietnamese: item.vietnameseTranslation,
+            }))
+
+            currentPage.value = response.currentPage
+            totalPages.value = response.totalPages
+            totalElements.value = response.totalElements
+            isLastPage.value = response.isLastPage
+
+          } catch (err) {
+            error.value = 'Không thể tải dữ liệu mẫu câu'
+            console.error('Lỗi khi tải mẫu câu:', err)
+          } finally {
+            loading.value = false
+          }
+    }
+
 
 // Load all data functions for search
-const loadAllVocabulary = async () => {
-      try {
-        const response = await vocabularyApi.getAll({ page: 0, size: 1000 }) // Tải nhiều dữ liệu hơn
-        allVocabularyData.value = response.vocabularies.map(item => ({
-          id: item.vocalbId,
-          word: item.words,
-          // Đổi 'reading' thành 'pronunciation' và loại bỏ tham chiếu ngôn ngữ
-          pronunciation: item.pronunciation || '', 
-          meaning: item.meanning || item.meaning || item.vietnameseMeaning || '',
-          type: item.wordType,
-          // Loại bỏ 'scriptType' (Không cần thiết cho Tiếng Anh)
-          // scriptType: item.scriptType, 
-          // Loại bỏ 'kanjiId'
-          relatedEntryId: item.relatedEntryId || null,
-          createdAt: new Date().toLocaleDateString('vi-VN')
-        }))
-      } catch (err) {
-        console.error('Lỗi khi tải toàn bộ từ vựng:', err)
-      }
-    }
+  const loadAllVocabulary = async () => {
+    try {
+      const response = await vocabularyApi.getAll({ page: 0, size: 1000 }) 
+      allVocabularyData.value = response.vocabularies.map(item => ({
+        id: item.vocabularyId,
+        word: item.word,
+        phoneticIpa: item.phoneticIpa || '',
+        meaning: item.vietnameseMeaning || '',
+        type: item.wordType,
+        relatedEntryId: item.relatedEntryId || null,
+        createdAt: item.createdAt
+          ? new Date(item.createdAt).toLocaleDateString('vi-VN')
+          : ''
+      }))
+    } catch (err) {
+      console.error('Lỗi khi tải toàn bộ từ vựng:', err)
+      allVocabularyData.value = []
+    }
+  }
 
     const loadAllGrammar = async () => {
       try {
         const response = await grammarApi.getAll({ page: 0, size: 1000 })
         allGrammarData.value = response.grammars.map(item => ({
-          id: item.grammarId,
+//           id: item.grammarId,
           structure: item.structure,
           explanation: item.explanation,
           example: item.example,
           grammarType: item.grammarType,
-          // Loại bỏ 'vietnamesePronunciation' và 'readings'
-          // vietnamesePronunciation: item.vietnamesePronunciation,
-          // readings: item.readings || [],
           createdAt: new Date().toISOString()
         }))
       } catch (err) {
@@ -1040,16 +1023,17 @@ const loadAllVocabulary = async () => {
       }
     }
 
-    // Đổi tên hàm từ loadAllKanji thành loadAllIdioms
     const loadAllIdioms = async () => {
       try {
-        // Đổi kanjiApi thành idiomsApi
+
         const response = await idiomsApi.getAll({ page: 0, size: 1000 })
-        // Đổi allKanjiData thành allIdiomsData
-        allIdiomsData.value = response.idioms.map(item => ({
+        allIdiomsData.value = response.content.map(item => ({
           id: item.idiomId,
-          phrase: item.phraseText, 
-          meaning: item.meaning,
+          phrase: item.englishPhrase || item.phraseText, 
+          meaning: item.vietnameseMeaning || item.meaning,
+          category: item.category,
+          origin: item.origin,
+
           createdAt: new Date().toLocaleDateString('vi-VN')
         }))
       } catch (err) {
@@ -1061,8 +1045,7 @@ const loadAllVocabulary = async () => {
       try {
         const response = await sampleSentenceApi.getAll({ page: 0, size: 1000 })
         allSentencesData.value = response.content.map(item => ({
-          id: item.sentenceId,
-          // Đổi 'japanese' thành 'english'
+//           id: item.sentenceId,
           englishSentence: item.englishSentence,
           vietnameseTranslation: item.vietnameseTranslation,
           usageFrequency: item.usageFrequency,
@@ -1081,17 +1064,11 @@ const loadAllVocabulary = async () => {
         const filtered = allVocabularyData.value.filter(item => {
           // Tìm kiếm theo từ vựng
           const wordMatch = item.word && item.word.toLowerCase().includes(query)
-          
-          // Tìm kiếm theo nghĩa
           const meaningMatch = item.meaning && item.meaning.toLowerCase().includes(query)
-          
-          // Đổi 'reading' thành 'pronunciation'
-          const pronunciationMatch = item.pronunciation && item.pronunciation.toLowerCase().includes(query)
-          
-          // Tìm kiếm theo loại từ
+          const pronunciationMatch = item.phoneticIpa && item.phoneticIpa.toLowerCase().includes(query)
           const typeMatch = item.type && item.type.toLowerCase().includes(query)
           
-          return wordMatch || meaningMatch || pronunciationMatch || typeMatch // Cập nhật biến tìm kiếm
+          return wordMatch || meaningMatch || pronunciationMatch || typeMatch 
         })
         
         // Phân trang cho kết quả tìm kiếm
@@ -1109,8 +1086,7 @@ const loadAllVocabulary = async () => {
         return allVocabularyData.value.filter(item => {
           const wordMatch = item.word && item.word.toLowerCase().includes(query)
           const meaningMatch = item.meaning && item.meaning.toLowerCase().includes(query)
-          // Đổi 'readingMatch' thành 'pronunciationMatch'
-          const pronunciationMatch = item.pronunciation && item.pronunciation.toLowerCase().includes(query)
+          const pronunciationMatch = item.phoneticIpa && item.phoneticIpa.toLowerCase().includes(query)
           const typeMatch = item.type && item.type.toLowerCase().includes(query)
           return wordMatch || meaningMatch || pronunciationMatch || typeMatch // Cập nhật biến tìm kiếm
         }).length
@@ -1124,13 +1100,12 @@ const loadAllVocabulary = async () => {
         const filtered = allGrammarData.value.filter(item => {
           const structureMatch = item.structure && item.structure.toLowerCase().includes(query)
           const explanationMatch = item.explanation && item.explanation.toLowerCase().includes(query)
-          const exampleMatch = item.example && item.example.toLowerCase().includes(query)
-          // Loại bỏ biến tìm kiếm 'pronunciationMatch' (không cần thiết cho ngữ pháp Tiếng Anh)
-          // const pronunciationMatch = item.vietnamesePronunciation && item.vietnamesePronunciation.toLowerCase().includes(query)
-          const typeMatch = item.grammarType && item.grammarType.toLowerCase().includes(query)
+          const exampleMatch = item.detailContent && item.detailContent.toLowerCase().includes(query)
           
+          const typeMatch = item.grammarType && item.grammarType.toLowerCase().includes(query)
+          const topicMatch = item.topicTag && item.topicTag.toLowerCase().includes(query)
           // Cập nhật logic trả về
-          return structureMatch || explanationMatch || exampleMatch || typeMatch
+          return structureMatch || explanationMatch || exampleMatch || typeMatch || topicMatch
         })
         
         // Phân trang cho kết quả tìm kiếm
@@ -1148,61 +1123,49 @@ const loadAllVocabulary = async () => {
         return allGrammarData.value.filter(item => {
           const structureMatch = item.structure && item.structure.toLowerCase().includes(query)
           const explanationMatch = item.explanation && item.explanation.toLowerCase().includes(query)
-          const exampleMatch = item.example && item.example.toLowerCase().includes(query)
-          // Loại bỏ biến tìm kiếm 'pronunciationMatch'
-          // const pronunciationMatch = item.vietnamesePronunciation && item.vietnamesePronunciation.toLowerCase().includes(query)
+          const exampleMatch = item.detailContent  && item.detailContent .toLowerCase().includes(query)
+         
           const typeMatch = item.grammarType && item.grammarType.toLowerCase().includes(query)
           // Cập nhật logic trả về
-          return structureMatch || explanationMatch || exampleMatch || typeMatch
+          return structureMatch || explanationMatch || exampleMatch || typeMatch || topicMatch
         }).length
       }
       return grammarData.value.length
     })
 
-    // Đổi tên 'filteredKanji' thành 'filteredIdioms'
+
     const filteredIdioms = computed(() => {
       if (searchQuery.value && searchQuery.value.trim()) {
         const query = searchQuery.value.trim().toLowerCase()
-        // Đổi 'allKanjiData' thành 'allIdiomsData'
         const filtered = allIdiomsData.value.filter(item => {
-          // Đổi 'characterMatch' thành 'phraseMatch'
+
           const phraseMatch = item.phrase && item.phrase.toLowerCase().includes(query)
-          const meaningMatch = item.meaning && item.meaning.toLowerCase().includes(query)
-          // Loại bỏ 'pronunciationMatch' và 'strokesMatch'
-          // const pronunciationMatch = item.vietnamesePronunciation && item.vietnamesePronunciation.toLowerCase().includes(query)
-          // const strokesMatch = item.strokes && item.strokes.toString().includes(query)
-          
-          // Cập nhật logic trả về
+          const meaningMatch = item.meaning && item.meaning.toLowerCase().includes(query)
+
           return phraseMatch || meaningMatch
         })
         
-        // Phân trang cho kết quả tìm kiếm
+
         const startIndex = searchCurrentPage.value * searchPageSize.value
         const endIndex = startIndex + searchPageSize.value
         return filtered.slice(startIndex, endIndex)
       }
       
-      // Đổi 'kanjiData' thành 'idiomsData'
       return idiomsData.value
     })
 
-    // Đổi tên 'filteredKanjiTotal' thành 'filteredIdiomsTotal'
     const filteredIdiomsTotal = computed(() => {
       if (searchQuery.value && searchQuery.value.trim()) {
         const query = searchQuery.value.trim().toLowerCase()
-        // Đổi 'allKanjiData' thành 'allIdiomsData'
         return allIdiomsData.value.filter(item => {
-          // Đổi 'characterMatch' thành 'phraseMatch'
+
           const phraseMatch = item.phrase && item.phrase.toLowerCase().includes(query)
-          const meaningMatch = item.meaning && item.meaning.toLowerCase().includes(query)
-          // Loại bỏ 'pronunciationMatch' và 'strokesMatch'
-          // const pronunciationMatch = item.vietnamesePronunciation && item.vietnamesePronunciation.toLowerCase().includes(query)
-          // const strokesMatch = item.strokes && item.strokes.toString().includes(query)
-          // Cập nhật logic trả về
+          const meaningMatch = item.meaning && item.meaning.toLowerCase().includes(query)
+
           return phraseMatch || meaningMatch
         }).length
       }
-      // Đổi 'kanjiData' thành 'idiomsData'
+
       return idiomsData.value.length
     })
 
@@ -1210,11 +1173,9 @@ const loadAllVocabulary = async () => {
       if (searchQuery.value && searchQuery.value.trim()) {
         const query = searchQuery.value.trim().toLowerCase()
         const filtered = allSentencesData.value.filter(item => {
-          // Đổi 'japaneseMatch' thành 'englishMatch'
+
           const englishMatch = item.english && item.english.toLowerCase().includes(query)
           const vietnameseMatch = item.vietnamese && item.vietnamese.toLowerCase().includes(query)
-          
-          // Cập nhật logic trả về
           return englishMatch || vietnameseMatch
         })
         
@@ -1231,10 +1192,9 @@ const loadAllVocabulary = async () => {
       if (searchQuery.value && searchQuery.value.trim()) {
         const query = searchQuery.value.trim().toLowerCase()
         return allSentencesData.value.filter(item => {
-          // Đổi 'japaneseMatch' thành 'englishMatch'
+
           const englishMatch = item.english && item.english.toLowerCase().includes(query)
           const vietnameseMatch = item.vietnamese && item.vietnamese.toLowerCase().includes(query)
-          // Cập nhật logic trả về
           return englishMatch || vietnameseMatch
         }).length
       }
@@ -1246,7 +1206,6 @@ const loadAllVocabulary = async () => {
       switch (tabKey) {
         case 'vocabulary': return filteredVocabularyTotal.value
         case 'grammar': return filteredGrammarTotal.value
-        // Đổi 'filteredKanjiTotal' thành 'filteredIdiomsTotal'
         case 'idioms': return filteredIdiomsTotal.value
         case 'sentences': return filteredSentencesTotal.value
         default: return 0
@@ -1313,28 +1272,26 @@ const loadAllVocabulary = async () => {
       })
     }
 
-    // Đổi tên hàm từ 'loadAvailableKanjis' thành 'loadAvailableIdioms'
+    // Hàm để tải danh sách Thành ngữ/Cụm từ có sẵn
     const loadAvailableIdioms = async () => {
       try {
-          // Gọi API getAll, sử dụng page=0 và size lớn để lấy toàn bộ (hoặc phần lớn) dữ liệu
-          const response = await idiomsApi.getAll({ page: 0, size: 1000 }) 
           
-          // Giả định API trả về dữ liệu danh sách nằm trong 'content' (chuẩn Spring Page)
+          const response = await idiomsApi.getAll({ page: 0, size: 1000 }) 
           availableIdioms.value = response.content.map(item => ({
+            // Chuyển đổi cấu trúc dữ liệu từ backend → frontend(id,phrase,meaning,original)
               id: item.idiomId,
-              
-              // Ánh xạ english_phrase sang phrase
               phrase: item.englishPhrase, 
-              
-              // Ánh xạ vietnamese_meaning sang meaning
-              meaning: item.vietnameseMeaning 
+              meaning: item.vietnameseMeaning,
+              original: item.origin
           }))
           
       } catch (err) {
           console.error('Lỗi khi tải Thành ngữ/Cụm từ có sẵn:', err)
-          availableIdioms.value = [] // Đặt lại thành mảng rỗng nếu có lỗi
+          availableIdioms.value = [] 
       }
-  }
+    }
+    
+
 
     // Methods
     const openCreateModal = async () => {
@@ -1343,52 +1300,100 @@ const loadAllVocabulary = async () => {
       if (activeTab.value === 'idioms') {
         // Khởi tạo trường dữ liệu cho 'Idioms'
         editingItem.value = {
-          phrase: '', // Thay 'character' bằng 'phrase'
+          phrase: '', 
+          category: '', 
           meaning: '',
-          category: '', // Có thể thêm 'category' thay cho 'strokes'
-          // Loại bỏ 'strokes' và 'vietnamesePronunciation'
+          origin: '',
+          audioUrl: ''
+
         }
       } else if (activeTab.value === 'grammar') {
         editingItem.value = {
           structure: '',
-          explanation: '',
-          example: '',
           grammarType: '',
-          // Loại bỏ 'vietnamesePronunciation'
+          explanation: '',
+          detailContent: '',
+          topicTag: ''
+
         }
       } else if (activeTab.value === 'sentences') {
         editingItem.value = {
-          english: '', // Thay 'japanese' bằng 'english'
-          vietnamese: ''
+          englishSentence: '', 
+          vietnameseTranslation: '',
+          topic: '',
+          audioUrl: '',
+          usageFrequency: ''
         }
       } else {
-        // Vocabulary form - load available idioms
-        await loadAvailableIdioms() // Đổi tên hàm
-        editingItem.value = {
-          words: '',               // item.words (được dùng trong form)
-          phoneticIpa: '',         // item.phoneticIpa (trước là pronunciation)
-          vietnameseMeaning: '',   // item.vietnameseMeaning (trước là meaning)
-          wordType: '',            // item.wordType (trước là type)
-          level: '',               // Trường mới
-          synonyms: '',            // Trường mới
-          antonyms: '',            // Trường mới
+        
+        await loadAvailableVocabulary() 
+        editingItem.value = {          
+          word: '',               
+          phoneticIpa: '',         
+          vietnameseMeaning: '',   
+          wordType: '', 
+          audioUrl: null,           
+          level: '',               
+          synonyms: '',            
+          antonyms: '',            
         }
       }
-      
       showModal.value = true
     }
 
+// Mở modal chỉnh sửa với dữ liệu đã có
     const editItem = async (item) => {
-      modalMode.value = 'edit'
-      editingItem.value = { ...item }
-      
-      // Load available idioms if editing vocabulary
-      if (activeTab.value === 'vocabulary') {
-        await loadAvailableIdioms() // Đổi tên hàm
-      }
-      
-      showModal.value = true
-    }
+      modalMode.value = 'edit'
+      error.value = ''
+
+      if (activeTab.value === 'idioms') {
+        editingItem.value = {
+          // id: item.idiomId,
+          phrase: item.englishPhrase,
+          meaning: item.vietnameseMeaning,
+          category: item.category,
+          origin: item.origin,
+          audioUrl: item.audioUrl
+        }
+
+      } else if (activeTab.value === 'grammar') {
+        editingItem.value = {
+          // id: item.grammarId,
+          structure: item.structure,
+          grammarType: item.grammarType,
+          explanation: item.explanation,
+          detailContent: item.detailContent,
+          topicTag: item.topicTag
+        }
+
+      } else if (activeTab.value === 'sentences') {
+        editingItem.value = {
+          // id: item.sentenceId,
+          englishSentence: item.englishSentence,
+          vietnameseTranslation: item.vietnameseTranslation,
+          topic: item.topic,
+          audioUrl: item.audioUrl,
+          usageFrequency: item.usageFrequency
+        }
+
+      } else { // vocabulary
+        await loadAvailableVocabulary()
+        editingItem.value = {
+          // id: item.vocabularyId,
+          word: item.word,
+          phoneticIpa: item.phoneticIpa,
+          vietnameseMeaning: item.vietnameseMeaning,
+          wordType: item.wordType,
+          audioUrl: item.audioUrl,
+          level: item.level,
+          synonyms: item.synonyms,
+          antonyms: item.antonyms
+        }
+      }
+
+      showModal.value = true
+    }
+
 
     const deleteItem = (id) => {
       deleteItemId.value = id
@@ -1403,12 +1408,12 @@ const loadAllVocabulary = async () => {
         let result
         
         if (activeTab.value === 'idioms') {
-          // Đổi 'kanjiApi' thành 'idiomsApi' và 'loadKanji' thành 'loadIdioms'
+          // loadIdioms
           result = await idiomsApi.delete(id)
           await loadIdioms(currentPage.value)
           // Cập nhật allData nếu đã tải
-          if (allIdiomsData.value.length > 0) { // Đổi 'allKanjiData' thành 'allIdiomsData'
-            await loadAllIdioms() // Đổi tên hàm
+          if (allIdiomsData.value.length > 0) { 
+            await loadAllIdioms() 
           }
         } else if (activeTab.value === 'grammar') {
           result = await grammarApi.delete(id)
@@ -1466,120 +1471,141 @@ const loadAllVocabulary = async () => {
     }
 
     const saveItem = async () => {
-      try {
-        const item = editingItem.value
-        if (!item) return
-        
-        if (activeTab.value === 'idioms') {
-          // Prepare idioms data for API
-          
-          const idiomData = {
-            phraseText: item.englishPhrase, 
-            meaning: item.vietnameseMeaning,
-            category: item.category, 
-            audioUrl: item.audioUrl || null,
-            origin: item.origin || null,
-            
-          }
-          
+        try {
+          const item = editingItem.value
+          if (!item) return
 
-          if (modalMode.value === 'create') {
-            await idiomsApi.create(idiomData)
-          } else {
-            await idiomsApi.update(item.id, idiomData)
-          }
-          await loadIdioms(currentPage.value) // Đổi tên hàm
-          // Cập nhật allData nếu đã tải
-          if (allIdiomsData.value.length > 0) { // Đổi tên biến
-            await loadAllIdioms() // Đổi tên hàm
-          }
-        } else if (activeTab.value === 'grammar') {
-          // Prepare grammar data for API
-          const grammarData = {
-            structure: item.structure,
-            explanation: item.explanation,
-            example: item.example,
-            grammarType: item.grammarType,
-            // Loại bỏ 'vietnamesePronunciation'
-          }
-          
-          if (modalMode.value === 'create') {
-            await grammarApi.create(grammarData)
-          } else {
-            await grammarApi.update(item.id, grammarData)
-          }
-          await loadGrammar(currentPage.value)
-          // Cập nhật allData nếu đã tải
-          if (allGrammarData.value.length > 0) {
-            await loadAllGrammar()
-          }
-        } else if (activeTab.value === 'sentences') {
-          // Prepare sentence data for API
-          const sentenceData = {
-            englishSentence: item.englishSentence, 
-            vietnameseTranslation: item.vietnameseTranslation,
-            audioUrl: item.audioUrl || null,
-            usageFrequency: item.usageFrequency || null,
-            topic: item.topic || null,
-          }
-          
-          if (modalMode.value === 'create') {
-            await sampleSentenceApi.create(sentenceData)
-          } else {
-            await sampleSentenceApi.update(item.id, sentenceData)
-          }
-          await loadSentences(currentPage.value)
-          // Cập nhật allData nếu đã tải
-          if (allSentencesData.value.length > 0) {
-            await loadAllSentences()
-          }
-        } else {
-          // Validate vocabulary data
-          if (!item.words || !item.vietnameseMeaning) {
-            error.value = 'Vui lòng nhập đầy đủ từ vựng và nghĩa'
-            return
-          }
-          
-          // Prepare vocabulary data for API
-          const vocabularyData = {
-            words: item.words ? item.words.trim() : '',
-            
-            // Cập nhật tên trường chính xác
-            vietnameseMeaning: item.vietnameseMeaning ? item.vietnameseMeaning.trim() : '',
-            phoneticIpa: item.phoneticIpa ? item.phoneticIpa.trim() : '',
-            wordType: item.wordType || 'noun',
-            audioUrl: item.audioUrl || null,
-            level: item.level || null,
-            synonyms: item.synonyms || null,
-            antonyms: item.antonyms || null,
-          }
-          
-          if (modalMode.value === 'create') {
-            const result = await vocabularyApi.create(vocabularyData)
-            successMessage.value = 'Từ vựng đã được thêm thành công'
-          } else {
-            const result = await vocabularyApi.update(item.id, vocabularyData)
-            successMessage.value = 'Từ vựng đã được cập nhật thành công'
-          }
-          await loadVocabulary(currentPage.value)
-          
-          // Cập nhật allData nếu đã tải
-          if (allVocabularyData.value.length > 0) {
-            await loadAllVocabulary()
-          }
-          
-          // Auto hide success message after 3 seconds
-          setTimeout(() => {
-            successMessage.value = ''
-          }, 3000)
-        }
-        
-        closeModal()
-      } catch (err) {
-        error.value = `Không thể lưu ${getModalTitle()}`
-        console.error(`Lỗi lưu ${getModalTitle().toLowerCase()}:`, err) // Cập nhật thông báo lỗi console
-      }
-    }
+          error.value = ''
+
+          /* ===================== IDIOMS ===================== */
+          if (activeTab.value === 'idioms') {
+
+            if (!item.phrase || !item.meaning) {
+              error.value = 'Vui lòng nhập đầy đủ thành ngữ và nghĩa'
+              return
+            }
+
+            const idiomData = {
+              englishPhrase: item.phrase.trim(),
+              vietnameseMeaning: item.meaning.trim(),
+              category: item.category || null,
+              origin: item.origin || null,
+              audioUrl: item.audioUrl || null
+            }
+
+            if (modalMode.value === 'create') {
+              await idiomsApi.create(idiomData)
+            } else {
+              await idiomsApi.update(item.id, idiomData)
+            }
+
+            await loadIdioms(currentPage.value)
+            if (allIdiomsData.value.length > 0) {
+              await loadAllIdioms()
+            }
+          }
+
+          /* ===================== GRAMMAR ===================== */
+          else if (activeTab.value === 'grammar') {
+
+            if (!item.structure || !item.explanation) {
+              error.value = 'Vui lòng nhập cấu trúc và giải thích'
+              return
+            }
+
+            const grammarData = {
+              structure: item.structure.trim(),
+              explanation: item.explanation.trim(),
+              detailContent: item.detailContent?.trim() || null,
+              grammarType: item.grammarType || null,
+              topicTag: item.topicTag || null
+            }
+
+            if (modalMode.value === 'create') {
+              await grammarApi.create(grammarData)
+            } else {
+              await grammarApi.update(item.id, grammarData)
+            }
+
+            await loadGrammar(currentPage.value)
+            if (allGrammarData.value.length > 0) {
+              await loadAllGrammar()
+            }
+          }
+
+          /* ===================== SAMPLE SENTENCES ===================== */
+          else if (activeTab.value === 'sentences') {
+
+            if (!item.englishSentence || !item.vietnameseTranslation) {
+              error.value = 'Vui lòng nhập đầy đủ câu và bản dịch'
+              return
+            }
+
+            const sentenceData = {
+              englishSentence: item.englishSentence.trim(),
+              vietnameseTranslation: item.vietnameseTranslation.trim(),
+              audioUrl: item.audioUrl || null,
+              usageFrequency: item.usageFrequency || null,
+              topic: item.topic || null
+            }
+
+            if (modalMode.value === 'create') {
+              await sampleSentenceApi.create(sentenceData)
+            } else {
+              await sampleSentenceApi.update(item.id, sentenceData)
+            }
+
+            await loadSentences(currentPage.value)
+            if (allSentencesData.value.length > 0) {
+              await loadAllSentences()
+            }
+          }
+
+          /* ===================== VOCABULARY ===================== */
+          else {
+
+            if (!item.word || !item.vietnameseMeaning) {
+              error.value = 'Vui lòng nhập đầy đủ từ vựng và nghĩa'
+              return
+            }
+
+            const vocabularyData = {
+              word: item.word.trim(),
+              vietnameseMeaning: item.vietnameseMeaning.trim(),
+              phoneticIpa: item.phoneticIpa?.trim() || null,
+              wordType: item.wordType || 'noun',
+              level: item.level || null,
+              audioUrl: item.audioUrl || null,
+              synonyms: item.synonyms || null,
+              antonyms: item.antonyms || null
+            }
+
+            if (modalMode.value === 'create') {
+              await vocabularyApi.create(vocabularyData)
+              successMessage.value = 'Từ vựng đã được thêm thành công'
+            } else {
+              await vocabularyApi.update(item.vocabularyId, vocabularyData)
+              successMessage.value = 'Từ vựng đã được cập nhật thành công'
+            }
+
+            await loadAllVocabulary(currentPage.value)
+            if (allVocabularyData.value.length > 0) {
+              await loadVocabularyPage()
+            }
+
+            setTimeout(() => {
+              successMessage.value = ''
+            }, 3000)
+          }
+
+          closeModal()
+
+        } catch (err) {
+          error.value = `Không thể lưu ${getModalTitle()}`
+          console.error(`Lỗi lưu ${getModalTitle().toLowerCase()}:`, err)
+        }
+      }
+
 
     // Search pagination functions
     // Search pagination functions
@@ -1590,7 +1616,6 @@ const loadAllVocabulary = async () => {
       } else if (activeTab.value === 'grammar') {
         total = filteredGrammarTotal.value
       } else if (activeTab.value === 'idioms') {
-        // Đổi 'filteredKanjiTotal' thành 'filteredIdiomsTotal'
         total = filteredIdiomsTotal.value
       } else if (activeTab.value === 'sentences') {
         total = filteredSentencesTotal.value
@@ -1625,8 +1650,8 @@ const loadAllVocabulary = async () => {
           await loadAllVocabulary()
         } else if (activeTab.value === 'grammar' && allGrammarData.value.length === 0) {
           await loadAllGrammar()
-        } else if (activeTab.value === 'idioms' && allIdiomsData.value.length === 0) { // Đổi 'allKanjiData' thành 'allIdiomsData'
-          await loadAllIdioms() // Đổi 'loadAllKanji' thành 'loadAllIdioms'
+        } else if (activeTab.value === 'idioms' && allIdiomsData.value.length === 0) { 
+          await loadAllIdioms() 
         } else if (activeTab.value === 'sentences' && allSentencesData.value.length === 0) {
           await loadAllSentences()
         }
@@ -1642,9 +1667,9 @@ const loadAllVocabulary = async () => {
       searchQuery.value = ''
       
       if (tab === 'vocabulary') {
-        loadVocabulary()
+        loadVocabularyPage(0)
       } else if (tab === 'idioms') {
-        loadIdioms() // Đổi 'loadKanji' thành 'loadIdioms'
+        loadIdioms() 
       } else if (tab === 'grammar') {
         loadGrammar()
       } else if (tab === 'sentences') {
@@ -1656,9 +1681,9 @@ const loadAllVocabulary = async () => {
     watch(activeTab, () => {
       currentPage.value = 0 // Reset to first page when changing tabs
       if (activeTab.value === 'vocabulary') {
-        loadVocabulary(0)
+        loadAllVocabulary(0)
       } else if (activeTab.value === 'idioms') {
-        loadIdioms(0) // Đổi 'loadKanji' thành 'loadIdioms'
+        loadIdioms(0) 
       } else if (activeTab.value === 'grammar') {
         loadGrammar(0)
       } else if (activeTab.value === 'sentences') {
@@ -1670,6 +1695,39 @@ const loadAllVocabulary = async () => {
     onMounted(() => {
       loadVocabulary()
     })
+
+
+
+
+    // LOAD AVAILABLE VOCABULARY (CHO MODAL)
+    const loadAvailableVocabulary = async () => {
+      try {
+        const response = await vocabularyApi.getAll({
+          page: 0,
+          size: 1000
+        })
+
+        const list = Array.isArray(response.content)
+          ? response.content
+          : []
+
+        availableVocabulary.value = list.map(item => ({
+          id: item.vocabularyId,
+          word: item.word,
+          vietnameseMeaning: item.vietnameseMeaning,
+          phoneticIpa: item.phoneticIpa ?? '',
+          wordType: item.wordType ?? 'noun',
+          level: item.level ?? null,
+          audioUrl: item.audioUrl ?? null,
+          synonyms: item.synonyms ?? '',
+          antonyms: item.antonyms ?? ''
+        }))
+
+      } catch (err) {
+        console.error('Lỗi khi tải bảng Từ vựng:', err)
+        availableVocabulary.value = []
+      }
+    }
 </script>
 
 <style src="./DictionaryManagement.scss" scoped></style>

@@ -30,19 +30,18 @@ public class SampleSentenceServiceImpl implements SampleSentenceService {
     private SampleSentenceDTO convertToDTO(SampleSentence entity) {
         SampleSentenceDTO dto = new SampleSentenceDTO();
         
-        // Cần sử dụng các Getter mới: getSentenceId, getEnglishSentence, getVietnameseTranslation
+
         dto.setSentenceId(entity.getSentenceId());
         dto.setEnglishSentence(entity.getEnglishSentence());
         dto.setVietnameseTranslation(entity.getVietnameseTranslation());
-        
-        // Thêm các trường mới
+        dto.setTopicTag(entity.getTopicTag());
         dto.setUsageFrequency(entity.getUsageFrequency());
         
         
         return dto;
     }
 
-    // Đã cập nhật để ánh xạ các trường mới và tên trường mới
+
     private SampleSentence convertToEntity(SampleSentenceDTO dto) {
         SampleSentence entity = new SampleSentence();
         
@@ -51,12 +50,8 @@ public class SampleSentenceServiceImpl implements SampleSentenceService {
         // Cần sử dụng các Getter mới: getEnglishSentence, getVietnameseTranslation
         entity.setEnglishSentence(dto.getEnglishSentence());
         entity.setVietnameseTranslation(dto.getVietnameseTranslation());
-        
-        // Thêm các trường mới
+        entity.setTopicTag(dto.getTopicTag());
         entity.setUsageFrequency(dto.getUsageFrequency());
-        
-        // KHÔNG xử lý khóa ngoại (Vocabulary, Idiom, Grammar) ở đây vì cần phải tìm Entity cha trước.
-        // Logic xử lý khóa ngoại nên được thực hiện trong Service nếu cần.
 
         return entity;
     }
@@ -79,15 +74,15 @@ public class SampleSentenceServiceImpl implements SampleSentenceService {
         if (dto.getEnglishSentence() != null) entity.setEnglishSentence(dto.getEnglishSentence());
         if (dto.getVietnameseTranslation() != null) entity.setVietnameseTranslation(dto.getVietnameseTranslation());
         if (dto.getUsageFrequency() != null) entity.setUsageFrequency(dto.getUsageFrequency());
+        if (dto.getTopicTag() != null) entity.setTopicTag(dto.getTopicTag());
         
-        // Lưu ý: Cần logic phức tạp hơn nếu muốn cập nhật các khóa ngoại (related IDs)
         
         return convertToDTO(repository.save(entity));
     }
 
     @Override
     public void delete(UUID id) {
-        // Nên kiểm tra sự tồn tại trước khi xóa
+
         if (!repository.existsById(id)) {
             throw new RuntimeException("SampleSentence not found with ID: " + id);
         }
@@ -105,9 +100,7 @@ public class SampleSentenceServiceImpl implements SampleSentenceService {
     public Map<String, Object> getAll(Pageable pageable) {
         Page<SampleSentence> pageResult = repository.findAll(pageable);
         
-        // Sử dụng stream().map(this::convertToDTO).collect(Collectors.toList())
-        // thay vì pageResult.map(this::convertToDTO) để tránh lỗi nếu sử dụng Spring Data JPA cũ
-        // Nhưng nếu sử dụng Spring Boot 3.x, pageResult.map() là hợp lệ. Tôi sẽ giữ pageResult.map().
+
         Page<SampleSentenceDTO> dtoPage = pageResult.map(this::convertToDTO);
 
         Map<String, Object> response = new HashMap<>();

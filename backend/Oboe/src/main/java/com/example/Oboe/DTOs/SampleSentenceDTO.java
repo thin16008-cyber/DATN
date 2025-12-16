@@ -9,23 +9,22 @@ public class SampleSentenceDTO {
     // Đã đổi tên: japaneseText -> englishSentence
     private String englishSentence;
     
-    private String vietnameseTranslation; // Đã đổi tên thuộc tính trong DTO (từ vietnameseMeaning)
+    private String vietnameseTranslation; 
+
+    private String topicTag;
 
     // Các trường mới
     private String usageFrequency;
     
-
-    // --- Constructors ---
-    
-    // Constructor không tham số
     public SampleSentenceDTO() {}
 
-    // Constructor đầy đủ tham số
-    public SampleSentenceDTO(UUID sentenceId, String englishSentence, String vietnameseTranslation, 
+
+    public SampleSentenceDTO(UUID sentenceId, String englishSentence, String vietnameseTranslation, String topicTag,
                              String usageFrequency) {
         this.sentenceId = sentenceId;
         this.englishSentence = englishSentence;
         this.vietnameseTranslation = vietnameseTranslation;
+        this.topicTag = topicTag;
         this.usageFrequency = usageFrequency;
     }
 
@@ -53,6 +52,13 @@ public class SampleSentenceDTO {
 
     public void setVietnameseTranslation(String vietnameseTranslation) {
         this.vietnameseTranslation = vietnameseTranslation;
+    }
+    
+    public String getTopicTag() {
+        return topicTag;
+    }
+    public void setTopicTag(String topicTag) {
+        this.topicTag = topicTag;
     }
 
     public String getUsageFrequency() {

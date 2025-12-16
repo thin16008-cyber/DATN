@@ -7,7 +7,7 @@ public class VocabularyDTOs {
 
     private UUID vocabularyId; 
     
-    private String words;
+    private String word;
     
     // 1. Chuẩn hóa tên thuộc tính
     private String vietnameseMeaning; 
@@ -38,11 +38,11 @@ public class VocabularyDTOs {
     public VocabularyDTOs() {}
 
     // Constructor đầy đủ tham số (thay thế @AllArgsConstructor)
-    public VocabularyDTOs(UUID vocabularyId, String words, String vietnameseMeaning, 
+    public VocabularyDTOs(UUID vocabularyId, String word, String vietnameseMeaning, 
                           String wordType, String phoneticIpa, String audioUrl, 
                           String level, String synonyms, String antonyms) {
         this.vocabularyId = vocabularyId;
-        this.words = words;
+        this.word = word;
         this.vietnameseMeaning = vietnameseMeaning;
         this.wordType = wordType;
         this.phoneticIpa = phoneticIpa;
@@ -63,12 +63,12 @@ public class VocabularyDTOs {
         this.vocabularyId = vocabularyId;
     }
 
-    public String getWords() {
-        return words;
+    public String getWord() {
+        return word;
     }
 
-    public void setWords(String words) {
-        this.words = words;
+    public void setWord(String word) {
+        this.word = word;
     }
 
     public String getVietnameseMeaning() {

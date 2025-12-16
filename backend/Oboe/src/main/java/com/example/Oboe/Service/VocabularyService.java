@@ -69,7 +69,7 @@ public class VocabularyService {
                 .orElseThrow(() -> new RuntimeException("Từ vựng không tồn tại"));
 
         // Cập nhật các thuộc tính từ DTO sang Entity (chỉ khi DTO cung cấp dữ liệu)
-        if (dto.getWords() != null) vocab.setWords(dto.getWords());
+        if (dto.getWord() != null) vocab.setWord(dto.getWord());
         if (dto.getVietnameseMeaning() != null) vocab.setVietnameseMeaning(dto.getVietnameseMeaning()); 
         if (dto.getWordType() != null) vocab.setWordType(dto.getWordType());
         
@@ -106,7 +106,7 @@ public class VocabularyService {
         VocabularyDTOs dto = new VocabularyDTOs();
         
         dto.setVocabularyId(vocab.getVocabularyId()); 
-        dto.setWords(vocab.getWords());
+        dto.setWord(vocab.getWord());
         dto.setVietnameseMeaning(vocab.getVietnameseMeaning()); 
         dto.setWordType(vocab.getWordType());
         
@@ -123,7 +123,7 @@ public class VocabularyService {
     private Vocabulary convertToEntity(VocabularyDTOs dto) {
         Vocabulary vocab = new Vocabulary();
         
-        vocab.setWords(dto.getWords());
+        vocab.setWord(dto.getWord());
         vocab.setVietnameseMeaning(dto.getVietnameseMeaning());
         vocab.setWordType(dto.getWordType());
         

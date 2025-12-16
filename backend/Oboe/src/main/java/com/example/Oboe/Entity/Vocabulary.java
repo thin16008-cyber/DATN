@@ -16,8 +16,8 @@ public class Vocabulary {
     @Column(name = "vocalb_id", updatable = false, nullable = false) 
     private UUID vocabularyId;
 
-    @Column(name = "words", nullable = false)
-    private String words; // Từ vựng Tiếng Anh
+    @Column(name = "word", nullable = false)
+    private String word; // Từ vựng Tiếng Anh
 
     @Column(name = "vietnamese_meaning", columnDefinition = "TEXT") 
     private String vietnameseMeaning; // Nghĩa Tiếng Việt
@@ -52,10 +52,10 @@ public class Vocabulary {
     public Vocabulary() {}
 
     // Constructor đầy đủ tham số
-    public Vocabulary(UUID vocabularyId, String words, String vietnameseMeaning, String wordType, 
+    public Vocabulary(UUID vocabularyId, String word, String vietnameseMeaning, String wordType, 
                       String phoneticIpa, String audioUrl, String level, String synonyms, String antonyms) {
         this.vocabularyId = vocabularyId;
-        this.words = words;
+        this.word = word;
         this.vietnameseMeaning = vietnameseMeaning;
         this.wordType = wordType;
         this.phoneticIpa = phoneticIpa;
@@ -76,12 +76,12 @@ public class Vocabulary {
         this.vocabularyId = vocabularyId;
     }
 
-    public String getWords() {
-        return words;
+    public String getWord() {
+        return word;
     }
 
-    public void setWords(String words) {
-        this.words = words;
+    public void setWord(String word) {
+        this.word = word;
     }
 
     public String getVietnameseMeaning() {

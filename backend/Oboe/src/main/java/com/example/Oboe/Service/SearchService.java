@@ -60,7 +60,7 @@ public class SearchService {
                 for (Vocabulary v : vocabularyRepository.searchVocabulary(keyword)) {
                     Map<String, String> item = new HashMap<>();
                     item.put("type", "vocabulary");
-                    item.put("word", v.getWords());
+                    item.put("word", v.getWord());
                     // 4a. Cập nhật trường reading: Dùng phoneticIpa
                     item.put("reading", v.getPhoneticIpa()); 
                     item.put("meaning", v.getVietnameseMeaning()); 

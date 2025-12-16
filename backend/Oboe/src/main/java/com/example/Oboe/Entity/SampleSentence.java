@@ -20,8 +20,13 @@ public class SampleSentence {
     @Column(name = "vietnamese_translation", columnDefinition = "TEXT", nullable = false)
     private String vietnameseTranslation;
 
+    @Column(name = "topic_Tag")
+    private String topicTag;
+
     @Column(name = "usage_frequency")
     private String usageFrequency;
+
+
 
 
    
@@ -32,19 +37,21 @@ public class SampleSentence {
     public SampleSentence() {}
 
     // Constructor đầy đủ tham số (Không bao gồm ID và các Entity)
-    public SampleSentence(String englishSentence, String vietnameseTranslation, 
+    public SampleSentence(String englishSentence, String vietnameseTranslation, String topicTag,
                           String usageFrequency) {
         this.englishSentence = englishSentence;
         this.vietnameseTranslation = vietnameseTranslation;
+        this.topicTag = topicTag;
         this.usageFrequency = usageFrequency;
     }
 
     // Constructor đầy đủ tham số (Bao gồm tất cả các trường)
-    public SampleSentence(UUID sentenceId, String englishSentence, String vietnameseTranslation, 
+    public SampleSentence(UUID sentenceId, String englishSentence, String vietnameseTranslation, String topicTag,
                           String usageFrequency) {
         this.sentenceId = sentenceId;
         this.englishSentence = englishSentence;
         this.vietnameseTranslation = vietnameseTranslation;
+        this.topicTag = topicTag;
         this.usageFrequency = usageFrequency;
     }
 
@@ -73,6 +80,13 @@ public class SampleSentence {
 
     public void setVietnameseTranslation(String vietnameseTranslation) {
         this.vietnameseTranslation = vietnameseTranslation;
+    }
+    
+    public String getTopicTag() {
+        return topicTag;
+    }
+    public void setTopicTag(String topicTag) {
+        this.topicTag = topicTag;
     }
 
     public String getUsageFrequency() {
