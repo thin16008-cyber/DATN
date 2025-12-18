@@ -1,8 +1,8 @@
 package com.example.Oboe.Service;
 
-import com.example.Oboe.DTOs.IdiomDTO; // Đã đổi tên DTO
-import com.example.Oboe.Entity.Idiom; // Đã đổi tên Entity
-import com.example.Oboe.Repository.IdiomRepository; // Đã đổi tên Repository
+import com.example.Oboe.DTOs.IdiomDTO; 
+import com.example.Oboe.Entity.Idiom; 
+import com.example.Oboe.Repository.IdiomRepository; 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -32,6 +32,7 @@ public class IdiomServiceImpl implements IdiomService {
         dto.setVietnameseMeaning(entity.getVietnameseMeaning());
         dto.setCategory(entity.getCategory()); // Thêm trường category mới
         dto.setAudioUrl(entity.getAudioUrl()); // Thêm trường audioUrl mới
+        dto.setOrigin(entity.getOrigin()); // Thêm trường origin mới
         // Bổ sung: origin
         
         return dto;
@@ -51,6 +52,7 @@ public class IdiomServiceImpl implements IdiomService {
         entity.setVietnameseMeaning(dto.getVietnameseMeaning());
         entity.setCategory(dto.getCategory());
         entity.setAudioUrl(dto.getAudioUrl());
+        entity.setOrigin(dto.getOrigin());
         // Bổ sung: origin
 
         return entity;
@@ -73,6 +75,7 @@ public class IdiomServiceImpl implements IdiomService {
         entity.setVietnameseMeaning(dto.getVietnameseMeaning());
         entity.setCategory(dto.getCategory());
         entity.setAudioUrl(dto.getAudioUrl());
+        entity.setOrigin(dto.getOrigin());
         // Bổ sung: origin
 
         return convertToDTO(repository.save(entity));

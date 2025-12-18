@@ -6,22 +6,22 @@ import jakarta.persistence.*;
 import java.util.UUID;
 
 @Entity
-@Table(name = "idioms") // Ánh xạ tới bảng DB 'idioms'
-public class Idiom { // Đổi tên lớp từ PhraseIdiom thành Idiom cho đơn giản
+@Table(name = "idioms") 
+public class Idiom { 
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     // Đã đổi tên cột Khóa chính từ 'phrase_id' thành 'idiom_id' (đồng bộ với DB)
     @Column(name = "idiom_id", updatable = false, nullable = false) 
-    private UUID idiomId; // Chuẩn hóa tên thuộc tính Java
+    private UUID idiomId; 
 
     @Column(name = "english_phrase", nullable = false, columnDefinition = "TEXT")
-    private String englishPhrase; // Cụm từ Tiếng Anh
+    private String englishPhrase; 
 
     @Column(name = "vietnamese_meaning", columnDefinition = "TEXT")
-    private String vietnameseMeaning; // Nghĩa tiếng Việt
+    private String vietnameseMeaning; 
 
-    @Column(name = "category") // Đổi tên cột DB từ 'phrase_category' thành 'category'
+    @Column(name = "category") 
     private String category;
 
     // THÊM MỚI: Audio URL
@@ -32,9 +32,6 @@ public class Idiom { // Đổi tên lớp từ PhraseIdiom thành Idiom cho đơ
     @Column(name = "origin", columnDefinition = "TEXT")
     private String origin; 
 
-    // --- 1. Constructors ---
-    
-    // Constructor không tham số
     public Idiom() {}
 
     // Constructor đầy đủ tham số

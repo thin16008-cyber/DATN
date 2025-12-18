@@ -84,7 +84,7 @@
                     </div>
                 </div>
                 <div class="actions">
-                      <button @click="editItem(item.vocabularyId)" class="btn-edit" title="Chỉnh sửa">
+                      <button @click="editItem(item)" class="btn-edit" title="Chỉnh sửa">
                         <i class="fas fa-edit"></i>
                       </button>
                       <button @click="deleteItem(item.vocabularyId)" class="btn-delete" title="Xóa">
@@ -180,19 +180,20 @@
           <div class="items-grid">
             <div 
               v-for="item in filteredGrammar" 
-              :key="item.id"
+              :key="item.grammarId"
               class="item-card grammar-card"
             >
               <div class="card-header">
                 <div class="grammar-info">
                   <h3 class="structure">{{ item.structure }}</h3>
-                  <span class="grammar-type-badge" :class="item.grammarType">{{ getGrammarTypeName(item.grammarType) }}</span>
+                  <!-- <span class="grammar-type-badge" :class="item.grammarType">{{ getGrammarTypeName(item.grammarType) }}</span> -->
+                  <span class="grammar-type-badge">{{item.grammarType}}</span>
                 </div>
                 <div class="actions">
-                  <button @click="editItem(item.id)" class="btn-edit" title="Chỉnh sửa">
+                  <button @click="editItem(item)" class="btn-edit" title="Chỉnh sửa">
                     <i class="fas fa-edit"></i>
                   </button>
-                  <button @click="deleteItem(item.id)" class="btn-delete" title="Xóa">
+                  <button @click="deleteItem(item.grammarId)" class="btn-delete" title="Xóa">
                     <i class="fas fa-trash"></i>
                   </button>
                 </div>
@@ -278,7 +279,7 @@
         <div v-else>
           <!-- Search Results Info -->
           <div v-if="searchQuery && searchQuery.trim()" class="search-results-info">
-            <p>Tìm thấy <strong>{{ filteredIdiomsTotal }}</strong> hán tự cho từ khóa "<strong>{{ searchQuery }}</strong>"</p>
+            <p>Tìm thấy <strong>{{ filteredIdiomsTotal }}</strong> thành ngữ/cụm từ cho từ khóa "<strong>{{ searchQuery }}</strong>"</p>
             <p v-if="getSearchTotalPages() > 1" class="pagination-info">
               Hiển thị {{ searchCurrentPage * searchPageSize + 1 }} - {{ Math.min((searchCurrentPage + 1) * searchPageSize, filteredIdiomsTotal) }} trong tổng số {{ filteredIdiomsTotal }} kết quả
             </p>
@@ -391,24 +392,28 @@
           <div class="items-grid">
             <div 
               v-for="item in filteredSentences" 
-              :key="item.id"
+              :key="item.sentenceId"
               class="item-card sentence-card"
             >
               <div class="card-header">
                 <div class="sentence-info">
-                  <h3 class="japanese-text">{{ item.englishSentence }}</h3>
+                  <h3 class="japanese-text">{{ item.english}}</h3>
                 </div>
                 <div class="actions">
-                  <button @click="editItem(item.id)" class="btn-edit" title="Chỉnh sửa">
+                  <button @click="editItem(item)" class="btn-edit" title="Chỉnh sửa">
                     <i class="fas fa-edit"></i>
                   </button>
-                  <button @click="deleteItem(item.id)" class="btn-delete" title="Xóa">
+                  <button @click="deleteItem(item.sentenceId)" class="btn-delete" title="Xóa">
                     <i class="fas fa-trash"></i>
                   </button>
                 </div>
               </div>
               <div class="card-content">
                 <p class="vietnamese-meaning">{{ item.vietnamese }}</p>
+                <div class="meta-info">
+                    <span class="type">{{ item.topicTag }}</span>
+                    <span class="script-type">{{ item.usageFrequency }}</span> 
+                </div>
               </div>
             </div>
           </div>
@@ -466,6 +471,7 @@
 
 
 
+    <!-- load dữ liệu có sẵn ở modal hoặc tạo mới -->
     <!-- Create/Edit Modal -->
     <div v-if="showModal" class="modal-overlay" @click="closeModal">
       <div class="modal-content" @click.stop>
@@ -511,7 +517,7 @@
                 <label for="vietnameseMeaning">Nghĩa tiếng Việt *</label>
                 <textarea 
                   id="vietnameseMeaning"
-                  v-model="editingItem.vietnameseMeaning" 
+                  v-model="editingItem.meaning" 
                   placeholder="Nhập nghĩa tiếng Việt"
                   rows="3"
                   required
@@ -862,7 +868,7 @@ const { pronounce } = usePronunciation()
         const response = await vocabularyApi.getAll({ page, size: pageSize.value })
         vocabularyData.value = response.vocabularies.map(item => {
           return {
-              vocabularyId: item.vocabularyId,
+              vocabularyId: item.id||item.vocabularyId,
               word: item.word,
               phoneticIpa: item.phoneticIpa || '',
               meaning: item.vietnameseMeaning || '',
@@ -925,7 +931,7 @@ const { pronounce } = usePronunciation()
             const response = await grammarApi.getAll({page,size: pageSize.value})
 
             grammarData.value = response.grammars.map(item => ({
-              id: item.grammarId,
+              grammarId: item.id|| item.grammarId,
               structure: item.structure,
               explanation: item.explanation,
               detailContent: item.detailContent,
@@ -956,7 +962,7 @@ const { pronounce } = usePronunciation()
             const response = await sampleSentenceApi.getAll({page,size: pageSize.value})
 
             sentencesData.value = response.content.map(item => ({
-              id: item.sentenceId,
+              sentenceId: item.id || item.sentenceId,
               english: item.englishText || item.englishSentence,
               vietnamese: item.vietnameseTranslation,
               usageFrequency: item.usageFrequency,
@@ -983,12 +989,12 @@ const { pronounce } = usePronunciation()
     try {
       const response = await vocabularyApi.getAll({ page: 0, size: 1000 }) 
       allVocabularyData.value = response.vocabularies.map(item => ({
-        id: item.vocabularyId,
+        vocabularyId: item.vocabularyId,
         word: item.word,
         phoneticIpa: item.phoneticIpa || '',
         meaning: item.vietnameseMeaning || '',
-        type: item.wordType,
-        relatedEntryId: item.relatedEntryId || null,
+        wordType: item.wordType,
+        level: item.level || null,
         createdAt: item.createdAt
           ? new Date(item.createdAt).toLocaleDateString('vi-VN')
           : ''
@@ -1003,11 +1009,12 @@ const { pronounce } = usePronunciation()
       try {
         const response = await grammarApi.getAll({ page: 0, size: 1000 })
         allGrammarData.value = response.grammars.map(item => ({
-          id: item.grammarId,
+          grammarId: item.grammarId || item.id,
           structure: item.structure,
           explanation: item.explanation,
           example: item.example,
           grammarType: item.grammarType,
+          detailContent: item.detailContent,
           createdAt: new Date().toISOString()
         }))
       } catch (err) {

@@ -37,7 +37,7 @@
     "user": "Người dùng",
     "unknown": "Không rõ",
     "vocabulary": "Từ vựng",
-    "kanji": "Hán tự",
+    "idiom": "Thành Ngữ",
     "grammar": "Ngữ pháp",
     "sentences": "Mẫu câu",
     "studyMaterial": "Học liệu",
@@ -60,7 +60,7 @@
   },
   "headerTabs": {
     "vocabulary": "Từ Vựng",
-    "kanji": "Hán Tự",
+    "idiom": "Thành Ngữ",
     "grammar": "Ngữ Pháp",
     "sentences": "Mẫu Câu"
   },
@@ -298,7 +298,7 @@
     "loadError": "Không thể tải dữ liệu bài viết. Vui lòng thử lại sau.",
     "categories": {
       "word": "Từ vựng",
-      "kanji": "Học Kanji",
+      "idiom": "Học thành ngữ",
       "grammar": "Ngữ pháp",
       "jlpt": "Luyện thi JLPT",
       "communication": "Giao tiếp",
@@ -550,7 +550,7 @@
     "supportCommunity": "Cộng Đồng Hỗ Trợ",
     "supportCommunityDesc": "Kết nối, chia sẻ học liệu và học hỏi kinh nghiệm từ hàng ngàn người dùng khác.",
     "buildKnowledge": "Tạo Dựng Tri Thức",
-    "buildKnowledgeDesc": "Bắt đầu từ những viên gạch nhỏ nhất. Với Oboe, bạn có thể dễ dàng tạo ra các bộ thẻ ghi nhớ (flashcards) cho từ vựng, kanji, hoặc các mẫu ngữ pháp. Biến kiến thức khô khan thành những học liệu sinh động, luôn sẵn sàng để bạn ôn tập.",
+    "buildKnowledgeDesc": "Bắt đầu từ những viên gạch nhỏ nhất. Với Oboe, bạn có thể dễ dàng tạo ra các bộ thẻ ghi nhớ (flashcards) cho từ vựng, thành ngữ, cụm từ, hoặc các mẫu ngữ pháp. Biến kiến thức khô khan thành những học liệu sinh động, luôn sẵn sàng để bạn ôn tập.",
     "startCreating": "Bắt đầu tạo",
     "practiceRemember": "Thực Hành & Ghi Nhớ",
     "practiceRememberDesc": "Học phải đi đôi với hành. Chuyển đổi bất kỳ bộ thẻ nào thành một bài kiểm tra đa dạng chỉ với vài cú nhấp chuột. Mọi kết quả đều được lưu lại, giúp bạn nhìn thấy rõ sự tiến bộ của mình qua từng ngày.",
@@ -584,16 +584,11 @@
     "vocabularyBenefit2": "Học cách sử dụng từ trong nhiều ngữ cảnh khác nhau",
     "vocabularyBenefit3": "Tăng vốn từ vựng một cách có hệ thống",
     "vocabularyBenefit4": "Ôn tập nhanh chóng mọi lúc mọi nơi",
-    "kanjiTitle": "2.2. Luyện Tập Kanji",
-    "kanjiBenefit1": "Học các thành phần bộ thủ một cách trực quan",
-    "kanjiBenefit2": "Ghi nhớ các cách đọc On-kun hiệu quả",
-    "kanjiBenefit3": "Liên kết nghĩa với hình dạng chữ Kanji",
-    "kanjiBenefit4": "Luyện tập viết Kanji thông qua stroke order",
     "featuresTitle": "3. Tính Năng Flashcard Trên Oboe",
     "smartSystemTitle": "3.1. Hệ Thống Thông Minh",
     "smartSystemFeature1": "Tự động điều chỉnh thời gian ôn tập dựa trên hiệu suất học tập",
     "smartSystemFeature2": "Phân tích và theo dõi tiến độ học tập chi tiết",
-    "smartSystemFeature3": "Gợi ý các từ vựng và Kanji liên quan",
+    "smartSystemFeature3": "Gợi ý các từ vựng và thành ngữ liên quan",
     "smartSystemFeature4": "Tích hợp phát âm chuẩn từ người bản xứ",
     "customizationTitle": "3.2. Tùy Chỉnh Linh Hoạt",
     "customizationFeature1": "Tạo bộ thẻ riêng theo chủ đề mong muốn",
@@ -645,11 +640,9 @@
     "categories": {
       "all": "Tất cả chuyên mục",
       "word": "Từ vựng",
-      "kanji": "Học Kanji",
+      "idiom": "Học thành ngữ",
       "grammar": "Ngữ pháp",
-      "jlpt": "Luyện thi JLPT",
       "communication": "Giao tiếp",
-      "lifeInJapan": "Cuộc sống tại Nhật",
       "other": "Chủ đề khác"
     },
     "timeAgo": {
@@ -795,7 +788,7 @@
     "section4_2Title": "4.2. Luyện Tập Thường Xuyên",
     "section4_2Method1": "Viết chữ theo stroke order chuẩn",
     "section4_2Method2": "Đọc văn bản Tiếng Anh hàng ngày",
-    "section4_2Method3": "Sử dụng ứng dụng học Kanji",
+    "section4_2Method3": "Sử dụng ứng dụng học idiom",
     "section4_2Method4": "Làm bài tập và kiểm tra định kỳ",
     "section5Title": "5. Mẹo Nhận Diện Nhanh",
     "section5_1Title": "5.1. Phân Tích Hình Dạng",
@@ -806,7 +799,7 @@
     "tip3Title": "Nhận Dạng Mẫu",
     "tip3Description": "Tìm các mẫu lặp lại trong chữ Hán",
     "section5_2Title": "5.2. Sử Dụng Công Cụ Hỗ Trợ",
-    "tool1": "Từ điển Kanji điện tử",
+    "tool1": "Từ điển idiom điện tử",
     "tool2": "Ứng dụng nhận dạng chữ viết",
     "tool3": "Công cụ tìm kiếm theo bộ thủ",
     "tool4": "Phần mềm luyện viết stroke order"
@@ -973,7 +966,7 @@
     "noStudySetsMessage": "Tạo học liệu đầu tiên của để bắt đầu học tập",
     "noQuizzesMessage": "Tạo bài kiểm tra để đánh giá kiến thức của",
     "vocabulary": "Từ vựng",
-    "kanji": "Hán tự",
+    "idiom": "Hán tự",
     "grammar": "Ngữ pháp",
     "sentences": "Mẫu câu",
     "noFavoriteVocabulary": "Chưa có từ vựng yêu thích",
@@ -1079,7 +1072,7 @@
   "japanese": {
     "word": "Từ vựng",
     "grammar": "Ngữ pháp",
-    "kanji": "Hán tự",
+    "idiom": "Hán tự",
     "sentence": "Câu mẫu",
     "pronunciation": "Phát âm",
     "meaning": "Nghĩa",
@@ -1334,7 +1327,7 @@
     "loadingGrammar": "Đang tải dữ liệu ngữ pháp...",
     "pronunciationLabel": "Phát âm:"
   },
-  "kanji": {
+  "idiom": {
     "relatedKanji": "Hán tự liên quan",
     "onReading": "Âm on:",
     "kunReading": "Âm kun:",
@@ -1737,7 +1730,7 @@
           "hiraganaKatakana": "Học bảng chữ Hiragana và Katakana",
           "basicGrammar": "Ngữ pháp cơ bản N5-N4",
           "vocabulary": "Từ vựng thông dụng (khoảng 1500 từ)",
-          "basicKanji": "Kanji cơ bản (khoảng 300 chữ)"
+          "basicKanji": "idiom cơ bản (khoảng 300 chữ)"
         }
       },
       "intermediate": {
@@ -1745,7 +1738,7 @@
         "items": {
           "intermediateGrammar": "Ngữ pháp trung cấp",
           "expandedVocabulary": "Từ vựng mở rộng (thêm 3000 từ)",
-          "intermediateKanji": "Kanji trung cấp (thêm 600 chữ)",
+          "intermediateKanji": "idiom trung cấp (thêm 600 chữ)",
           "comprehensionSkills": "Kỹ năng đọc hiểu và nghe hiểu"
         }
       }
@@ -1756,7 +1749,7 @@
         "title": "2.1. Học với Flashcard",
         "description": "Oboe cung cấp hệ thống flashcard thông minh giúp bạn:",
         "features": {
-          "systematic": "Học từ vựng và kanji một cách có hệ thống",
+          "systematic": "Học từ vựng và idiom một cách có hệ thống",
           "spacedRepetition": "Ôn tập theo phương pháp spaced repetition",
           "progress": "Theo dõi tiến độ học tập",
           "customization": "Tùy chỉnh bộ thẻ theo nhu cầu"
@@ -1788,7 +1781,7 @@
         "title": "3.2. Công cụ hỗ trợ",
         "items": {
           "dictionary": "Từ điển tích hợp",
-          "kanjiLookup": "Công cụ tra cứu kanji",
+          "kanjiLookup": "Công cụ tra cứu idiom",
           "pronunciation": "Phần mềm luyện phát âm",
           "mobileApp": "Ứng dụng mobile học mọi lúc"
         }
@@ -1848,14 +1841,14 @@
         "systems": {
           "hiragana": "Hiragana (ひらがな): Chữ cong, mềm mại, dùng cho từ thuần Nhật",
           "katakana": "Katakana (カタカナ): Chữ thẳng, góc cạnh, dùng cho từ nước ngoài",
-          "kanji": "Kanji (漢字): Chữ Hán, mang nghĩa cụ thể"
+          "idiom": "idiom (漢字): Chữ Hán, mang nghĩa cụ thể"
         }
       },
       "roles": {
         "title": "1.2. Vai Trò Trong Câu",
         "hiragana": "Hiragana: Viết đuôi động từ, trợ từ, từ thuần Nhật",
         "katakana": "Katakana: Từ nước ngoài, tên nước ngoài, thuật ngữ khoa học",
-        "kanji": "Kanji: Thể hiện nghĩa chính của từ"
+        "idiom": "idiom: Thể hiện nghĩa chính của từ"
       }
     },
     "hiragana": {
@@ -1875,7 +1868,7 @@
           "nativeWords": "Viết các từ thuần Nhật (和語 - わご)",
           "verbEndings": "Viết đuôi động từ, tính từ",
           "particles": "Viết trợ từ (は、が、を、に、で...)",
-          "furigana": "Viết furigana (phiên âm trên kanji)"
+          "furigana": "Viết furigana (phiên âm trên idiom)"
         }
       }
     },
@@ -1915,7 +1908,7 @@
         "example": {
           "title": "Ví dụ:",
           "sentence": "私はコーヒーを飲みます。",
-          "explanation": "- 私 (わたし): \"tôi\" - từ thuần Nhật, viết bằng kanji và hiragana<br>- は: trợ từ, viết bằng hiragana<br>- コーヒー: \"cà phê\" - từ nước ngoài, viết bằng katakana<br>- を: trợ từ, viết bằng hiragana<br>- 飲みます (のみます): \"uống\" - động từ thuần Nhật, viết bằng kanji và hiragana"
+          "explanation": "- 私 (わたし): \"tôi\" - từ thuần Nhật, viết bằng idiom và hiragana<br>- は: trợ từ, viết bằng hiragana<br>- コーヒー: \"cà phê\" - từ nước ngoài, viết bằng katakana<br>- を: trợ từ, viết bằng hiragana<br>- 飲みます (のみます): \"uống\" - động từ thuần Nhật, viết bằng idiom và hiragana"
         }
       }
     },
@@ -1927,7 +1920,7 @@
           "hiraganaFirst": "Học Hiragana trước (2-3 tuần)",
           "katakanaSecond": "Học Katakana sau (2-3 tuần)",
           "combinedReading": "Luyện đọc kết hợp cả hai",
-          "kanjiParallel": "Học Kanji song song"
+          "kanjiParallel": "Học idiom song song"
         }
       },
       "memoryTechniques": {
