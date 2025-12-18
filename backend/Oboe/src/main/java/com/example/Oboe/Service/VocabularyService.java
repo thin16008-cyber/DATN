@@ -18,11 +18,17 @@ import java.util.stream.Collectors;
 public class VocabularyService {
 
     private final VocabularyRepository vocabularyRepository;
+    private final DictionaryAudioService dictionaryAudioService;
+
+    public VocabularyService( VocabularyRepository vocabularyRepository, DictionaryAudioService dictionaryAudioService) {
+        this.vocabularyRepository = vocabularyRepository;
+        this.dictionaryAudioService = dictionaryAudioService;
+    }
     
     // Constructor đã chuẩn hóa
-    public VocabularyService(VocabularyRepository vocabularyRepository) {
-        this.vocabularyRepository = vocabularyRepository;
-    }
+    // public VocabularyService(VocabularyRepository vocabularyRepository) {
+    //     this.vocabularyRepository = vocabularyRepository;
+    // }
 
     // Get all vocabularies with pagination
     public Map<String, Object> getAllVocabulary(int page, int size) {
@@ -43,12 +49,38 @@ public class VocabularyService {
 
         return response;
     }
+    public int fillMissingAudioForVocabulary() {
+        checkAdminAccess();
+
+        List<Vocabulary> list = vocabularyRepository.findVocabularyWithoutAudio();
+        int updated = 0;
+
+        for (Vocabulary vocab : list) {
+            String audioUrl =
+                    dictionaryAudioService.fetchAudioUrl(vocab.getWord());
+
+            if (audioUrl != null) {
+                vocab.setAudioUrl(audioUrl);
+                updated++;
+            }
+        }
+
+        vocabularyRepository.saveAll(list);
+        return updated;
+    }
+
 
     // Create new vocabulary
     public VocabularyDTOs createVocabulary(VocabularyDTOs dto) {
         checkAdminAccess();
 
         Vocabulary vocab = convertToEntity(dto); // Sử dụng hàm chuyển đổi chung
+
+        if (vocab.getAudioUrl() == null || vocab.getAudioUrl().isBlank()) {
+        String audio =
+                dictionaryAudioService.fetchAudioUrl(vocab.getWord());
+        vocab.setAudioUrl(audio);
+    }
         
         Vocabulary saved = vocabularyRepository.save(vocab);
         return vocabToDTO(saved);
@@ -68,6 +100,8 @@ public class VocabularyService {
         Vocabulary vocab = vocabularyRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Từ vựng không tồn tại"));
 
+        boolean wordChanged = false;
+
         // Cập nhật các thuộc tính từ DTO sang Entity (chỉ khi DTO cung cấp dữ liệu)
         if (dto.getWord() != null) vocab.setWord(dto.getWord());
         if (dto.getVietnameseMeaning() != null) vocab.setVietnameseMeaning(dto.getVietnameseMeaning()); 
@@ -79,6 +113,11 @@ public class VocabularyService {
         if (dto.getLevel() != null) vocab.setLevel(dto.getLevel());
         if (dto.getSynonyms() != null) vocab.setSynonyms(dto.getSynonyms());
         if (dto.getAntonyms() != null) vocab.setAntonyms(dto.getAntonyms());
+
+        if (wordChanged) {
+        String audio = dictionaryAudioService.fetchAudioUrl(vocab.getWord());
+        vocab.setAudioUrl(audio);
+    }
 
         Vocabulary updated = vocabularyRepository.save(vocab);
         return vocabToDTO(updated);

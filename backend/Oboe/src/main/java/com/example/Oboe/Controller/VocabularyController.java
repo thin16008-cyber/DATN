@@ -2,6 +2,7 @@ package com.example.Oboe.Controller;
 
 import com.example.Oboe.DTOs.VocabularyDTOs;
 import com.example.Oboe.Service.VocabularyService;
+import com.example.Oboe.Service.DictionaryAudioService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,9 +13,11 @@ import java.util.*;
 public class VocabularyController {
 
     private final VocabularyService vocabularyService;
+    private final DictionaryAudioService dictionaryAudioService;
 
-    public VocabularyController(VocabularyService vocabularyService) {
+    public VocabularyController(VocabularyService vocabularyService, DictionaryAudioService dictionaryAudioService) {
         this.vocabularyService = vocabularyService;
+        this.dictionaryAudioService = dictionaryAudioService;
     }
 
     // GET /api/vocabulary?page=0&size=10
@@ -59,4 +62,27 @@ public class VocabularyController {
     public ResponseEntity<List<VocabularyDTOs>> search(@RequestParam String keyword) {
         return ResponseEntity.ok(vocabularyService.searchVocabulary(keyword));
     }
+    // POST /api/vocabulary/fill-audio (ROLE_ADMIN)
+    @PostMapping("/fill-audio")
+    public ResponseEntity<Map<String, Object>> fillMissingAudio() {
+        int updated = vocabularyService.fillMissingAudioForVocabulary();
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("updated", updated);
+        response.put("message", "Đã cập nhật audio cho từ vựng chưa có audio");
+
+        return ResponseEntity.ok(response);
+    }
+    // @GetMapping("/{id}/pronounce")
+    // public ResponseEntity<Map<String, String>> pronounce(@PathVariable UUID id) {
+    //     String audioUrl =  dictionaryAudioService.fetchAudioUrl(W);
+
+    //     if (audioUrl == null) {
+    //         return ResponseEntity.notFound().build();
+    //     }
+
+    //     return ResponseEntity.ok(Map.of("audioUrl", audioUrl));
+    // }
+
+
 }

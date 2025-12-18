@@ -21,4 +21,10 @@ public interface VocabularyRepository extends JpaRepository<Vocabulary, UUID> {
             "OR LOWER(v.level) LIKE LOWER(CONCAT('%', :keyword, '%'))") // Thêm tìm kiếm theo level
     List<Vocabulary> searchVocabulary(@Param("keyword") String keyword);
 
+    @Query("""
+        SELECT v FROM Vocabulary v
+        WHERE v.audioUrl IS NULL OR v.audioUrl = ''
+    """)
+    List<Vocabulary> findVocabularyWithoutAudio();
+
 }
