@@ -87,12 +87,12 @@
         <div class="ai-sensei-card">
           <div class="ai-sensei-header">
             <div class="ai-sensei-avatar">
-               <img :src="ImagePaths.avatar.sensei" alt="Oboe Sensei" class="sensei-avatar">
+               <img :src="ImagePaths.avatar.sensei" alt="Oboe AI" class="sensei-avatar">
             </div>
             <div class="ai-sensei-info">
               <h3 class="sensei-name">
                 <i class="fas fa-robot"></i>
-                Oboe Sensei
+                Oboe AI
               </h3>
               <span class="sensei-badge">{{ t('forumPostDetail.aiTeacher') }}</span>
             </div>
@@ -101,7 +101,7 @@
           <!-- Loading State -->
           <div v-if="aiSenseiLoading" class="ai-sensei-loading">
             <div class="spinner"></div>
-            <p>Oboe Sensei đang suy nghĩ...</p>
+            <p>Oboe AI đang suy nghĩ...</p>
           </div>
           
           <!-- Error State -->
@@ -499,7 +499,7 @@ const fetchAiSenseiReply = async (blogId) => {
     };
     
   } catch (err) {
-    aiSenseiError.value = err.message || 'Không thể tải phản hồi từ Oboe Sensei';
+    aiSenseiError.value = err.message || 'Không thể tải phản hồi từ Oboe AI';
     aiSenseiReply.value = null;
   } finally {
     aiSenseiLoading.value = false;
