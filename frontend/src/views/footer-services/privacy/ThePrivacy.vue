@@ -3,7 +3,7 @@
     <div class="privacy-container">
       <div class="privacy-header">
         <h1>{{ t('privacy.title') }}</h1>
-        <p class="last-updated">{{ t('privacy.lastUpdated') }} {{ lastUpdated }}</p>
+        <p class="last-updated">{{ t('privacy.lastUpdated') }}</p>
       </div>
 
       <div class="privacy-content">
@@ -131,7 +131,7 @@ import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 const { t } = useI18n();
-const lastUpdated = ref('15/03/2024');
+const lastUpdated = ref('15/03/2025');
 </script>
 
 <style lang="scss" scoped>

@@ -62,7 +62,7 @@ const store = useStore()
 const activeIndex = computed(() => store.getters['header/activeIndex'])
 
 const isWord = computed(() => activeIndex.value === 0)
-const isKanji = computed(() => activeIndex.value === 1)
+const isIdiom = computed(() => activeIndex.value === 1)
 const isGrammar = computed(() => activeIndex.value === 2)
 const isSentence = computed(() => activeIndex.value === 3)
 
@@ -70,7 +70,7 @@ const isSentence = computed(() => activeIndex.value === 3)
 const getSearchType = () => {
   switch (activeIndex.value) {
     case 0: return 'vocabulary'  // Vocabulary
-    case 1: return 'kanji'       // Kanji
+    case 1: return 'idiom'       // Idiom
     case 2: return 'grammar'     // Grammar
     case 3: return 'sentence'    // Sentences
     default: return 'vocabulary'
@@ -179,8 +179,8 @@ const navigateToDetail = (item) => {
       case 'vocabulary':
         routeType = 'word'  // Route: /word/:id
         break
-      case 'kanji':
-        routeType = 'kanji'  // Route: /kanji/:id
+      case 'idiom':
+        routeType = 'idiom'  // Route: /idiom/:id
         break
       case 'grammar':
         routeType = 'grammar'  // Route: /grammar/:id

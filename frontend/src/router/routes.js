@@ -36,10 +36,9 @@ import StudyGuide from '@/views/footer-services/study-guide/StudyGuide.vue';
 import PaymentGuide from '@/views/footer-services/payment-guide/PaymentGuide.vue';
 import WhyFlashcard from '@/views/footer-services/why-flashcard/WhyFlashcard.vue';
 import WritingGuide from '@/views/footer-services/writing-guide/WritingGuide.vue';
-import JapanNews from '@/views/footer-services/japan-news/JapanNews.vue';
 import TheContact from '@/views/footer-services/contact/TheContact.vue';
 import TheBenefits from '@/views/footer-services/japanese-benefits/TheBenefits.vue';
-import KanjiGuide from '@/views/footer-services/kanji-guide/KanjiGuide.vue';
+
 
 
 const routes = [
@@ -303,16 +302,6 @@ const routes = [
         path: 'benefits-japanese',
         name: 'BenefitsJapanese',
         component: TheBenefits
-      },
-      {
-        path: 'kanji-guide',
-        name: 'KanjiGuide',
-        component: KanjiGuide
-      },
-      {
-        path: 'japan-news',
-        name: 'JapanNews',
-        component: JapanNews
       },
       {
         path: 'contact',

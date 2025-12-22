@@ -4,27 +4,27 @@ export default {
   state: () => ({
     slides: [
       {
-        content: "覚え",
+        content: "Remember",
         backcontent: "Oboe",
       },
       {
-        content: "覚え",
+        content: "Remember",
         backcontent: "Oboe",
       },
       {
-        content: "覚え",
+        content: "Remember",
         backcontent: "Oboe",        
       },
       {
-        content: "覚え",
+        content: "Remember",  
         backcontent: "Oboe",
       },
       {
-        content: "覚え",
+        content: "Remember",
         backcontent: "Oboe",
       },
       {
-        content: "覚え",
+        content: "Remember",
         backcontent: "Oboe",
       },
     ],

@@ -12,10 +12,10 @@
           <div class="sub-section">
             <h3>{{ t('studyGuide.learningPath.beginner.title') }}</h3>
             <ul>
-              <li>{{ t('studyGuide.learningPath.beginner.items.hiraganaKatakana') }}</li>
+              <li>{{ t('studyGuide.learningPath.beginner.items.basicVocabulary') }}</li>
               <li>{{ t('studyGuide.learningPath.beginner.items.basicGrammar') }}</li>
-              <li>{{ t('studyGuide.learningPath.beginner.items.vocabulary') }}</li>
-              <li>{{ t('studyGuide.learningPath.beginner.items.basicKanji') }}</li>
+              <li>{{ t('studyGuide.learningPath.beginner.items.listeningPractice') }}</li>
+              <li>{{ t('studyGuide.learningPath.beginner.items.readingPractice') }}</li>
             </ul>
           </div>
           <div class="sub-section">
@@ -23,8 +23,8 @@
             <ul>
               <li>{{ t('studyGuide.learningPath.intermediate.items.intermediateGrammar') }}</li>
               <li>{{ t('studyGuide.learningPath.intermediate.items.expandedVocabulary') }}</li>
-              <li>{{ t('studyGuide.learningPath.intermediate.items.intermediateKanji') }}</li>
-              <li>{{ t('studyGuide.learningPath.intermediate.items.comprehensionSkills') }}</li>
+              <li>{{ t('studyGuide.learningPath.intermediate.items.listeningSkills') }}</li>
+              <li>{{ t('studyGuide.learningPath.intermediate.items.readingSkills') }}</li>
             </ul>
           </div>
         </section>
@@ -56,21 +56,21 @@
         <section class="guide-section">
           <h2>{{ t('studyGuide.learningResources.title') }}</h2>
           <div class="sub-section">
-            <h3>{{ t('studyGuide.learningResources.materials.title') }}</h3>
+            <h3>{{ t('studyGuide.learningResources.materials.sub-title') }}</h3>
             <ul>
-              <li>{{ t('studyGuide.learningResources.materials.items.basicTextbooks') }}</li>
+              <li>{{ t('studyGuide.learningResources.materials.items.textbooks') }}</li>
               <li>{{ t('studyGuide.learningResources.materials.items.grammarExercises') }}</li>
-              <li>{{ t('studyGuide.learningResources.materials.items.jlptMaterials') }}</li>
+              <li>{{ t('studyGuide.learningResources.materials.items.examPrepMaterials') }}</li>
               <li>{{ t('studyGuide.learningResources.materials.items.conversationMaterials') }}</li>
             </ul>
           </div>
           <div class="sub-section">
-            <h3>{{ t('studyGuide.learningResources.tools.title') }}</h3>
+            <h3>{{ t('studyGuide.learningResources.tools.sub-title') }}</h3>
             <ul>
               <li>{{ t('studyGuide.learningResources.tools.items.dictionary') }}</li>
-              <li>{{ t('studyGuide.learningResources.tools.items.kanjiLookup') }}</li>
               <li>{{ t('studyGuide.learningResources.tools.items.pronunciation') }}</li>
               <li>{{ t('studyGuide.learningResources.tools.items.mobileApp') }}</li>
+              <li>{{ t('studyGuide.learningResources.tools.items.practiceApps') }}</li>
             </ul>
           </div>
         </section>
@@ -118,6 +118,7 @@
             </ul>
           </div>
         </section>
+
       </div>
     </div>
   </div>
@@ -128,7 +129,7 @@ import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 const { t } = useI18n();
-const lastUpdated = ref('15/03/2024');
+const lastUpdated = ref('15/06/2025');
 </script>
 
 <style lang="scss" scoped>

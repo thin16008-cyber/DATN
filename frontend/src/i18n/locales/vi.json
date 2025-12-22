@@ -37,7 +37,7 @@
     "user": "Người dùng",
     "unknown": "Không rõ",
     "vocabulary": "Từ vựng",
-    "idiom": "Thành Ngữ",
+    "kanji": "Thành Ngữ",
     "grammar": "Ngữ pháp",
     "sentences": "Mẫu câu",
     "studyMaterial": "Học liệu",
@@ -60,7 +60,7 @@
   },
   "headerTabs": {
     "vocabulary": "Từ Vựng",
-    "idiom": "Thành Ngữ",
+    "kanji":"Thành Ngữ",
     "grammar": "Ngữ Pháp",
     "sentences": "Mẫu Câu"
   },
@@ -226,8 +226,8 @@
     "you": "Bạn",
     "user": "Người dùng",
     "close": "Đóng",
-    "translationTitle": "Oboe Sensei - Dịch Tiếng Anh",
-    "translating": "Oboe Sensei đang dịch...",
+    "translationTitle": "Oboe AI - Dịch Tiếng Anh",
+    "translating": "Oboe AI đang dịch...",
     "cannotTranslate": "Không thể dịch văn bản này.",
     "originalText": "Văn bản gốc",
     "translateAndExplain": "Dịch và giải thích",
@@ -298,11 +298,11 @@
     "loadError": "Không thể tải dữ liệu bài viết. Vui lòng thử lại sau.",
     "categories": {
       "word": "Từ vựng",
-      "idiom": "Học thành ngữ",
+      "kanji": "Học thành ngữ",
       "grammar": "Ngữ pháp",
-      "jlpt": "Luyện thi JLPT",
+      "examPrep": "Luyện thi tiếng Anh",
       "communication": "Giao tiếp",
-      "life-in-japan": "Cuộc sống tại Nhật",
+      "lifeAbroad": "Cuộc sống nước ngoài",
       "other": "Chủ đề khác"
     },
     "tags": {
@@ -311,7 +311,6 @@
       "selfStudy": "tự học",
       "listening": "luyện nghe",
       "materials": "tài liệu",
-      "particles": "trợ từ",
       "pronunciation": "phát âm",
       "mistakes": "lỗi sai",
       "books": "sách",
@@ -330,9 +329,9 @@
     "score": "Điểm số",
     "time": "Thời gian",
     "accuracy": "Độ chính xác",
-    "aiGrading": "Oboe Sensei đang chấm bài của bạn",
+    "aiGrading": "Oboe AI đang chấm bài của bạn",
     "pleaseWait": "Vui lòng chờ trong giây lát...",
-    "aiAdvice": "Lời khuyên từ Oboe Sensei",
+    "aiAdvice": "Lời khuyên từ Oboe AI",
     "questionDetails": "Chi tiết từng câu hỏi",
     "question": "Câu",
     "reviewAnswer": "Xem lại đáp án",
@@ -350,7 +349,6 @@
     "testHistoryTitle": "(Lúc {time})",
     "testHistoryDescription": "Kết quả: {score}/{total}",
     "createQuizError": "Không thể tạo quiz - response không hợp lệ",
-    "reviewAnswer": "Xem lại đáp án",
     "multipleChoiceTestTitle": "Bài kiểm tra trắc nghiệm",
     "writtenTestTitle": "Bài kiểm tra tự luận",
     "trueFalseTestTitle": "Bài kiểm tra đúng sai",
@@ -383,7 +381,7 @@
     "editPost": "Sửa bài viết",
     "reportPost": "Báo cáo bài viết",
     "aiTeacher": "AI Giáo viên",
-    "aiThinking": "Oboe Sensei đang suy nghĩ...",
+    "aiThinking": "Oboe AI đang suy nghĩ...",
     "replies": "Trả lời",
     "showing": "hiển thị",
     "loadingComments": "Đang tải bình luận...",
@@ -486,36 +484,36 @@
     "updateSuccess": "Cập nhật bộ thẻ thành công!",
     "createSuccess": "Tạo bộ thẻ thành công!",
     "saveError": "Đã có lỗi xảy ra khi lưu bộ thẻ: "
-   },
-   "createQuiz": {
-     "title": "Tạo Bài Kiểm Tra Mới",
-     "aiButton": "Nhờ Oboe Sensei",
-     "generating": "Đang tạo...",
-     "nameLabel": "Tên bài kiểm tra",
-     "namePlaceholder": "Nhập tên bài kiểm tra...",
-     "descriptionLabel": "Mô tả",
-     "descriptionPlaceholder": "Nhập mô tả về bài kiểm tra...",
-     "questions": "Câu hỏi",
-     "question": "Câu hỏi",
-     "questionPlaceholder": "Nhập câu hỏi...",
-     "option": "Phương án",
-     "addOption": "Thêm phương án",
-     "addQuestion": "Thêm câu hỏi",
-     "saveQuiz": "Lưu bài kiểm tra",
-     "upgradePremium": "Nâng cấp Premium",
-     "nameRequired": "Vui lòng nhập tên bài kiểm tra.",
-     "questionRequired": "Vui lòng thêm ít nhất một câu hỏi.",
-     "questionContentRequired": "Vui lòng nhập nội dung cho câu hỏi",
-     "optionContentRequired": "Vui lòng nhập nội dung cho phương án",
-     "of": "của câu hỏi",
-     "aiGenerateError": "Không thể tạo câu hỏi bằng AI. Vui lòng thử lại.",
-     "aiGeneratedTitle": "Bài kiểm tra được tạo bằng AI",
-     "aiGeneratedDescription": "Bài kiểm tra gồm {count} câu hỏi được tạo tự động bằng AI",
-     "aiError": "Đã có lỗi xảy ra khi tạo bài kiểm tra bằng AI: ",
-     "createSuccess": "Tạo bài kiểm tra thành công!",
-     "saveError": "Đã có lỗi xảy ra khi lưu bài kiểm tra: "
-   },
-   "profile": {
+  },
+  "createQuiz": {
+    "title": "Tạo Bài Kiểm Tra Mới",
+    "aiButton": "Nhờ Oboe AI",
+    "generating": "Đang tạo...",
+    "nameLabel": "Tên bài kiểm tra",
+    "namePlaceholder": "Nhập tên bài kiểm tra...",
+    "descriptionLabel": "Mô tả",
+    "descriptionPlaceholder": "Nhập mô tả về bài kiểm tra...",
+    "questions": "Câu hỏi",
+    "question": "Câu hỏi",
+    "questionPlaceholder": "Nhập câu hỏi...",
+    "option": "Phương án",
+    "addOption": "Thêm phương án",
+    "addQuestion": "Thêm câu hỏi",
+    "saveQuiz": "Lưu bài kiểm tra",
+    "upgradePremium": "Nâng cấp Premium",
+    "nameRequired": "Vui lòng nhập tên bài kiểm tra.",
+    "questionRequired": "Vui lòng thêm ít nhất một câu hỏi.",
+    "questionContentRequired": "Vui lòng nhập nội dung cho câu hỏi",
+    "optionContentRequired": "Vui lòng nhập nội dung cho phương án",
+    "of": "của câu hỏi",
+    "aiGenerateError": "Không thể tạo câu hỏi bằng AI. Vui lòng thử lại.",
+    "aiGeneratedTitle": "Bài kiểm tra được tạo bằng AI",
+    "aiGeneratedDescription": "Bài kiểm tra gồm {count} câu hỏi được tạo tự động bằng AI",
+    "aiError": "Đã có lỗi xảy ra khi tạo bài kiểm tra bằng AI: ",
+    "createSuccess": "Tạo bài kiểm tra thành công!",
+    "saveError": "Đã có lỗi xảy ra khi lưu bài kiểm tra: "
+  },
+  "profile": {
     "title": "Hồ sơ",
     "editProfile": "Chỉnh sửa hồ sơ",
     "personalInfo": "Thông tin cá nhân",
@@ -576,10 +574,9 @@
     "testingEffectDesc": "Testing Effect là hiện tượng tâm lý học cho thấy việc kiểm tra kiến thức thường xuyên sẽ:",
     "testingEffectBenefit1": "Củng cố trí nhớ tốt hơn so với đọc lại",
     "testingEffectBenefit2": "Tạo liên kết não bộ bền vững",
-    "testingEffectBenefit3": "Giúp nhận biết được lỗ hổng kiến thức",
+    "testingEffectBenefit3": "Giúp nhận biết lỗ hổng kiến thức",
     "testingEffectBenefit4": "Tăng khả năng áp dụng kiến thức vào thực tế",
     "benefitsTitle": "2. Lợi Ích Của Flashcard Trong Học Tiếng Anh",
-    "vocabularyTitle": "2.1. Học Từ Vựng Hiệu Quả",
     "vocabularyBenefit1": "Dễ dàng ghi nhớ từ mới thông qua hình ảnh và ví dụ",
     "vocabularyBenefit2": "Học cách sử dụng từ trong nhiều ngữ cảnh khác nhau",
     "vocabularyBenefit3": "Tăng vốn từ vựng một cách có hệ thống",
@@ -608,15 +605,15 @@
     "techniquesAdvice4": "Áp dụng ngay vào thực hành",
     "resultsTitle": "5. Kết Quả Thực Tế",
     "statisticsTitle": "5.1. Thống Kê Từ Người Dùng",
-    "statistic1": "90% người dùng cải thiện điểm JLPT sau 3 tháng sử dụng",
-    "statistic2": "Trung bình ghi nhớ 30 từ mới mỗi ngày",
+    "statistic1": "90% người dùng cải thiện trình độ tiếng Anh sau 3 tháng sử dụng",
+    "statistic2": "Trung bình ghi nhớ 20–30 từ mới mỗi ngày",
     "statistic3": "Tỷ lệ duy trì học tập cao hơn 75% so với phương pháp truyền thống",
     "statistic4": "Tiết kiệm 50% thời gian học tập",
     "testimonialsTitle": "5.2. Phản Hồi Từ Người Học",
-    "testimonial1Quote": "Tôi đã vượt qua N2 sau 6 tháng học với Oboe Flashcard. Phương pháp này thực sự hiệu quả!",
-    "testimonial1Author": "- Nguyễn Văn A, Đã đạt N2",
-    "testimonial2Quote": "Từ một người mất gốc Tiếng Anh, giờ tôi có thể tự tin giao tiếp với người bản xứ.",
-    "testimonial2Author": "- Trần Thị B, Du học sinh"
+    "testimonial1Quote": "Tôi đã cải thiện đáng kể vốn từ vựng và tự tin giao tiếp sau 6 tháng học với Oboe Flashcard.",
+    "testimonial1Author": "- Nguyễn Văn A, Học viên",
+    "testimonial2Quote": "Từ người mất gốc tiếng Anh, giờ tôi có thể giao tiếp và đọc hiểu tài liệu dễ dàng.",
+    "testimonial2Author": "- Trần Thị B, Học viên"
   },
   "forum": {
     "title": "Diễn đàn",
@@ -640,7 +637,7 @@
     "categories": {
       "all": "Tất cả chuyên mục",
       "word": "Từ vựng",
-      "idiom": "Học thành ngữ",
+      "kanji": "Học thành ngữ",
       "grammar": "Ngữ pháp",
       "communication": "Giao tiếp",
       "other": "Chủ đề khác"
@@ -671,7 +668,7 @@
   "flashcardLearn": {
     "breadcrumb": {
       "home": "Trang chủ",
-      "search": "Tìm kiếm", 
+      "search": "Tìm kiếm",
       "library": "Thư viện",
       "profile": "Hồ sơ",
       "studyMaterial": "Học liệu"
@@ -731,78 +728,6 @@
     "daysAgo": "{days} ngày trước",
     "timeError": "Lỗi thời gian",
     "startConversationWith": "Bắt đầu cuộc trò chuyện với {name}"
-  },
-  "kanjiGuide": {
-    "title": "Hướng Dẫn Học Chữ Hán",
-    "lastUpdated": "Cập nhật lần cuối:",
-    "section1Title": "1. Cấu Trúc Chữ Hán",
-    "section1_1Title": "1.1. Bộ Thủ (Radical)",
-    "section1_1Description": "Bộ thủ là thành phần cơ bản tạo nên chữ Hán, giúp phân loại và tra cứu:",
-    "waterRadical": "Bộ thủ nước",
-    "waterExamples": "Ví dụ: 河, 海, 湖",
-    "woodRadical": "Bộ thủ cây",
-    "woodExamples": "Ví dụ: 森, 林, 材",
-    "fireRadical": "Bộ thủ lửa",
-    "fireExamples": "Ví dụ: 炎, 焼, 熱",
-    "section1_2Title": "1.2. Cách Kết Hợp",
-    "horizontalCombination": "Kết hợp ngang: 明 (日 + 月)",
-    "verticalCombination": "Kết hợp dọc: 岩 (山 + 石)",
-    "surroundingCombination": "Kết hợp bao quanh: 国 (囗 + 玉)",
-    "complexCombination": "Kết hợp phức tạp: 森 (木 + 木 + 木)",
-    "section2Title": "2. Quy Tắc Viết Chữ Hán",
-    "section2_1Title": "2.1. Nguyên Tắc Cơ Bản",
-    "leftToRight": "Từ trái sang phải",
-    "topToBottom": "Từ trên xuống dưới",
-    "outsideToInside": "Từ ngoài vào trong",
-    "horizontalBeforeVertical": "Nét ngang trước nét dọc",
-    "section2_2Title": "2.2. Stroke Order",
-    "woodStroke1": "Nét ngang trên cùng",
-    "woodStroke2": "Nét dọc giữa",
-    "woodStroke3": "Nét chéo trái",
-    "woodStroke4": "Nét chéo phải",
-    "waterStroke1": "Nét chấm bên trái",
-    "waterStroke2": "Nét chấm bên phải",
-    "waterStroke3": "Nét ngang",
-    "waterStroke4": "Nét dọc",
-    "waterStroke5": "Nét gập khúc",
-    "section3Title": "3. Cách Đọc Chữ Hán",
-    "section3_1Title": "3.1. Âm Hán Việt",
-    "section3_1Description": "Âm Hán Việt là cách đọc chữ Hán theo âm tiếng Việt, được truyền từ Trung Quốc vào Việt Nam từ thời cổ đại.",
-    "waterVietnamese": "Thủy",
-    "woodVietnamese": "Mộc",
-    "fireVietnamese": "Hỏa",
-    "section3_2Title": "3.2. Âm Nhật Bản",
-    "section3_2Description": "Chữ Hán trong Tiếng Anh có hai cách đọc chính:",
-    "onReading": "Âm On",
-    "onReadingDesc": "Đọc theo âm Trung Quốc cổ",
-    "kunReading": "Âm Kun",
-    "kunReadingDesc": "Đọc theo âm Nhật Bản bản địa",
-    "waterJapanese": "すい (sui) / みず (mizu)",
-    "woodJapanese": "もく (moku) / き (ki)",
-    "section4Title": "4. Phương Pháp Học Hiệu Quả",
-    "section4_1Title": "4.1. Học Theo Bộ Thủ",
-    "section4_1Method1": "Tập trung học các bộ thủ phổ biến trước",
-    "section4_1Method2": "Nhóm các chữ Hán có cùng bộ thủ",
-    "section4_1Method3": "Tìm hiểu ý nghĩa và liên hệ với bộ thủ",
-    "section4_1Method4": "Sử dụng flashcard để ghi nhớ bộ thủ",
-    "section4_2Title": "4.2. Luyện Tập Thường Xuyên",
-    "section4_2Method1": "Viết chữ theo stroke order chuẩn",
-    "section4_2Method2": "Đọc văn bản Tiếng Anh hàng ngày",
-    "section4_2Method3": "Sử dụng ứng dụng học idiom",
-    "section4_2Method4": "Làm bài tập và kiểm tra định kỳ",
-    "section5Title": "5. Mẹo Nhận Diện Nhanh",
-    "section5_1Title": "5.1. Phân Tích Hình Dạng",
-    "tip1Title": "Tìm Bộ Thủ",
-    "tip1Description": "Xác định bộ thủ chính để đoán nghĩa gốc",
-    "tip2Title": "Đếm Số Nét",
-    "tip2Description": "Đếm số nét để tìm kiếm trong từ điển",
-    "tip3Title": "Nhận Dạng Mẫu",
-    "tip3Description": "Tìm các mẫu lặp lại trong chữ Hán",
-    "section5_2Title": "5.2. Sử Dụng Công Cụ Hỗ Trợ",
-    "tool1": "Từ điển idiom điện tử",
-    "tool2": "Ứng dụng nhận dạng chữ viết",
-    "tool3": "Công cụ tìm kiếm theo bộ thủ",
-    "tool4": "Phần mềm luyện viết stroke order"
   },
   "contact": {
     "title": "Liên Hệ Chúng Tôi",
@@ -897,12 +822,12 @@
     "section8Title": "8. Liên hệ",
     "section8Description": "Nếu bạn có thắc mắc về chính sách quyền riêng tư, vui lòng liên hệ:",
     "contactEmail": "Email: bophanchamsoc{'@'}oboe.com",
-    "contactPhone": "Điện thoại: 0775751954",
-    "contactAddress": "Địa chỉ: Hoài Đức, Hà Nội, Việt Nam"
+    "contactPhone": "Điện thoại: 0832342554",
+    "contactAddress": "Địa chỉ: Ngũ Hành Sơn, Đà Nẵng, Việt Nam"
   },
   "terms": {
     "title": "Điều Khoản Dịch Vụ",
-    "lastUpdated": "Cập nhật lần cuối: 15/01/2025",
+    "lastUpdated": "Cập nhật lần cuối: 15/09/2025",
     "section1Title": "1. Giới thiệu",
     "section1Description1": "Chào mừng bạn đến với Oboe - Nền tảng học tiếng Anh trực tuyến. Bằng việc truy cập và sử dụng dịch vụ của chúng tôi, bạn đồng ý tuân thủ các điều khoản và điều kiện này.",
     "section1Description2": "Oboe cung cấp các công cụ và tài nguyên học tập Tiếng Anh hiệu quả, bao gồm hệ thống flashcard, bài kiểm tra, và cộng đồng học tập.",
@@ -946,7 +871,6 @@
     "dataSecurity1": "Không chia sẻ thông tin cá nhân cho bên thứ ba",
     "dataSecurity2": "Áp dụng các biện pháp bảo mật tiên tiến",
     "dataSecurity3": "Tuân thủ các quy định về bảo vệ dữ liệu"
-
   },
   "library": {
     "title": "Thư viện",
@@ -966,15 +890,15 @@
     "noStudySetsMessage": "Tạo học liệu đầu tiên của để bắt đầu học tập",
     "noQuizzesMessage": "Tạo bài kiểm tra để đánh giá kiến thức của",
     "vocabulary": "Từ vựng",
-    "idiom": "Hán tự",
+    "kanji": "Thành Ngữ",
     "grammar": "Ngữ pháp",
     "sentences": "Mẫu câu",
     "noFavoriteVocabulary": "Chưa có từ vựng yêu thích",
-    "noFavoriteKanji": "Chưa có hán tự yêu thích",
+    "noFavoriteKanji": "Chưa có thành ngữ yêu thích",
     "noFavoriteGrammar": "Chưa có ngữ pháp yêu thích",
     "noFavoriteSentences": "Chưa có mẫu câu yêu thích",
     "markFavoriteVocabulary": "Đánh dấu từ vựng yêu thích để xem lại sau",
-    "markFavoriteKanji": "Đánh dấu hán tự yêu thích để xem lại sau",
+    "markFavoriteKanji": "Đánh dấu thành ngữ yêu thích để xem lại sau",
     "markFavoriteGrammar": "Đánh dấu ngữ pháp yêu thích để xem lại sau",
     "markFavoriteSentences": "Đánh dấu mẫu câu yêu thích để xem lại sau",
     "confirmDelete": "Xác nhận xóa",
@@ -1090,13 +1014,11 @@
     "romaji": "Romaji"
   },
   "guides": {
-    "kanjiGuide": "Hướng dẫn Hán tự",
     "writingGuide": "Hướng dẫn Viết",
     "studyGuide": "Hướng dẫn Học tập",
     "paymentGuide": "Hướng dẫn Thanh toán",
     "whyFlashcard": "Tại sao nên dùng Flashcard",
     "japaneseBenefits": "Lợi ích học Tiếng Anh",
-    "japanNews": "Tin tức Nhật Bản",
     "contact": "Liên hệ",
     "privacy": "Chính sách bảo mật",
     "terms": "Điều khoản sử dụng"
@@ -1217,13 +1139,13 @@
     "smartLearningDesc": "Hệ thống tự động điều chỉnh độ khó và tần suất ôn tập dựa trên khả năng của bạn.",
     "advancedContent": "Nội Dung Nâng Cao",
     "advancedContentTitle": "Nội Dung Nâng Cao",
-    "advancedContentDesc": "Truy cập thư viện từ vựng và ngữ pháp nâng cao, phù hợp với mọi trình độ.",
+    "advancedContentDesc": "Truy cập thư viện từ vựng và ngữ pháp nâng cao, phù hợp với mọi trình độ tiếng Anh.",
     "testimonialsTitle": "Người Dùng Nói Gì?",
     "testimonial1Name": "Nguyễn Văn A",
-    "testimonial1Role": "Học viên N3",
-    "testimonial1Text": "\"OboePro giúp tôi cải thiện khả năng Tiếng Anh một cách đáng kể. Trợ lý AI thực sự hiểu được điểm yếu của tôi.\"",
+    "testimonial1Role": "Học viên Trung Cấp",
+    "testimonial1Text": "\"OboePro giúp tôi cải thiện khả năng tiếng Anh một cách đáng kể. Trợ lý AI thực sự hiểu được điểm yếu của tôi.\"",
     "testimonial2Name": "Trần Thị B",
-    "testimonial2Role": "Học viên N2",
+    "testimonial2Role": "Học viên Nâng Cao",
     "testimonial2Text": "\"Báo cáo tiến độ chi tiết giúp tôi dễ dàng theo dõi sự tiến bộ và duy trì động lực học tập.\"",
     "faqTitle": "Câu Hỏi Thường Gặp",
     "ctaTitle": "Sẵn sàng nâng cao trải nghiệm học tập?",
@@ -1281,9 +1203,9 @@
     "generalInfo": "THÔNG TIN CHUNG",
     "feedback": "GÓP Ý",
     "contactInfo": {
-      "phone": "0775751954",
+      "phone": "0832342554",
       "email": "bophanchamsoc{'@'}oboe.com",
-      "address": "Đà Nẵng, Việt Nam",
+      "address": "Ngũ Hành Sơn, Đà Nẵng, Việt Nam",
       "workingHours": "Thứ 2 - CN: 8:00 - 24:00"
     },
     "services": {
@@ -1297,13 +1219,11 @@
       "usageTips": {
         "title": "MẸO SỬ DỤNG",
         "whyFlashcard": "Tại sao nên học flashcard",
-        "writingGuide": "Phân biệt hiragana, katakana",
-        "japaneseBenefits": "Lợi ích của học Tiếng Anh",
-        "kanjiGuide": "Cách nhận diện chữ Hán"
+        "writingGuide": "Phân biệt các thì trong tiếng Anh",
+        "japaneseBenefits": "Lợi ích của học Tiếng Anh"
       },
       "generalInfo": {
         "title": "THÔNG TIN CHUNG",
-        "japanNews": "Tin tức thị trường Nhật Bản",
         "upgradeAccount": "Quyền lợi nâng cấp tài khoản",
         "contact": "Liên hệ chúng tôi"
       },
@@ -1423,515 +1343,379 @@
     "skip": "Bỏ qua",
     "confirm": "Xác nhận"
   },
-  "japanNews": {
-    "title": "Tin Tức Thị Trường Nhật Bản",
-    "lastUpdated": "Cập nhật lần cuối:",
-    "featuredNews": {
-      "title": "Tin Tức Nổi Bật",
-      "economy": "Kinh Tế",
-      "technology": "Công Nghệ",
-      "visaNews": {
-        "title": "Nhật Bản Mở Rộng Chính Sách Visa Cho Lao Động Nước Ngoài",
-        "excerpt": "Chính phủ Nhật Bản vừa thông qua đề xuất mới về việc nới lỏng các điều kiện visa cho lao động nước ngoài trong các ngành nghề trọng điểm.",
-        "source": "Nikkei Asia"
-      },
-      "aiNews": {
-        "title": "Làn Sóng AI Tại Nhật Bản: Cơ Hội Việc Làm Mới",
-        "excerpt": "Sự phát triển của AI đang tạo ra nhiều cơ hội việc làm mới trong lĩnh vực công nghệ tại Nhật Bản.",
-        "source": "Tech Japan"
-      }
-    },
-    "marketTrends": {
-      "title": "Xu Hướng Thị Trường",
-      "gdpGrowth": {
-        "title": "Tăng Trưởng GDP",
-        "description": "Tốc độ tăng trưởng kinh tế Nhật Bản quý I/2024"
-      },
-      "yenRate": {
-        "title": "Tỷ Giá Yên",
-        "description": "Tỷ giá JPY/USD"
-      }
-    },
-    "jobOpportunities": {
-      "title": "Cơ Hội Việc Làm",
-      "it": {
-        "title": "Công Nghệ Thông Tin",
-        "softwareEngineer": "Software Engineer",
-        "frontendDeveloper": "Frontend Developer",
-        "location": "Tokyo",
-        "locationOsaka": "Osaka",
-        "company1": "Tech Corp Japan",
-        "company2": "Digital Solutions"
-      },
-      "manufacturing": {
-        "title": "Sản Xuất & Kỹ Thuật",
-        "mechanicalEngineer": "Kỹ Sư Cơ Khí",
-        "electronicsEngineer": "Kỹ Sư Điện Tử",
-        "locationNagoya": "Nagoya",
-        "locationYokohama": "Yokohama",
-        "company1": "Toyota Manufacturing",
-        "company2": "Electronics Corp"
-      }
-    },
-    "studyAbroad": {
-      "title": "Du Học Nhật Bản",
-      "mextScholarship": {
-        "title": "Học Bổng MEXT 2024",
-        "description": "Chương trình học bổng toàn phần của chính phủ Nhật Bản",
-        "deadline": "Hạn nộp hồ sơ: 30/04/2024",
-        "value": "Giá trị học bổng: ¥147,000/tháng",
-        "flight": "Bao gồm vé máy bay khứ hồi",
-        "tuition": "Miễn học phí toàn phần"
-      },
-      "ejuExam": {
-        "title": "Kỳ Thi Du Học",
-        "description": "Thông tin về kỳ thi EJU tháng 6/2024",
-        "examDate": "Ngày thi: 16/06/2024",
-        "registerDeadline": "Hạn đăng ký: 30/04/2024",
-        "location": "Địa điểm: Nhiều thành phố lớn",
-        "fee": "Lệ phí: ¥20,000"
-      }
-    },
-    "culturalExchange": {
-      "title": "Giao Lưu Văn Hóa",
-      "sakuraFestival": {
-        "title": "Lễ Hội Hoa Anh Đào 2024",
-        "description": "Lễ hội hoa anh đào lớn nhất năm tại công viên Ueno, Tokyo.",
-        "location": "Công viên Ueno, Tokyo"
-      },
-      "culturalExhibition": {
-        "title": "Triển Lãm Văn Hóa Việt-Nhật",
-        "description": "Sự kiện giao lưu văn hóa giữa Việt Nam và Nhật Bản.",
-        "location": "Trung tâm Văn hóa Nhật Bản, Osaka"
-      }
-    }
-  },
-  "paymentGuide": {
-    "title": "Hướng Dẫn Thanh Toán",
-    "lastUpdated": "Cập nhật lần cuối:",
-    "servicePackages": {
-      "title": "1. Gói Dịch Vụ",
-      "free": {
-        "title": "1.1. Oboe Free",
-        "features": {
-          "basicFeatures": "Truy cập các tính năng cơ bản",
-          "flashcards": "Học với bộ thẻ flashcard có sẵn",
-          "forum": "Tham gia diễn đàn cộng đồng",
-          "dictionary": "Tra cứu từ điển cơ bản"
-        }
-      },
-      "premium": {
-        "title": "1.2. Oboe Premium",
-        "features": {
-          "allFree": "Tất cả tính năng của gói Free",
-          "unlimitedFlashcards": "Tạo không giới hạn bộ thẻ flashcard",
-          "jlptTests": "Truy cập toàn bộ ngân hàng đề thi JLPT",
-          "analytics": "Công cụ phân tích học tập nâng cao",
-          "prioritySupport": "Ưu tiên hỗ trợ kỹ thuật",
-          "noAds": "Không hiển thị quảng cáo"
-        }
-      }
-    },
-    "paymentMethods": {
-      "title": "2. Phương Thức Thanh Toán",
-      "cards": {
-        "title": "2.1. Thanh Toán Qua Thẻ",
-        "description": "Chúng tôi chấp nhận các loại thẻ sau:",
-        "types": {
-          "visa": "Thẻ Visa",
-          "mastercard": "Thẻ Mastercard",
-          "jcb": "Thẻ JCB",
-          "atmCard": "Thẻ ATM nội địa (có đăng ký Internet Banking)"
-        }
-      },
-      "eWallets": {
-        "title": "2.2. Ví Điện Tử",
-        "types": {
-          "momo": "Momo",
-          "paypal": "PayPal (cho thanh toán quốc tế)"
-        }
-      }
-    },
-    "paymentProcess": {
-      "title": "3. Quy Trình Thanh Toán",
-      "selectPackage": {
-        "title": "3.1. Chọn Gói Dịch Vụ",
-        "steps": {
-          "login": "Đăng nhập vào tài khoản Oboe",
-          "upgrade": "Truy cập trang \"Nâng cấp tài khoản\"",
-          "selectPremium": "Chọn gói Premium",
-          "continue": "Nhấn \"Tiếp tục\" để chuyển đến bước thanh toán"
-        }
-      },
-      "makePayment": {
-        "title": "3.2. Thực Hiện Thanh Toán",
-        "steps": {
-          "selectMethod": "Chọn phương thức thanh toán mong muốn",
-          "fillInfo": "Điền thông tin thanh toán theo yêu cầu",
-          "confirm": "Xác nhận và hoàn tất giao dịch",
-          "wait": "Đợi xác nhận từ hệ thống"
-        }
-      }
-    },
-    "refundPolicy": {
-      "title": "4. Chính Sách Hoàn Tiền",
-      "description": "Không hoàn tiền dưới mọi hình thức"
-    },
-    "faq": {
-      "title": "5. Câu Hỏi Thường Gặp",
-      "payment": {
-        "title": "5.1. Về Thanh Toán",
-        "changeMethod": {
-          "question": "Tôi có thể đổi phương thức thanh toán sau khi đã bắt đầu giao dịch không?",
-          "answer": "Có, bạn có thể quay lại bước chọn phương thức thanh toán bất cứ lúc nào trước khi hoàn tất giao dịch."
+  
+
+  "studyGuide": {
+      "title": "Hướng Dẫn Tự Học",
+      "lastUpdated": "Cập nhật lần cuối:",
+      "learningPath": {
+        "title": "1. Lộ trình học tiếng Anh",
+        "beginner": {
+          "title": "1.1. Cấp độ cơ bản",
+          "items": {
+            "basicVocabulary": "Học từ vựng cơ bản (khoảng 1500 từ)",
+            "basicGrammar": "Ngữ pháp cơ bản",
+            "listeningPractice": "Luyện nghe cơ bản",
+            "readingPractice": "Đọc hiểu cơ bản"
+          }
         },
-        "noEmail": {
-          "question": "Tôi không nhận được email xác nhận thanh toán?",
-          "answer": "Email xác nhận thường được gửi trong vòng 5 phút. Vui lòng kiểm tra hộp thư spam hoặc liên hệ hỗ trợ nếu chưa nhận được."
-        }
-      },
-      "premium": {
-        "title": "5.2. Về Tài Khoản Premium",
-        "whenUpgrade": {
-          "question": "Khi nào tài khoản được nâng cấp lên Premium?",
-          "answer": "Tài khoản sẽ được nâng cấp ngay lập tức sau khi thanh toán thành công."
-        },
-        "shareAccount": {
-          "question": "Tôi có thể chia sẻ tài khoản Premium với người khác không?",
-          "answer": "Không, mỗi tài khoản Premium chỉ được sử dụng cho một người dùng."
-        }
-      }
-    }
-  },
-  "japaneseBenefits": {
-    "title": "Lợi Ích Của Việc Học Tiếng Anh",
-    "lastUpdated": "Cập nhật lần cuối:",
-    "careerOpportunities": {
-      "title": "1. Cơ Hội Nghề Nghiệp",
-      "japanMarket": {
-        "title": "1.1. Thị Trường Lao Động Nhật Bản",
-        "benefits": {
-          "jobs": "Cơ hội việc làm tại các công ty Nhật với mức lương hấp dẫn",
-          "visa": "Chính sách visa đặc biệt cho lao động có tay nghề",
-          "environment": "Môi trường làm việc chuyên nghiệp, kỷ luật",
-          "promotion": "Cơ hội thăng tiến rõ ràng"
-        }
-      },
-      "vietnamMarket": {
-        "title": "1.2. Cơ Hội Tại Việt Nam",
-        "benefits": {
-          "companies": "Làm việc tại các công ty Nhật có văn phòng tại Việt Nam",
-          "translation": "Vị trí biên, phiên dịch viên được trả lương cao",
-          "tourism": "Cơ hội làm việc trong lĩnh vực du lịch, dịch vụ",
-          "teaching": "Giảng dạy Tiếng Anh tại các trung tâm"
-        }
-      }
-    },
-    "education": {
-      "title": "2. Cơ Hội Giáo Dục",
-      "studyAbroad": {
-        "title": "2.1. Du Học Nhật Bản",
-        "benefits": {
-          "tuition": "Học phí thấp hơn so với các nước phát triển khác",
-          "scholarships": "Nhiều học bổng từ chính phủ và tổ chức tư nhân",
-          "quality": "Chất lượng giáo dục đẳng cấp thế giới",
-          "partTime": "Cơ hội làm thêm trong quá trình học tập"
-        }
-      },
-      "research": {
-        "title": "2.2. Nghiên Cứu và Phát Triển",
-        "benefits": {
-          "materials": "Tiếp cận nguồn tài liệu khoa học công nghệ tiên tiến",
-          "projects": "Cơ hội tham gia các dự án nghiên cứu quốc tế",
-          "technology": "Học hỏi công nghệ và quy trình sản xuất hiện đại",
-          "exchange": "Trao đổi học thuật với các chuyên gia Nhật Bản"
-        }
-      }
-    },
-    "personalDevelopment": {
-      "title": "3. Phát Triển Cá Nhân",
-      "thinking": {
-        "title": "3.1. Kỹ Năng Tư Duy",
-        "benefits": {
-          "patience": "Rèn luyện tính kiên nhẫn và kỷ luật",
-          "memory": "Phát triển khả năng ghi nhớ và tập trung",
-          "logic": "Tăng cường tư duy logic qua cấu trúc ngôn ngữ",
-          "problemSolving": "Nâng cao khả năng giải quyết vấn đề"
-        }
-      },
-      "cultural": {
-        "title": "3.2. Phát Triển Văn Hóa",
-        "benefits": {
-          "understanding": "Hiểu sâu về văn hóa và con người Nhật Bản",
-          "workEthic": "Học hỏi tinh thần làm việc chuyên nghiệp",
-          "lifestyle": "Trải nghiệm phong cách sống độc đáo",
-          "perspective": "Mở rộng tầm nhìn và giao lưu văn hóa"
-        }
-      }
-    },
-    "lifeBenefits": {
-      "title": "4. Lợi Ích Trong Cuộc Sống",
-      "entertainment": {
-        "title": "4.1. Giải Trí và Sở Thích",
-        "benefits": {
-          "anime": "Thưởng thức anime, manga nguyên gốc",
-          "literature": "Hiểu sâu về văn học, phim ảnh Nhật Bản",
-          "events": "Tham gia các sự kiện văn hóa Nhật Bản",
-          "community": "Giao lưu với cộng đồng người yêu thích văn hóa Nhật"
-        }
-      },
-      "travel": {
-        "title": "4.2. Du Lịch và Trải Nghiệm",
-        "benefits": {
-          "confidence": "Tự tin du lịch và khám phá Nhật Bản",
-          "cuisine": "Trải nghiệm ẩm thực địa phương đích thực",
-          "communication": "Giao tiếp và kết bạn với người bản địa",
-          "festivals": "Tham gia các lễ hội truyền thống"
-        }
-      }
-    },
-    "futureProspects": {
-      "title": "5. Triển Vọng Tương Lai",
-      "marketTrends": {
-        "title": "5.1. Xu Hướng Thị Trường",
-        "stats": {
-          "demand": {
-            "title": "Nhu Cầu Nhân Lực",
-            "value": "+25%",
-            "description": "Tăng trưởng nhu cầu nhân lực Tiếng Anh hàng năm"
-          },
-          "salary": {
-            "title": "Mức Lương",
-            "value": "+30%",
-            "description": "Mức lương cao hơn so với không biết Tiếng Anh"
-          },
-          "jobs": {
-            "title": "Cơ Hội Việc Làm",
-            "value": "1000+",
-            "description": "Vị trí tuyển dụng mới mỗi tháng"
+        "intermediate": {
+          "title": "1.2. Cấp độ trung cấp",
+          "items": {
+            "intermediateGrammar": "Ngữ pháp trung cấp",
+            "expandedVocabulary": "Từ vựng mở rộng (thêm 3000 từ)",
+            "listeningSkills": "Luyện nghe nâng cao",
+            "readingSkills": "Đọc hiểu nâng cao"
           }
         }
       },
-      "personalGrowth": {
-        "title": "5.2. Phát Triển Bản Thân",
-        "quote": "Học Tiếng Anh không chỉ là học một ngôn ngữ mới, mà còn là cơ hội để thay đổi tư duy và phong cách sống theo hướng tích cực hơn.",
-        "author": "- Chuyên gia văn hóa Nhật Bản"
-      }
-    }
-  },
-  "studyGuide": {
-    "title": "Hướng Dẫn Tự Học",
-    "lastUpdated": "Cập nhật lần cuối:",
-    "learningPath": {
-      "title": "1. Lộ trình học Tiếng Anh",
-      "beginner": {
-        "title": "1.1. Cấp độ cơ bản (N5-N4)",
-        "items": {
-          "hiraganaKatakana": "Học bảng chữ Hiragana và Katakana",
-          "basicGrammar": "Ngữ pháp cơ bản N5-N4",
-          "vocabulary": "Từ vựng thông dụng (khoảng 1500 từ)",
-          "basicKanji": "idiom cơ bản (khoảng 300 chữ)"
+      "effectiveMethods": {
+        "title": "2. Phương pháp học hiệu quả",
+        "flashcards": {
+          "title": "2.1. Học với Flashcard",
+          "description": "Hệ thống flashcard thông minh giúp bạn:",
+          "features": {
+            "systematic": "Học từ vựng một cách có hệ thống",
+            "spacedRepetition": "Ôn tập theo phương pháp spaced repetition",
+            "progress": "Theo dõi tiến độ học tập",
+            "customization": "Tùy chỉnh bộ thẻ theo nhu cầu"
+          }
+        },
+        "quizzes": {
+          "title": "2.2. Luyện tập với Quiz",
+          "description": "Kiểm tra kiến thức thường xuyên thông qua:",
+          "types": {
+            "vocabulary": "Bài kiểm tra từ vựng",
+            "grammar": "Bài tập ngữ pháp",
+            "reading": "Luyện đọc hiểu",
+            "listening": "Luyện nghe hiểu"
+          }
         }
       },
-      "intermediate": {
-        "title": "1.2. Cấp độ trung cấp (N3)",
-        "items": {
-          "intermediateGrammar": "Ngữ pháp trung cấp",
-          "expandedVocabulary": "Từ vựng mở rộng (thêm 3000 từ)",
-          "intermediateKanji": "idiom trung cấp (thêm 600 chữ)",
-          "comprehensionSkills": "Kỹ năng đọc hiểu và nghe hiểu"
+      "learningResources": {
+        "title": "3. Tài nguyên học tập",
+        "materials": {
+          "sub-title": "3.1. Tài liệu học tập",
+          "items": {
+            "textbooks": "Giáo trình tiếng Anh cơ bản và nâng cao",
+            "grammarExercises": "Bài tập ngữ pháp theo cấp độ",
+            "examPrepMaterials": "Tài liệu luyện thi tiếng Anh",
+            "conversationMaterials": "Tài liệu hội thoại thực tế"
+          }
+        },
+        "tools": {
+          "sub-title": "3.2. Công cụ hỗ trợ",
+          "items": {
+            "dictionary": "Từ điển tích hợp",
+            "pronunciation": "Phần mềm luyện phát âm",
+            "mobileApp": "Ứng dụng mobile học mọi lúc",
+            "practiceApps": "Các công cụ luyện tập trực tuyến"
+          }
+        }
+      },
+      "beginnerTips": {
+        "title": "4. Lời khuyên cho người mới bắt đầu",
+        "goalSetting": {
+          "title": "4.1. Thiết lập mục tiêu",
+          "tips": {
+            "clearGoals": "Xác định mục tiêu học tập rõ ràng",
+            "studyPlan": "Lập kế hoạch học tập phù hợp",
+            "shortLongTerm": "Đặt mục tiêu ngắn hạn và dài hạn",
+            "trackProgress": "Theo dõi tiến độ thường xuyên"
+          }
+        },
+        "motivation": {
+          "title": "4.2. Duy trì động lực",
+          "tips": {
+            "dailyStudy": "Học đều đặn mỗi ngày",
+            "community": "Tham gia cộng đồng học tập",
+            "nativePractice": "Thực hành với người bản xứ",
+            "entertainment": "Tận dụng các tài nguyên giải trí (video, podcast, sách)"
+          }
+        }
+      },
+      "oboeSupport": {
+        "title": "5. Hỗ trợ từ Oboe",
+        "learningSupport": {
+          "title": "5.1. Hỗ trợ học tập",
+          "services": {
+            "personalConsultation": "Tư vấn lộ trình học tập cá nhân",
+            "expertHelp": "Giải đáp thắc mắc từ chuyên gia",
+            "materialUpdates": "Cập nhật tài liệu thường xuyên",
+            "progressReports": "Thống kê và báo cáo tiến độ"
+          }
+        },
+        "community": {
+          "title": "5.2. Cộng đồng học tập",
+          "features": {
+            "forum": "Diễn đàn trao đổi kiến thức",
+            "studyGroups": "Nhóm học tập theo trình độ",
+            "experienceSharing": "Chia sẻ kinh nghiệm học tập",
+            "networking": "Kết nối với người học khác"
+          }
         }
       }
     },
-    "effectiveMethods": {
-      "title": "2. Phương pháp học hiệu quả",
-      "flashcards": {
-        "title": "2.1. Học với Flashcard",
-        "description": "Oboe cung cấp hệ thống flashcard thông minh giúp bạn:",
-        "features": {
-          "systematic": "Học từ vựng và idiom một cách có hệ thống",
-          "spacedRepetition": "Ôn tập theo phương pháp spaced repetition",
-          "progress": "Theo dõi tiến độ học tập",
-          "customization": "Tùy chỉnh bộ thẻ theo nhu cầu"
+    "paymentGuide": {
+      "title": "Hướng Dẫn Thanh Toán",
+      "lastUpdated": "Cập nhật lần cuối:",
+      "servicePackages": {
+        "title": "1. Gói Dịch Vụ",
+        "free": {
+          "title": "1.1. Oboe Free",
+          "features": {
+            "basicFeatures": "Truy cập các tính năng cơ bản",
+            "flashcards": "Học với bộ thẻ flashcard có sẵn",
+            "forum": "Tham gia diễn đàn cộng đồng",
+            "dictionary": "Tra cứu từ điển cơ bản"
+          }
+        },
+        "premium": {
+          "title": "1.2. Oboe Premium",
+          "features": {
+            "allFree": "Tất cả tính năng của gói Free",
+            "unlimitedFlashcards": "Tạo không giới hạn bộ thẻ flashcard",
+            "jlptTests": "Truy cập toàn bộ ngân hàng đề thi JLPT",
+            "analytics": "Công cụ phân tích học tập nâng cao",
+            "prioritySupport": "Ưu tiên hỗ trợ kỹ thuật",
+            "noAds": "Không hiển thị quảng cáo"
+          }
         }
       },
-      "quizzes": {
-        "title": "2.2. Luyện tập với Quiz",
-        "description": "Kiểm tra kiến thức thường xuyên thông qua:",
-        "types": {
-          "vocabulary": "Bài kiểm tra từ vựng",
-          "grammar": "Bài tập ngữ pháp",
-          "reading": "Luyện đọc hiểu",
-          "listening": "Luyện nghe hiểu"
+      "paymentMethods": {
+        "title": "2. Phương Thức Thanh Toán",
+        "cards": {
+          "title": "2.1. Thanh Toán Qua Thẻ",
+          "description": "Chúng tôi chấp nhận các loại thẻ sau:",
+          "types": {
+            "visa": "Thẻ Visa",
+            "mastercard": "Thẻ Mastercard",
+            "jcb": "Thẻ JCB",
+            "atmCard": "Thẻ ATM nội địa (có đăng ký Internet Banking)"
+          }
+        },
+        "eWallets": {
+          "title": "2.2. Ví Điện Tử",
+          "types": {
+            "momo": "Momo",
+            "paypal": "PayPal (cho thanh toán quốc tế)"
+          }
+        }
+      },
+      "paymentProcess": {
+        "title": "3. Quy Trình Thanh Toán",
+        "selectPackage": {
+          "title": "3.1. Chọn Gói Dịch Vụ",
+          "steps": {
+            "login": "Đăng nhập vào tài khoản Oboe",
+            "upgrade": "Truy cập trang \"Nâng cấp tài khoản\"",
+            "selectPremium": "Chọn gói Premium",
+            "continue": "Nhấn \"Tiếp tục\" để chuyển đến bước thanh toán"
+          }
+        },
+        "makePayment": {
+          "title": "3.2. Thực Hiện Thanh Toán",
+          "steps": {
+            "selectMethod": "Chọn phương thức thanh toán mong muốn",
+            "fillInfo": "Điền thông tin thanh toán theo yêu cầu",
+            "confirm": "Xác nhận và hoàn tất giao dịch",
+            "wait": "Đợi xác nhận từ hệ thống"
+          }
+        }
+      },
+      "refundPolicy": {
+        "title": "4. Chính Sách Hoàn Tiền",
+        "description": "Không hoàn tiền dưới mọi hình thức"
+      },
+      "faq": {
+        "title": "5. Câu Hỏi Thường Gặp",
+        "payment": {
+          "title": "5.1. Về Thanh Toán",
+          "changeMethod": {
+            "question": "Tôi có thể đổi phương thức thanh toán sau khi đã bắt đầu giao dịch không?",
+            "answer": "Có, bạn có thể quay lại bước chọn phương thức thanh toán bất cứ lúc nào trước khi hoàn tất giao dịch."
+          },
+          "noEmail": {
+            "question": "Tôi không nhận được email xác nhận thanh toán?",
+            "answer": "Email xác nhận thường được gửi trong vòng 5 phút. Vui lòng kiểm tra hộp thư spam hoặc liên hệ hỗ trợ nếu chưa nhận được."
+          }
+        },
+        "premium": {
+          "title": "5.2. Về Tài Khoản Premium",
+          "whenUpgrade": {
+            "question": "Khi nào tài khoản được nâng cấp lên Premium?",
+            "answer": "Tài khoản sẽ được nâng cấp ngay lập tức sau khi thanh toán thành công."
+          },
+          "shareAccount": {
+            "question": "Tôi có thể chia sẻ tài khoản Premium với người khác không?",
+            "answer": "Không, mỗi tài khoản Premium chỉ được sử dụng cho một người dùng."
+          }
         }
       }
     },
-    "learningResources": {
-      "title": "3. Tài nguyên học tập",
-      "materials": {
-        "title": "3.1. Tài liệu học tập",
-        "items": {
-          "basicTextbooks": "Giáo trình Tiếng Anh cơ bản",
-          "grammarExercises": "Bài tập ngữ pháp theo cấp độ",
-          "jlptMaterials": "Tài liệu luyện thi JLPT",
-          "conversationMaterials": "Tài liệu hội thoại thực tế"
+    "japaneseBenefits": {
+      "title": "Lợi Ích Của Việc Học Tiếng Anh",
+      "lastUpdated": "Cập nhật lần cuối:",
+      "careerOpportunities": {
+        "title": "1. Cơ Hội Nghề Nghiệp",
+        "japanMarket": {
+          "title": "1.1. Thị Trường Lao Động Quốc Tế",
+          "benefits": {
+            "jobs": "Cơ hội việc làm tại các công ty đa quốc gia với mức lương hấp dẫn",
+            "visa": "Thuận lợi khi làm việc và định cư ở nước ngoài",
+            "environment": "Môi trường làm việc chuyên nghiệp, hiện đại",
+            "promotion": "Cơ hội thăng tiến và phát triển sự nghiệp rõ ràng"
+          }
+        },
+        "vietnamMarket": {
+          "title": "1.2. Cơ Hội Tại Việt Nam",
+          "benefits": {
+            "companies": "Làm việc tại các công ty nước ngoài và doanh nghiệp toàn cầu",
+            "translation": "Cơ hội làm biên phiên dịch, content, marketing quốc tế",
+            "tourism": "Phát triển trong lĩnh vực du lịch, khách sạn, dịch vụ",
+            "teaching": "Giảng dạy Tiếng Anh tại các trung tâm và trường học"
+          }
         }
       },
-      "tools": {
-        "title": "3.2. Công cụ hỗ trợ",
-        "items": {
-          "dictionary": "Từ điển tích hợp",
-          "kanjiLookup": "Công cụ tra cứu idiom",
-          "pronunciation": "Phần mềm luyện phát âm",
-          "mobileApp": "Ứng dụng mobile học mọi lúc"
+      "education": {
+        "title": "2. Cơ Hội Giáo Dục",
+        "studyAbroad": {
+          "title": "2.1. Du Học & Trao Đổi Quốc Tế",
+          "benefits": {
+            "tuition": "Nhiều lựa chọn học tập với chi phí hợp lý",
+            "scholarships": "Nhiều học bổng từ các trường và tổ chức quốc tế",
+            "quality": "Tiếp cận nền giáo dục tiên tiến toàn cầu",
+            "partTime": "Cơ hội làm thêm và thực tập trong quá trình học"
+          }
+        },
+        "research": {
+          "title": "2.2. Nghiên Cứu và Phát Triển",
+          "benefits": {
+            "materials": "Tiếp cận nguồn tài liệu học thuật bằng tiếng Anh",
+            "projects": "Tham gia các dự án nghiên cứu quốc tế",
+            "technology": "Học hỏi công nghệ và kiến thức mới",
+            "exchange": "Giao lưu học thuật với sinh viên và chuyên gia toàn cầu"
+          }
+        }
+      },
+      "personalDevelopment": {
+        "title": "3. Phát Triển Cá Nhân",
+        "thinking": {
+          "title": "3.1. Kỹ Năng Tư Duy",
+          "benefits": {
+            "patience": "Rèn luyện tính kiên trì và kỷ luật",
+            "memory": "Cải thiện khả năng ghi nhớ và tập trung",
+            "logic": "Nâng cao tư duy logic và phản xạ ngôn ngữ",
+            "problemSolving": "Tăng khả năng giải quyết vấn đề"
+          }
+        },
+        "cultural": {
+          "title": "3.2. Phát Triển Văn Hóa",
+          "benefits": {
+            "understanding": "Hiểu biết về văn hóa và phong cách sống quốc tế",
+            "workEthic": "Học hỏi tác phong làm việc chuyên nghiệp",
+            "lifestyle": "Tiếp cận phong cách sống hiện đại",
+            "perspective": "Mở rộng tư duy và góc nhìn toàn cầu"
+          }
+        }
+      },
+      "lifeBenefits": {
+        "title": "4. Lợi Ích Trong Cuộc Sống",
+        "entertainment": {
+          "title": "4.1. Giải Trí và Sở Thích",
+          "benefits": {
+            "anime": "Thưởng thức phim, nhạc, nội dung quốc tế không cần phụ đề",
+            "literature": "Tiếp cận sách, phim và tài liệu gốc bằng tiếng Anh",
+            "events": "Tham gia sự kiện, hội thảo quốc tế",
+            "community": "Kết nối cộng đồng học tập toàn cầu"
+          }
+        },
+        "travel": {
+          "title": "4.2. Du Lịch và Trải Nghiệm",
+          "benefits": {
+            "confidence": "Tự tin giao tiếp khi du lịch nước ngoài",
+            "cuisine": "Khám phá văn hóa và ẩm thực quốc tế",
+            "communication": "Dễ dàng kết bạn với người nước ngoài",
+            "festivals": "Trải nghiệm các lễ hội quốc tế"
+          }
+        }
+      },
+      "futureProspects": {
+        "title": "5. Triển Vọng Tương Lai",
+        "marketTrends": {
+          "title": "5.1. Xu Hướng Thị Trường",
+          "stats": {
+            "demand": {
+              "title": "Nhu Cầu Nhân Lực",
+              "value": "+30%",
+              "description": "Nhu cầu sử dụng Tiếng Anh tăng trưởng hàng năm"
+            },
+            "salary": {
+              "title": "Mức Lương",
+              "value": "+40%",
+              "description": "Thu nhập cao hơn so với người không sử dụng Tiếng Anh"
+            },
+            "jobs": {
+              "title": "Cơ Hội Việc Làm",
+              "value": "2000+",
+              "description": "Vị trí tuyển dụng yêu cầu Tiếng Anh mỗi tháng"
+            }
+          }
+        },
+        "personalGrowth": {
+          "title": "5.2. Phát Triển Bản Thân",
+          "quote": "Học Tiếng Anh không chỉ là học một ngôn ngữ, mà còn là chìa khóa mở ra cơ hội toàn cầu.",
+          "author": "- Chuyên gia giáo dục quốc tế"
         }
       }
+      
     },
-    "beginnerTips": {
-      "title": "4. Lời khuyên cho người mới bắt đầu",
-      "goalSetting": {
-        "title": "4.1. Thiết lập mục tiêu",
-        "tips": {
-          "clearGoals": "Xác định mục tiêu học tập rõ ràng",
-          "studyPlan": "Lập kế hoạch học tập phù hợp",
-          "shortLongTerm": "Đặt mục tiêu ngắn hạn và dài hạn",
-          "trackProgress": "Theo dõi tiến độ thường xuyên"
-        }
-      },
-      "motivation": {
-        "title": "4.2. Duy trì động lực",
-        "tips": {
-          "dailyStudy": "Học đều đặn mỗi ngày",
-          "community": "Tham gia cộng đồng học tập",
-          "nativePractice": "Thực hành với người bản xứ",
-          "entertainment": "Tận dụng các tài nguyên giải trí (anime, manga)"
-        }
-      }
-    },
-    "oboeSupport": {
-      "title": "5. Hỗ trợ từ Oboe",
-      "learningSupport": {
-        "title": "5.1. Hỗ trợ học tập",
-        "services": {
-          "personalConsultation": "Tư vấn lộ trình học tập cá nhân",
-          "expertHelp": "Giải đáp thắc mắc từ chuyên gia",
-          "materialUpdates": "Cập nhật tài liệu thường xuyên",
-          "progressReports": "Thống kê và báo cáo tiến độ"
-        }
-      },
-      "community": {
-        "title": "5.2. Cộng đồng học tập",
-        "features": {
-          "forum": "Diễn đàn trao đổi kiến thức",
-          "studyGroups": "Nhóm học tập theo cấp độ",
-          "experienceSharing": "Chia sẻ kinh nghiệm học tập",
-          "networking": "Kết nối với người học khác"
-        }
-      }
-    }
-  },
-  "writingGuide": {
-    "title": "Phân Biệt Hiragana và Katakana",
-    "lastUpdated": "Cập nhật lần cuối:",
-    "overview": {
-      "title": "1. Tổng Quan Về Chữ Viết Nhật Bản",
-      "writingSystems": {
-        "title": "1.1. Ba Hệ Thống Chữ Viết",
-        "description": "Tiếng Anh sử dụng 3 hệ thống chữ viết chính:",
-        "systems": {
-          "hiragana": "Hiragana (ひらがな): Chữ cong, mềm mại, dùng cho từ thuần Nhật",
-          "katakana": "Katakana (カタカナ): Chữ thẳng, góc cạnh, dùng cho từ nước ngoài",
-          "idiom": "idiom (漢字): Chữ Hán, mang nghĩa cụ thể"
-        }
-      },
-      "roles": {
-        "title": "1.2. Vai Trò Trong Câu",
-        "hiragana": "Hiragana: Viết đuôi động từ, trợ từ, từ thuần Nhật",
-        "katakana": "Katakana: Từ nước ngoài, tên nước ngoài, thuật ngữ khoa học",
-        "idiom": "idiom: Thể hiện nghĩa chính của từ"
-      }
-    },
-    "hiragana": {
-      "title": "2. Hiragana (ひらがな)",
-      "characteristics": {
-        "title": "2.1. Đặc Điểm",
-        "features": {
-          "curved": "Nét chữ cong, mềm mại, liền mạch",
-          "basic": "46 chữ cái cơ bản",
-          "diacritics": "Dùng dấu để biến âm (dakuten, handakuten)",
-          "strokeOrder": "Viết theo quy tắc stroke order cụ thể"
-        }
-      },
-      "usage": {
-        "title": "2.2. Cách Sử Dụng",
-        "uses": {
-          "nativeWords": "Viết các từ thuần Nhật (和語 - わご)",
-          "verbEndings": "Viết đuôi động từ, tính từ",
-          "particles": "Viết trợ từ (は、が、を、に、で...)",
-          "furigana": "Viết furigana (phiên âm trên idiom)"
+    "writingGuide": {
+        "title": "Phân biệt thì trong tiếng Anh",
+        "lastUpdated": "Cập nhật lần cuối:",
+        "overview": {
+          "title": "1. Tổng Quan",
+          "writingSystems": {
+            "title": "1.1. Các Khía Cạnh Học Tiếng Anh",
+            "systems": {
+              "basicWords": "Từ cơ bản: từ vựng và câu thông dụng",
+              "properNouns": "Tên riêng và thương hiệu",
+              "idioms": "Idioms & phrases: nghĩa đặc biệt"
+            }
+          }
+        },
+        "distinction": {
+          "title": "1.2. Phân Biệt Các Thì",
+          "context": {
+            "example": {
+              "sentence": "I eat breakfast. / I am eating breakfast. / I have eaten breakfast.",
+              "explanation": "- I eat breakfast: thì hiện tại đơn, thói quen<br>- I am eating breakfast: thì hiện tại tiếp diễn, đang xảy ra<br>- I have eaten breakfast: thì hiện tại hoàn thành, hành động đã hoàn tất"
+            }
+          }
+        },
+        "learningMethods": {
+          "title": "1.3. Cách Học",
+          "studyOrder": {
+            "title": "1.3.1. Thứ Tự Học",
+            "steps": {
+              "basicFirst": "Học từ cơ bản trước",
+              "verbsSecond": "Học động từ và thì cơ bản",
+              "combinedPractice": "Luyện tập kết hợp các thì",
+              "idiomsParallel": "Học idioms & phrases song song"
+            }
+          },
+          "memoryTechniques": {
+            "title": "1.3.2. Kỹ Thuật Ghi Nhớ",
+            "techniques": {
+              "flashcards": "Flashcards từ vựng",
+              "practiceWriting": "Viết câu thường xuyên",
+              "realTexts": "Đọc văn bản thực tế"
+            }
+          }
         }
       }
-    },
-    "katakana": {
-      "title": "3. Katakana (カタカナ)",
-      "characteristics": {
-        "title": "3.1. Đặc Điểm",
-        "features": {
-          "angular": "Nét chữ thẳng, góc cạnh, đơn giản",
-          "corresponding": "46 chữ cái tương ứng với Hiragana",
-          "recognizable": "Dễ nhận biết trong văn bản",
-          "longVowels": "Thường viết các âm dài bằng dấu gạch (ー)"
-        }
-      },
-      "usage": {
-        "title": "3.2. Cách Sử Dụng",
-        "uses": {
-          "foreignWords": "Viết từ nước ngoài (外来語 - がいらいご)",
-          "foreignNames": "Tên người, địa danh nước ngoài",
-          "technical": "Thuật ngữ khoa học, kỹ thuật",
-          "emphasis": "Nhấn mạnh từ ngữ trong câu"
-        }
-      }
-    },
-    "distinction": {
-      "title": "4. Cách Phân Biệt",
-      "appearance": {
-        "title": "4.1. Về Hình Dạng",
-        "tableHeaders": {
-          "sound": "Âm",
-          "hiragana": "Hiragana",
-          "katakana": "Katakana"
-        }
-      },
-      "context": {
-        "title": "4.2. Về Ngữ Cảnh Sử Dụng",
-        "example": {
-          "title": "Ví dụ:",
-          "sentence": "私はコーヒーを飲みます。",
-          "explanation": "- 私 (わたし): \"tôi\" - từ thuần Nhật, viết bằng idiom và hiragana<br>- は: trợ từ, viết bằng hiragana<br>- コーヒー: \"cà phê\" - từ nước ngoài, viết bằng katakana<br>- を: trợ từ, viết bằng hiragana<br>- 飲みます (のみます): \"uống\" - động từ thuần Nhật, viết bằng idiom và hiragana"
-        }
-      }
-    },
-    "learningMethods": {
-      "title": "5. Phương Pháp Học Hiệu Quả",
-      "studyOrder": {
-        "title": "5.1. Thứ Tự Học",
-        "steps": {
-          "hiraganaFirst": "Học Hiragana trước (2-3 tuần)",
-          "katakanaSecond": "Học Katakana sau (2-3 tuần)",
-          "combinedReading": "Luyện đọc kết hợp cả hai",
-          "kanjiParallel": "Học idiom song song"
-        }
-      },
-      "memoryTechniques": {
-        "title": "5.2. Kỹ Thuật Ghi Nhớ",
-        "techniques": {
-          "flashcards": "Sử dụng flashcard trên Oboe",
-          "handwriting": "Viết tay thường xuyên",
-          "realTexts": "Tập đọc văn bản thực tế",
-          "strokeOrder": "Luyện tập stroke order đúng cách"
-        }
-      }
-    }
   }
-}
+
+
+
+  

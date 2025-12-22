@@ -438,7 +438,6 @@
     "paymentGuide": "支払いガイド",
     "whyFlashcard": "フラッシュカードの効果",
     "japaneseBenefits": "日本語学習のメリット",
-    "japanNews": "日本ニュース",
     "contact": "お問い合わせ",
     "privacy": "プライバシーポリシー",
     "terms": "利用規約"
@@ -1224,7 +1223,6 @@
       },
       "generalInfo": {
         "title": "一般情報",
-        "japanNews": "日本市場ニュース",
         "upgradeAccount": "アカウントアップグレードの特典",
         "contact": "お問い合わせ"
       },
@@ -1399,89 +1397,7 @@
     "skip": "スキップ",
     "confirm": "確認"
   },
-  "japanNews": {
-    "title": "日本市場ニュース",
-    "lastUpdated": "最終更新:",
-    "featuredNews": {
-      "title": "注目ニュース",
-      "economy": "経済",
-      "technology": "技術",
-      "visaNews": {
-        "title": "日本、外国人労働者向けビザ政策を拡大",
-        "excerpt": "日本政府は主要産業における外国人労働者のビザ条件を緩和する新提案を承認しました。",
-        "source": "日経アジア"
-      },
-      "aiNews": {
-        "title": "日本のAI波：新しい雇用機会",
-        "excerpt": "AIの発展により、日本の技術分野で多くの新しい雇用機会が生まれています。",
-        "source": "テックジャパン"
-      }
-    },
-    "marketTrends": {
-      "title": "市場動向",
-      "gdpGrowth": {
-        "title": "GDP成長率",
-        "description": "日本の経済成長率 2024年第1四半期"
-      },
-      "yenRate": {
-        "title": "円為替レート",
-        "description": "JPY/USD為替レート"
-      }
-    },
-    "jobOpportunities": {
-      "title": "求人情報",
-      "it": {
-        "title": "情報技術",
-        "softwareEngineer": "ソフトウェアエンジニア",
-        "frontendDeveloper": "フロントエンド開発者",
-        "location": "東京",
-        "locationOsaka": "大阪",
-        "company1": "テックコープジャパン",
-        "company2": "デジタルソリューションズ"
-      },
-      "manufacturing": {
-        "title": "製造・エンジニアリング",
-        "mechanicalEngineer": "機械エンジニア",
-        "electronicsEngineer": "電子エンジニア",
-        "locationNagoya": "名古屋",
-        "locationYokohama": "横浜",
-        "company1": "トヨタ製造",
-        "company2": "エレクトロニクス株式会社"
-      }
-    },
-    "studyAbroad": {
-      "title": "日本留学",
-      "mextScholarship": {
-        "title": "MEXT奨学金2024",
-        "description": "日本政府による全額奨学金プログラム",
-        "deadline": "申請締切：2024年4月30日",
-        "value": "奨学金額：月額¥147,000",
-        "flight": "往復航空券込み",
-        "tuition": "授業料全額免除"
-      },
-      "ejuExam": {
-        "title": "留学生試験",
-        "description": "2024年6月のEJU試験に関する情報",
-        "examDate": "試験日：2024年6月16日",
-        "registerDeadline": "申込締切：2024年4月30日",
-        "location": "場所：主要都市複数箇所",
-        "fee": "受験料：¥20,000"
-      }
-    },
-    "culturalExchange": {
-      "title": "文化交流",
-      "sakuraFestival": {
-        "title": "桜祭り2024",
-        "description": "東京上野公園で開催される年最大の桜祭り。",
-        "location": "東京上野公園"
-      },
-      "culturalExhibition": {
-        "title": "ベトナム・日本文化展",
-        "description": "ベトナムと日本の文化交流イベント。",
-        "location": "大阪日本文化センター"
-      }
-    }
-  },
+  
   "paymentGuide": {
     "title": "支払いガイド",
     "lastUpdated": "最終更新:",

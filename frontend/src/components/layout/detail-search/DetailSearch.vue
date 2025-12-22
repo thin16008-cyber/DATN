@@ -105,7 +105,7 @@ export default defineComponent({
     type: {
       type: String,
       required: true,
-      validator: (value) => ['word', 'kanji', 'grammar', 'sentence'].includes(value)
+      validator: (value) => ['word', 'idiom', 'grammar', 'sentence'].includes(value)
     },
     item: {
       type: Object,
@@ -117,7 +117,7 @@ export default defineComponent({
     },
     mainField: {
       type: String,
-      default: 'kanji'
+      default: 'idiom'
     },
     readingField: {
       type: String,
@@ -194,8 +194,8 @@ export default defineComponent({
               return fav.vocabularyId === currentId;
             case 'grammar':
               return fav.grammaId === currentId; // Note: API uses 'grammaId' not 'grammarId'
-            case 'kanji':
-              return fav.kanjiId === currentId;
+            case 'idiom':
+              return fav.idiomId === currentId;
             case 'sentence':
               return fav.sampleSentenceId === currentId;
             default:

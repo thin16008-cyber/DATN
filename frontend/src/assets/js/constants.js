@@ -100,7 +100,7 @@ export const FOOTER = {
   CONTACT_INFO: [
     {
       icon: "fas fa-mobile-screen-button",
-      title: "0775751954"
+      title: "02782731234"
     },
     {
       icon: "far fa-envelope",
@@ -108,7 +108,7 @@ export const FOOTER = {
     },
     {
       icon: "far fa-map",
-      title: "Hoài Đức, Hà Nội, Việt Nam"
+      title: "Ngũ Hành Sơn, Đà Nẵng, Việt Nam"
     },
     {
       icon: "far fa-clock",
@@ -135,15 +135,15 @@ export const FOOTER = {
       title: "MẸO SỬ DỤNG",
       service: [
         { title: "Tại sao nên học flashcard", link: "/footer-services/why-flashcard" },
-        { title: "Phân biệt hiragana, katakana", link: "/footer-services/writing-guide" },
+        { title: "Phân biệt các thì Trong tiếng Anh", link: "/footer-services/writing-guide" },
         { title: "Lợi ích của học Tiếng Nhật", link: "/footer-services/benefits-japanese" },
-        { title: "Cách nhận diện chữ Hán", link: "/footer-services/kanji-guide" }
+       
       ]
     },
     {
       title: "THÔNG TIN CHUNG",
       service: [
-        { title: "Tin tức thị trường Nhật Bản", link: "/footer-services/japan-news" },
+        
         { title: "Quyền lợi nâng cấp tài khoản", link: "/upgrade" },
         { title: "Liên hệ chúng tôi", link: "/footer-services/contact" }
       ]

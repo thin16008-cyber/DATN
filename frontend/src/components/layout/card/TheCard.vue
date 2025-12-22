@@ -26,7 +26,7 @@
           </div>
           <p class="card-description webkit-box webkit-line-3">{{ slide.description }}</p>
           <div class="flex see-more">
-            <button class="cta-button" @click.stop="onSeeMore(slide)" :style="{ fontSize: buttonFontSize, padding: buttonPadding }">Oboe Sensei</button>
+            <button class="cta-button" @click.stop="onSeeMore(slide)" :style="{ fontSize: buttonFontSize, padding: buttonPadding }">Oboe AI</button>
           </div>
         </div>
         <div class="card-content flex" :class="{ 'back': true, 'visible': showBackIndex === index }">
@@ -43,7 +43,7 @@
           </div>
           <!-- <p class="card-description webkit-box webkit-line-3">{{ slide.backdescription }}</p> -->
           <div class="flex see-more">
-            <button class="cta-button" @click.stop="onSeeMore(slide)" :style="{ fontSize: buttonFontSize, padding: buttonPadding }">Oboe Sensei</button>
+            <button class="cta-button" @click.stop="onSeeMore(slide)" :style="{ fontSize: buttonFontSize, padding: buttonPadding }">Oboe AI</button>
           </div>
         </div>
       </div>
@@ -145,7 +145,7 @@ function onSwiper(swiper) {
 }
 
 
-// Xử lý khi bấm nút "Oboe Sensei" - emit event để parent component xử lý
+// Xử lý khi bấm nút "Oboe AI" - emit event để parent component xử lý
 async function onSeeMore(slide) {
   // Kiểm tra premium trước khi sử dụng tính năng AI
   if (!(await checkPremiumFeature())) {

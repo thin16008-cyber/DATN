@@ -34,21 +34,12 @@
         <section class="guide-section">
           <h2>{{ t('whyFlashcard.benefitsTitle') }}</h2>
           <div class="sub-section">
-            <h3>{{ t('whyFlashcard.vocabularyTitle') }}</h3>
+            <!-- <h3>{{ t('whyFlashcard.vocabularyTitle') }}</h3> -->
             <ul>
               <li>{{ t('whyFlashcard.vocabularyBenefit1') }}</li>
               <li>{{ t('whyFlashcard.vocabularyBenefit2') }}</li>
               <li>{{ t('whyFlashcard.vocabularyBenefit3') }}</li>
               <li>{{ t('whyFlashcard.vocabularyBenefit4') }}</li>
-            </ul>
-          </div>
-          <div class="sub-section">
-            <h3>{{ t('whyFlashcard.kanjiTitle') }}</h3>
-            <ul>
-              <li>{{ t('whyFlashcard.kanjiBenefit1') }}</li>
-              <li>{{ t('whyFlashcard.kanjiBenefit2') }}</li>
-              <li>{{ t('whyFlashcard.kanjiBenefit3') }}</li>
-              <li>{{ t('whyFlashcard.kanjiBenefit4') }}</li>
             </ul>
           </div>
         </section>
@@ -130,7 +121,7 @@ import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 const { t } = useI18n();
-const lastUpdated = ref('15/03/2024');
+const lastUpdated = ref('15/09/2025');
 </script>
 
 <style lang="scss" scoped>

@@ -37,7 +37,7 @@
     "user": "User",
     "unknown": "Unknown",
     "vocabulary": "Vocabulary",
-    "kanji": "Kanji",
+    "idiom": "Idiom",
     "grammar": "Grammar",
     "sentences": "Sentences",
     "studyMaterial": "Study Material",
@@ -60,7 +60,7 @@
   },
   "headerTabs": {
     "vocabulary": "Vocabulary",
-    "kanji": "Kanji",
+    "idiom": "Idiom",
     "grammar": "Grammar",
     "sentences": "Sentences"
   },
@@ -130,7 +130,7 @@
     "deleteMyAccount": "Delete My Account"
   },
   "search": {
-    "searchPlaceholder": "Search vocabulary, grammar, kanji...",
+    "searchPlaceholder": "Search vocabulary, grammar,...",
     "searchResults": "Search Results",
     "noResults": "No results found",
     "searchHistory": "Search History",
@@ -226,8 +226,8 @@
     "you": "You",
     "user": "User",
     "close": "Close",
-    "translationTitle": "Oboe Sensei - Japanese Translation",
-    "translating": "Oboe Sensei is translating...",
+    "translationTitle": "Oboe AI - English Translation",
+    "translating": "Oboe AI is translating...",
     "cannotTranslate": "Cannot translate this text.",
     "originalText": "Original text:",
     "translateAndExplain": "Translation and explanation:",
@@ -259,7 +259,7 @@
     "categories": {
       "all": "All Categories",
       "word": "Vocabulary",
-      "kanji": "Learn Kanji",
+      "idiom": "Learn Idiom",
       "grammar": "Grammar",
       "jlpt": "JLPT Practice",
       "communication": "Communication",
@@ -287,9 +287,9 @@
     "score": "Score",
     "time": "Time",
     "accuracy": "Accuracy",
-    "aiGrading": "Oboe Sensei is grading your test",
+    "aiGrading": "Oboe AI is grading your test",
     "pleaseWait": "Please wait a moment...",
-    "aiAdvice": "Advice from Oboe Sensei",
+    "aiAdvice": "Advice from Oboe AI",
     "questionDetails": "Question Details",
     "question": "Question",
     "reviewAnswer": "Review Answer",
@@ -307,7 +307,6 @@
     "testHistoryTitle": "(At {time})",
     "testHistoryDescription": "Result: {score}/{total}",
     "createQuizError": "Cannot create quiz - invalid response",
-    "reviewAnswer": "Review Answers",
     "multipleChoiceTestTitle": "Multiple Choice Test",
     "writtenTestTitle": "Written Test",
     "trueFalseTestTitle": "True/False Test",
@@ -394,15 +393,15 @@
     "noStudySetsMessage": "Create your first study set to start learning",
     "noQuizzesMessage": "Create quizzes to test your knowledge",
     "vocabulary": "Vocabulary",
-    "kanji": "Kanji",
+    "idiom": "Idiom",
     "grammar": "Grammar",
     "sentences": "Sentences",
     "noFavoriteVocabulary": "No favorite vocabulary yet",
-    "noFavoriteKanji": "No favorite kanji yet",
+    "noFavoriteIdiom": "No favorite idiom yet",
     "noFavoriteGrammar": "No favorite grammar yet",
     "noFavoriteSentences": "No favorite sentences yet",
     "markFavoriteVocabulary": "Mark vocabulary as favorite to review later",
-    "markFavoriteKanji": "Mark kanji as favorite to review later",
+    "markFavoriteIdiom": "Mark idiom as favorite to review later",
     "markFavoriteGrammar": "Mark grammar as favorite to review later",
     "markFavoriteSentences": "Mark sentences as favorite to review later",
     "confirmDelete": "Confirm Delete",
@@ -445,7 +444,7 @@
   "japanese": {
     "word": "Vocabulary",
     "grammar": "Grammar",
-    "kanji": "Kanji",
+    "idiom": "Idiom",
     "sentence": "Sentence",
     "pronunciation": "Pronunciation",
     "meaning": "Meaning",
@@ -469,7 +468,6 @@
     "paymentGuide": "Payment Guide",
     "whyFlashcard": "Why Flashcard",
     "japaneseBenefits": "Benefits of Learning Japanese",
-    "japanNews": "Japan News",
     "contact": "Contact",
     "privacy": "Privacy Policy",
     "terms": "Terms of Service"
@@ -682,7 +680,7 @@
   },
   "createQuiz": {
     "title": "Create New Quiz",
-    "aiButton": "Ask Oboe Sensei",
+    "aiButton": "Ask Oboe AI",
     "generating": "Generating...",
     "nameLabel": "Quiz Name",
     "namePlaceholder": "Enter quiz name...",
@@ -1227,7 +1225,6 @@
       },
       "generalInfo": {
         "title": "GENERAL INFORMATION",
-        "japanNews": "Japan market news",
         "upgradeAccount": "Account upgrade benefits",
         "contact": "Contact us"
       },
@@ -1402,89 +1399,7 @@
     "skip": "Skip",
     "confirm": "Confirm"
   },
-  "japanNews": {
-    "title": "Japan Market News",
-    "lastUpdated": "Last updated:",
-    "featuredNews": {
-      "title": "Featured News",
-      "economy": "Economy",
-      "technology": "Technology",
-      "visaNews": {
-        "title": "Japan Expands Visa Policy for Foreign Workers",
-        "excerpt": "The Japanese government has just approved a new proposal to relax visa conditions for foreign workers in key industries.",
-        "source": "Nikkei Asia"
-      },
-      "aiNews": {
-        "title": "AI Wave in Japan: New Job Opportunities",
-        "excerpt": "The development of AI is creating many new job opportunities in the technology sector in Japan.",
-        "source": "Tech Japan"
-      }
-    },
-    "marketTrends": {
-      "title": "Market Trends",
-      "gdpGrowth": {
-        "title": "GDP Growth",
-        "description": "Japan's economic growth rate Q1/2024"
-      },
-      "yenRate": {
-        "title": "Yen Exchange Rate",
-        "description": "JPY/USD exchange rate"
-      }
-    },
-    "jobOpportunities": {
-      "title": "Job Opportunities",
-      "it": {
-        "title": "Information Technology",
-        "softwareEngineer": "Software Engineer",
-        "frontendDeveloper": "Frontend Developer",
-        "location": "Tokyo",
-        "locationOsaka": "Osaka",
-        "company1": "Tech Corp Japan",
-        "company2": "Digital Solutions"
-      },
-      "manufacturing": {
-        "title": "Manufacturing & Engineering",
-        "mechanicalEngineer": "Mechanical Engineer",
-        "electronicsEngineer": "Electronics Engineer",
-        "locationNagoya": "Nagoya",
-        "locationYokohama": "Yokohama",
-        "company1": "Toyota Manufacturing",
-        "company2": "Electronics Corp"
-      }
-    },
-    "studyAbroad": {
-      "title": "Study in Japan",
-      "mextScholarship": {
-        "title": "MEXT Scholarship 2024",
-        "description": "Full scholarship program by the Japanese government",
-        "deadline": "Application deadline: April 30, 2024",
-        "value": "Scholarship value: ¥147,000/month",
-        "flight": "Round-trip airfare included",
-        "tuition": "Full tuition waiver"
-      },
-      "ejuExam": {
-        "title": "Study Abroad Exam",
-        "description": "Information about EJU exam in June 2024",
-        "examDate": "Exam date: June 16, 2024",
-        "registerDeadline": "Registration deadline: April 30, 2024",
-        "location": "Location: Multiple major cities",
-        "fee": "Fee: ¥20,000"
-      }
-    },
-    "culturalExchange": {
-      "title": "Cultural Exchange",
-      "sakuraFestival": {
-        "title": "Cherry Blossom Festival 2024",
-        "description": "The biggest cherry blossom festival of the year at Ueno Park, Tokyo.",
-        "location": "Ueno Park, Tokyo"
-      },
-      "culturalExhibition": {
-        "title": "Vietnam-Japan Cultural Exhibition",
-        "description": "Cultural exchange event between Vietnam and Japan.",
-        "location": "Japan Cultural Center, Osaka"
-      }
-    }
-  },
+  
   "paymentGuide": {
     "title": "Payment Guide",
     "lastUpdated": "Last updated:",

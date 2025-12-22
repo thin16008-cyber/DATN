@@ -99,15 +99,6 @@
             <li>{{ t('terms.dataSecurity3') }}</li>
           </ul>
         </section>
-
-        <section class="terms-section">
-          <h2>{{ t('terms.section7Title') }}</h2>
-          <ul>
-            <li>{{ t('terms.other1') }}</li>
-            <li>{{ t('terms.other2') }}</li>
-            <li>{{ t('terms.other3') }}</li>
-          </ul>
-        </section>
       </div>
     </div>
   </div>

@@ -2,7 +2,7 @@
 export default {
     namespaced: true,
     state: () => ({
-      optionKeys: ['vocabulary', 'kanji', 'grammar', 'sentences'],
+      optionKeys: ['vocabulary', 'idiom', 'grammar', 'sentences'],
       activeIndex: 0,
     }),
     mutations: {

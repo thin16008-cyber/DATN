@@ -104,13 +104,12 @@ const listServies = computed(() => [
       { title: t('footer.services.usageTips.whyFlashcard'), link: "/footer-services/why-flashcard" },
       { title: t('footer.services.usageTips.writingGuide'), link: "/footer-services/writing-guide" },
       { title: t('footer.services.usageTips.japaneseBenefits'), link: "/footer-services/benefits-japanese" },
-      { title: t('footer.services.usageTips.kanjiGuide'), link: "/footer-services/kanji-guide" }
+      
     ]
   },
   {
     title: t('footer.services.generalInfo.title'),
     service: [
-      { title: t('footer.services.generalInfo.japanNews'), link: "/footer-services/japan-news" },
       { title: t('footer.services.generalInfo.upgradeAccount'), link: "/upgrade" },
       { title: t('footer.services.generalInfo.contact'), link: "/footer-services/contact" }
     ]

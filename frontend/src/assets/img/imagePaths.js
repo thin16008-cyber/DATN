@@ -6,12 +6,12 @@ export const ImagePaths = {
   },
 
   // Footer images
-  footer: {
-    japanAi: 'https://oboe-images.s3.ap-southeast-1.amazonaws.com/footer/japan-ai.jpg',
-    japanCulture: 'https://oboe-images.s3.ap-southeast-1.amazonaws.com/footer/Japan-culture.webp',
-    japanSakura: 'https://oboe-images.s3.ap-southeast-1.amazonaws.com/footer/japan-sakura.jpg',
-    japanVisa: 'https://oboe-images.s3.ap-southeast-1.amazonaws.com/footer/japan-visa.jpg',
-  },
+  // footer: {
+  //   japanAi: 'https://oboe-images.s3.ap-southeast-1.amazonaws.com/footer/japan-ai.jpg',
+  //   japanCulture: 'https://oboe-images.s3.ap-southeast-1.amazonaws.com/footer/Japan-culture.webp',
+  //   japanSakura: 'https://oboe-images.s3.ap-southeast-1.amazonaws.com/footer/japan-sakura.jpg',
+  //   japanVisa: 'https://oboe-images.s3.ap-southeast-1.amazonaws.com/footer/japan-visa.jpg',
+  // },
 
   // Intro images
   intro: {
