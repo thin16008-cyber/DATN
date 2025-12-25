@@ -12,13 +12,20 @@ public class PayOsBeanConfig {
     public PayOsBeanConfig(PayOsConfig payOsConfig) {
         this.payOsConfig = payOsConfig;
     }
+    
+
 
     @Bean
     public PayOS payOS() {
+        System.out.println("CLIENT_ID=" + payOsConfig.getClientId());
+        System.out.println("API_KEY=" + payOsConfig.getApiKey());
+        System.out.println("CHECKSUM_KEY=" + payOsConfig.getChecksumKey());
+        System.out.println("CHECKSUM length = " + payOsConfig.getChecksumKey().length());
+
         return new PayOS(
                 payOsConfig.getClientId(),
                 payOsConfig.getApiKey(),
-                payOsConfig.getChecksumKey() 
-        );
+                payOsConfig.getChecksumKey()
+            );
     }
 }

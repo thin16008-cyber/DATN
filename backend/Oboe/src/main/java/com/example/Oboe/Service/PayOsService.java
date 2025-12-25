@@ -6,8 +6,17 @@ import com.example.Oboe.Entity.Payment;
 import com.example.Oboe.Entity.User;
 import com.example.Oboe.Repository.PaymentRepository;
 import com.example.Oboe.Repository.UserRepository;
+import com.example.Oboe.Util.HmacUtil;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+// import com.google.api.client.http.HttpHeaders;
+
+import lombok.RequiredArgsConstructor;
+
+import org.apache.commons.codec.digest.HmacUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+
 import vn.payos.PayOS;
 import vn.payos.type.CheckoutResponseData;
 import vn.payos.type.ItemData;
@@ -15,103 +24,240 @@ import vn.payos.type.PaymentData;
 import vn.payos.type.WebhookData;
 
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.UUID;
 
+import org.springframework.http.*;
+import java.util.*;
+import java.nio.charset.StandardCharsets;
+import javax.crypto.Mac;
+import javax.crypto.spec.SecretKeySpec;
+
+
+import org.springframework.http.HttpEntity;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.RestTemplate;
+
+
+
+
+
+
+
+
+
+// @Service
+// public class PayOsService {
+
+//     private final PayOS payOS;
+//     private final PayOsConfig config;
+//     private final PaymentRepository paymentRepository;
+//     private final UserRepository userRepository;
+
+//     public PayOsService(PayOS payOS,
+//                         PayOsConfig config,
+//                         PaymentRepository paymentRepository,
+//                         UserRepository userRepository) {
+//         this.payOS = payOS;
+//         this.config = config;
+//         this.paymentRepository = paymentRepository;
+//         this.userRepository = userRepository;
+//     }
+
+//     public CheckoutResponseData createPayment(int amount, String itemName, UUID userId) throws Exception {
+
+//         // ItemData item = ItemData.builder()
+//         //         .name(itemName)
+//         //         .quantity(1)
+//         //         .price(amount)
+//         //         .build();
+
+//         long orderCode = System.currentTimeMillis(); 
+
+//         PaymentData paymentData = PaymentData.builder()
+//                 .orderCode(orderCode)
+//                 .amount(amount)
+//                 .description("Pay Oboeru " + orderCode)
+//                 .returnUrl(config.getReturnUrl())
+//                 .cancelUrl(config.getCancelUrl())
+//                 // .items(List.of(item))
+//                 .build();
+
+//         CheckoutResponseData response = payOS.createPaymentLink(paymentData);
+
+//         Payment payment = new Payment();
+//         payment.setOrderCode(orderCode);
+//         payment.setAmount(amount);
+//         payment.setUser(userRepository.findById(userId).orElse(null));
+//         payment.setStatus("PENDING");
+//         paymentRepository.save(payment);
+
+//         return response;
+//     }
+
+
+//     public WebhookData handleWebhook(String rawJson) throws Exception {
+//         ObjectMapper mapper = new ObjectMapper();
+//         vn.payos.type.Webhook webhook = mapper.readValue(rawJson, vn.payos.type.Webhook.class);
+//         WebhookData data = payOS.verifyPaymentWebhookData(webhook);
+
+//         long orderCode = data.getOrderCode();
+//         String code = data.getCode();
+
+//         Payment payment = paymentRepository.findByOrderCode(orderCode);
+//         if (payment != null) {
+//             String status;
+
+//             switch (code) {
+//                 case "00" -> {
+//                     status = "SUCCESS";
+//                     payment.setPaidAt(LocalDateTime.now());
+//                     User user = payment.getUser();
+//                     if (user.getAccountType() != AccountType.PREMIUM) {
+//                         user.setAccountType(AccountType.PREMIUM);
+
+//                         userRepository.save(user);
+//                     }
+//                 }
+//                 case "09" -> status = "CANCELLED";
+//                 default -> status = "FAILED";
+//             }
+
+
+//             payment.setStatus(status);
+//             paymentRepository.save(payment);
+//         }
+
+//         return data;
+//     }
+
+//     public void cancelPayment(long orderCode, String reason) throws Exception {
+//         payOS.cancelPaymentLink(orderCode, reason);
+//     }
+
+//     public Object getPaymentInfo(long orderCode) throws Exception {
+//         return payOS.getPaymentLinkInformation(orderCode);
+//     }
+// }
 @Service
 public class PayOsService {
 
-    private final PayOS payOS;
     private final PayOsConfig config;
     private final PaymentRepository paymentRepository;
     private final UserRepository userRepository;
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
-    public PayOsService(PayOS payOS,
-                        PayOsConfig config,
+    public PayOsService(PayOsConfig config,
                         PaymentRepository paymentRepository,
                         UserRepository userRepository) {
-        this.payOS = payOS;
         this.config = config;
         this.paymentRepository = paymentRepository;
         this.userRepository = userRepository;
     }
 
-    public CheckoutResponseData createPayment(int amount, String itemName, UUID userId) throws Exception {
-        int fixedAmount = 99000;
+    // ================= CREATE PAYMENT =================
+    public Map<String, Object> createPayment(int amount, UUID userId) throws Exception {
+        amount = 99000; // fixed amount
 
-        ItemData item = ItemData.builder()
-                .name(itemName)
-                .quantity(1)
-                .price(fixedAmount)
-                .build();
-        long uniquePart = System.currentTimeMillis() % 100000000; 
-        long randomPart = (long) (Math.random() * 10000);
-        long tempOrderCode = uniquePart * 10000 + randomPart;
-        // long tempOrderCode = System.currentTimeMillis();
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found"));
 
-        PaymentData paymentData = PaymentData.builder()
-                .orderCode(tempOrderCode)
-                .amount(fixedAmount)
-                .description("Pay Oboeru " + tempOrderCode)
-                .returnUrl(config.getReturnUrl())
-                .cancelUrl(config.getCancelUrl())
-                .items(List.of(item))
-                .build();
+        long orderCode = System.currentTimeMillis();
 
-        CheckoutResponseData response = payOS.createPaymentLink(paymentData);
+        // ====== REQUEST BODY ======
+        Map<String, Object> body = new LinkedHashMap<>();
+        body.put("orderCode", orderCode);
+        body.put("amount", amount);
+        body.put("description", "Pay Oboeru " + orderCode);
+        body.put("returnUrl", config.getReturnUrl());
+        body.put("cancelUrl", config.getCancelUrl());
 
-        // Save to DB
+        // ====== SIGNATURE ======
+        String dataToSign =
+                orderCode + "|" + amount + "|" +
+                config.getReturnUrl() + "|" +
+                config.getCancelUrl();
+
+        String signature = HmacUtil.signSHA256(dataToSign, config.getChecksumKey());
+        body.put("signature", signature);
+
+        // ====== HEADERS ======
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.set("x-client-id", config.getClientId());
+        headers.set("x-api-key", config.getApiKey());
+
+        HttpEntity<Map<String, Object>> request =
+                new HttpEntity<Map<String, Object>>(body, headers);
+
+        RestTemplate restTemplate = new RestTemplate();
+        ResponseEntity<Map> response =
+                restTemplate.postForEntity(
+                        config.getBaseUrl() + "/v2/payment-requests",
+                        request,
+                        Map.class
+                );
+
+        Map<String, Object> resBody = response.getBody();
+        Map<String, Object> data = (Map<String, Object>) resBody.get("data");
+
+        // ====== SAVE DB ======
         Payment payment = new Payment();
-        payment.setOrderCode(tempOrderCode);
-        payment.setAmount(fixedAmount);
-        payment.setUser(userRepository.findById(userId).orElse(null));
+        payment.setOrderCode(orderCode);
+        payment.setAmount(amount);
         payment.setStatus("PENDING");
+        payment.setPaymentMethod("PAYOS");
+        payment.setTransactionId((String) data.get("paymentLinkId"));
+        payment.setUser(user);
+
         paymentRepository.save(payment);
 
-        return response;
+        // ====== RETURN FRONTEND ======
+        Map<String, Object> result = new HashMap<>();
+        result.put("orderCode", orderCode);
+        result.put("checkoutUrl", data.get("checkoutUrl"));
+        result.put("qrCode", data.get("qrCode"));
+        result.put("amount", amount);
+        result.put("status", "PENDING");
+
+        return result;
     }
 
-    public WebhookData handleWebhook(String rawJson) throws Exception {
-        ObjectMapper mapper = new ObjectMapper();
-        vn.payos.type.Webhook webhook = mapper.readValue(rawJson, vn.payos.type.Webhook.class);
-        WebhookData data = payOS.verifyPaymentWebhookData(webhook);
-    //    WebhookData data = webhook.getData(); // Bỏ verify chữ ký khi test
+    // ================= WEBHOOK =================
+    public void handleWebhook(String rawJson) throws Exception {
 
-        long orderCode = data.getOrderCode();
-        String code = data.getCode();
+        JsonNode root = objectMapper.readTree(rawJson);
+        JsonNode data = root.get("data");
 
-        Payment payment = paymentRepository.findByOrderCode(orderCode);
-        if (payment != null) {
-            String status;
+        String receivedSignature = root.get("signature").asText();
 
-            switch (code) {
-                case "00" -> {
-                    status = "SUCCESS";
-                    payment.setPaidAt(LocalDateTime.now());
-                    User user = payment.getUser();
-                    if (user.getAccountType() != AccountType.PREMIUM) {
-                        user.setAccountType(AccountType.PREMIUM);
+        String dataToSign =
+                data.get("orderCode").asText() + "|" +
+                data.get("amount").asText() + "|" +
+                data.get("code").asText();
 
-                        userRepository.save(user);
-                    }
-                }
-                case "09" -> status = "CANCELLED";
-                default -> status = "FAILED";
-            }
+        String expectedSignature =
+                HmacUtil.signSHA256(dataToSign, config.getChecksumKey());
 
-
-            payment.setStatus(status);
-            paymentRepository.save(payment);
+        if (!expectedSignature.equals(receivedSignature)) {
+            throw new RuntimeException("INVALID PAYOS SIGNATURE");
         }
 
-        return data;
-    }
+        Long orderCode = data.get("orderCode").asLong();
+        String code = data.get("code").asText();
 
-    public void cancelPayment(long orderCode, String reason) throws Exception {
-        payOS.cancelPaymentLink(orderCode, reason);
-    }
+        Payment payment = paymentRepository.findByOrderCode(orderCode);
+        if (payment == null) return;
 
-    public Object getPaymentInfo(long orderCode) throws Exception {
-        return payOS.getPaymentLinkInformation(orderCode);
+        switch (code) {
+            case "00" -> {
+                payment.setStatus("SUCCESS");
+                payment.setPaidAt(LocalDateTime.now());
+            }
+            case "09" -> payment.setStatus("CANCELLED");
+            default -> payment.setStatus("FAILED");
+        }
+
+        paymentRepository.save(payment);
     }
 }
+

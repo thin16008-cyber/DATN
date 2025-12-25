@@ -52,73 +52,146 @@ public class PaymentController {
     }
 
 
-    @PostMapping("/payos")
-    public ResponseEntity<?> payWithPayOS(@RequestParam(required = false) Integer amount,
-                                          Authentication authentication) {
-        try {
-            CustomUserDetails customUser = (CustomUserDetails) authentication.getPrincipal();
-            UUID userId = customUser.getUserID();
+//     @PostMapping("/payos")
+//     public ResponseEntity<?> payWithPayOS(@RequestParam(required = false) Integer amount,
+//                                           Authentication authentication) {
+//         try {
+//             CustomUserDetails customUser = (CustomUserDetails) authentication.getPrincipal();
+//             UUID userId = customUser.getUserID();
 
-            var result = payOsService.createPayment(99000, "Pay Oboeru", userId);
+//             var result = payOsService.createPayment(99000, "Pay Oboeru", userId);
 
-            if (result == null || result.getCheckoutUrl() == null) {
+//             if (result == null || result.getCheckoutUrl() == null) {
+//                 return ResponseEntity.status(500).body(Map.of(
+//                         "error", "Lỗi tạo thanh toán PayOS",
+//                         "message", "Không có dữ liệu trả về từ PayOS hoặc thiếu checkoutUrl"
+//                 ));
+//             }
+
+//             // Lấy lại payment từ orderCode
+//             long orderCode = result.getOrderCode();
+//             Payment payment = paymentRepository.findByOrderCode(orderCode);
+//             if (payment == null) {
+//                 return ResponseEntity.status(500).body(Map.of("error", "Không tìm thấy đơn hàng vừa tạo"));
+//             }
+
+//             String encodedCheckoutUrl = URLEncoder.encode(result.getCheckoutUrl(), StandardCharsets.UTF_8);
+// //            String qrUrl = "https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=" + result.getCheckoutUrl();
+
+//             String qrUrl = result.getQrCode();
+
+//             Map<String, Object> body = new HashMap<>();
+//             body.put("amount", payment.getAmount());
+//             body.put("orderCode", payment.getOrderCode());
+//             body.put("status", payment.getStatus());
+//             body.put("paid_at", payment.getPaidAt());
+//             body.put("qrUrl", qrUrl);
+//             body.put("checkoutUrl", result.getCheckoutUrl());
+
+//             System.out.println("Checkout result: " + result);
+//             return ResponseEntity.ok(body);
+
+//         } catch (Exception e) {
+//             e.printStackTrace();
+//             return ResponseEntity.status(500).body(Map.of(
+//                     "error", "Lỗi PayOS",
+//                     "message", e.getMessage()
+//             ));
+//         }
+//     }
+
+
+
+//     @PostMapping("/payos-notify")
+//     public ResponseEntity<?> handlePayOsCallback(@RequestBody String rawJson) {
+//         try {
+//             System.out.println("Webhook Received:\n" + rawJson);
+
+//             var data = payOsService.handleWebhook(rawJson);
+
+//             System.out.println("Payment status updated for orderCode: " + data.getOrderCode() +
+//                     ", status code: " + data.getCode());
+
+
+//             return ResponseEntity.ok("Received");
+//         } catch (Exception e) {
+//             e.printStackTrace();
+//             return ResponseEntity.status(500).body("Failed: " + e.getMessage());
+//         }
+//     }
+
+        @PostMapping("/payos")
+        public ResponseEntity<?> payWithPayOS(
+                @RequestParam(required = false) Integer amount,
+                Authentication authentication
+        ) {
+            try {
+                CustomUserDetails customUser =
+                        (CustomUserDetails) authentication.getPrincipal();
+                UUID userId = customUser.getUserID();
+
+                // 👉 gọi service REST PayOS
+                Map<String, Object> result = payOsService.createPayment(99000, userId);
+
+                if (result == null || !result.containsKey("data")) {
+                    return ResponseEntity.status(500).body(Map.of(
+                            "error", "Lỗi tạo thanh toán PayOS",
+                            "message", "Không có dữ liệu trả về từ PayOS"
+                    ));
+                }
+
+                Map<String, Object> data =
+                        (Map<String, Object>) result.get("data");
+
+                String checkoutUrl = (String) data.get("checkoutUrl");
+                Long orderCode = Long.valueOf(data.get("orderCode").toString());
+                String qrCode = (String) data.get("qrCode");
+
+                if (checkoutUrl == null) {
+                    return ResponseEntity.status(500).body(Map.of(
+                            "error", "Thiếu checkoutUrl từ PayOS"
+                    ));
+                }
+
+                // Lấy payment từ DB
+                Payment payment = paymentRepository.findByOrderCode(orderCode);
+                if (payment == null) {
+                    return ResponseEntity.status(500).body(
+                            Map.of("error", "Không tìm thấy đơn hàng vừa tạo")
+                    );
+                }
+
+                Map<String, Object> body = new HashMap<>();
+                body.put("amount", payment.getAmount());
+                body.put("orderCode", payment.getOrderCode());
+                body.put("status", payment.getStatus());
+                body.put("paid_at", payment.getPaidAt());
+                body.put("qrUrl", qrCode);
+                body.put("checkoutUrl", checkoutUrl);
+
+                System.out.println("Checkout result: " + data);
+
+                return ResponseEntity.ok(body);
+
+            } catch (Exception e) {
+                e.printStackTrace();
                 return ResponseEntity.status(500).body(Map.of(
-                        "error", "Lỗi tạo thanh toán PayOS",
-                        "message", "Không có dữ liệu trả về từ PayOS hoặc thiếu checkoutUrl"
+                        "error", "Lỗi PayOS",
+                        "message", e.getMessage()
                 ));
             }
-
-            // Lấy lại payment từ orderCode
-            long orderCode = result.getOrderCode();
-            Payment payment = paymentRepository.findByOrderCode(orderCode);
-            if (payment == null) {
-                return ResponseEntity.status(500).body(Map.of("error", "Không tìm thấy đơn hàng vừa tạo"));
-            }
-
-            String encodedCheckoutUrl = URLEncoder.encode(result.getCheckoutUrl(), StandardCharsets.UTF_8);
-//            String qrUrl = "https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=" + result.getCheckoutUrl();
-
-            String qrUrl = result.getQrCode();
-
-            Map<String, Object> body = new HashMap<>();
-            body.put("amount", payment.getAmount());
-            body.put("orderCode", payment.getOrderCode());
-            body.put("status", payment.getStatus());
-            body.put("paid_at", payment.getPaidAt());
-            body.put("qrUrl", qrUrl);
-            body.put("checkoutUrl", result.getCheckoutUrl());
-
-            System.out.println("Checkout result: " + result);
-            return ResponseEntity.ok(body);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            return ResponseEntity.status(500).body(Map.of(
-                    "error", "Lỗi PayOS",
-                    "message", e.getMessage()
-            ));
         }
-    }
 
-
-
-    @PostMapping("/payos-notify")
-    public ResponseEntity<?> handlePayOsCallback(@RequestBody String rawJson) {
+    @PostMapping("/payos-webhook")
+    public ResponseEntity<?> webhook(@RequestBody String rawJson) {
         try {
-            System.out.println("Webhook Received:\n" + rawJson);
-
-            var data = payOsService.handleWebhook(rawJson);
-
-            System.out.println("Payment status updated for orderCode: " + data.getOrderCode() +
-                    ", status code: " + data.getCode());
-
-
-            return ResponseEntity.ok("Received");
+            payOsService.handleWebhook(rawJson);
+            return ResponseEntity.ok("OK");
         } catch (Exception e) {
-            e.printStackTrace();
-            return ResponseEntity.status(500).body("Failed: " + e.getMessage());
+            return ResponseEntity.status(400).body(e.getMessage());
         }
     }
+
 
 
 

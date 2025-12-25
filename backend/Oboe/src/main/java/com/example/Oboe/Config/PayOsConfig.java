@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 public class PayOsConfig {
     private String clientId;
     private String apiKey;
-    private String checksumKey; // Có thể bạn chưa dùng, nhưng SDK cần
+    private String checksumKey; 
     private String baseUrl;
     private String returnUrl;
     private String cancelUrl;
